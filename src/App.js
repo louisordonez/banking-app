@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 import './App.css';
+=======
+import React from 'react';
+// import './Assets/Styles/index.scss';
+>>>>>>> Stashed changes
 import Button from './Components/Button/Button.js';
 
 const App = () => {
