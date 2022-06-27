@@ -1,12 +1,5 @@
-import './App.css';
-import Button from './components/Button/Button.js';
+import React from 'react';
 
-function App() {
-  return (
-    <div>
-      <Button variant="btn-primary" textValue="Confirm" />
-    </div>
-  );
+export default function App() {
+  return <></>;
 }
-
-export default App;
