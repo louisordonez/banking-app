@@ -1,22 +1,22 @@
 .btn {
-  width: 91px;
-  height: 20px;
-  left: 367.5px;
-  top: 623.79px;
+  width: 282px;
+  height: 60px;
+  left: 272px;
+  top: 603.79px;
   /* font-family: 'Gilroy-SemiBold'; */
   font-family: 'Helvetica'; /* TEMPORARY FONT */
   font-size: 16px;
   line-height: 19px;
   color: #ffffff;
-  /* border: none; COMMENTED FOR NOW UNTIL FINAL DESIGN */
+  border: none;
   cursor: pointer;
+  border-radius: 22px;
 }
 
 .btn-primary {
-  width: 282px;
-  height: 60px;
-  left: 272px;
-  top: 603.79px;
-  background: #0177fb;
-  border-radius: 22px;
+  background: #159947;
+}
+
+.btn-primary:hover {
+  background: #49b265;
 }

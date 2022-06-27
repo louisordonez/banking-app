@@ -4,7 +4,7 @@ import Button from './components/Button/Button.js';
 function App() {
   return (
     <div>
-      <Button variant="btn-primary" text="Confirm" />
+      <Button variant="btn-primary" textValue="Confirm" />
     </div>
   );
 }
