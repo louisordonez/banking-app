@@ -1,5 +1,7 @@
-import './Button.css';
+import React from 'react';
 
-export default function Button({ variant = 'btn-primary', textValue }) {
+const Button = ({ variant = 'btn-primary', textValue }) => {
   return <button className={`btn ${variant}`}>{textValue}</button>;
-}
+};
+
+export default Button;
