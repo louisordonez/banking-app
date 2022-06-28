@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import InputAmount from './Components/InputAmount/InputAmount';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Link to="/Transactions">Transactions</Link> |{' '}
         <Link to="/Settings">Settings</Link>
       </nav>
+      <InputAmount />
     </div>
   );
 };

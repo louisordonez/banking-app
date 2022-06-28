@@ -1,0 +1,46 @@
+.input-amount-container {
+  position: absolute;
+  width: 279.78px;
+  height: 98.87px;
+  left: 275.14px;
+  top: 425.95px;
+  background: var(--white);
+  box-shadow: 0px 15px 30px rgba(118, 118, 118, 0.2);
+  border-radius: 14px;
+
+  > div {
+    width: 236.12px;
+    height: 74.43px;
+
+    > div {
+      margin-top: 1rem;
+      margin-left: 1rem;
+      width: 11.2rem;
+      height: 1.7rem;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      color: var(--grey);
+    }
+  }
+}
+
+.amount-flex-container {
+  display: flex;
+
+  span {
+    margin-top: 2rem;
+    margin-right: 1rem;
+    font-size: 2.01589rem;
+    line-height: 2.4rem;
+    color: var(--black-light);
+  }
+
+  input {
+    margin-top: 2rem;
+    font-size: 2.01589rem;
+    line-height: 2.4rem;
+    color: var(--black-light);
+    border: none;
+    outline: none;
+  }
+}
