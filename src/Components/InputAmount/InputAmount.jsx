@@ -6,7 +6,7 @@ const InputText = () => {
       <div>
           {`Enter amount`}
           <div className='amount-flex-container'>
-            <span>₱</span><input></input>
+            <span>₱</span><input type='text'></input>
           </div>
       </div>
     </div>
