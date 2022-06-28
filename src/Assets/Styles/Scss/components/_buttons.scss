@@ -10,8 +10,8 @@
 
 .btn-primary {
   background: var(--first-color);
-}
 
-.btn-primary:hover {
-  background: var(--second-color);
+  &:hover {
+    background: var(--second-color);
+  }
 }
