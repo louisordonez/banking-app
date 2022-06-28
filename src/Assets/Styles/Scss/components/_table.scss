@@ -1,10 +1,25 @@
 .table {
-  height: 36.2rem;
+  width: 120rem;
   background: var(--white);
   border: 0.1rem solid #f4f4f4;
   box-shadow: 0rem 3.2rem 3.2rem -3.2rem rgba(142, 142, 142, 0.18);
   border-radius: 1.2rem;
   overflow-y: scroll;
+
+  button {
+    text-align: center;
+    margin: 0.5rem;
+    border: 0.1rem solid #f2f2f2;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    background-color: var(--white);
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f9fafe;
+    }
+  }
 }
 
 .table-header {
