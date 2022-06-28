@@ -1,0 +1,37 @@
+.input-container {
+  width: 27.978rem;
+  height: 9.887rem;
+  background: var(--white);
+  box-shadow: 0rem 1.5rem 3rem rgba(118, 118, 118, 0.2);
+  border-radius: 1.4rem;
+
+  > div {
+    padding-top: 1.2rem;
+    margin-left: 2rem;
+    width: 23.612rem;
+    height: 7.443rem;
+    font-size: 1.4rem;
+    color: var(--grey);
+  }
+}
+
+.input-flex-container {
+  display: flex;
+  align-items: center;
+
+  span {
+    padding-top: 1.2rem;
+    margin-right: 1rem;
+    font-size: 2.3rem;
+    color: var(--grey);
+  }
+
+  input[type='text'] {
+    width: 100%;
+    padding-top: 1.2rem;
+    font-size: 2.3rem;
+    color: var(--black-light);
+    border: none;
+    outline: none;
+  }
+}
