@@ -1,16 +1,16 @@
 import React from 'react';
 
-const InputAmount = () => {
+const InputText = ({label}) => {
   return (
     <div className='input-container'>
       <div>
-          {`Enter amount`}
+          {label}
           <div className='input-flex-container'>
-            <span>₱</span><input type='text'></input>
+            <input type='text'></input>
           </div>
       </div>
     </div>
   );
 }
 
-export default InputAmount;
+export default InputText;
