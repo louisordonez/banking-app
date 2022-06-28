@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Settings = () => {
   return (
     <main style={{ padding: "1rem 0" }}>
