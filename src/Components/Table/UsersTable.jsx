@@ -14,20 +14,16 @@ const UsersTable = ({ users }) => {
               <tr>
                 <th>Account Number</th>
                 <th>Name</th>
-                <th>Age</th>
-                <th>Gender</th>
                 <th>Balance</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((val, key) => {
+              {users.map((val) => {
                 return (
-                  <tr key={key}>
+                  <tr>
                     <td>{val.accountNumber}</td>
                     <td>{`${val.firstName} ${val.lastName}`}</td>
-                    <td>{val.age}</td>
-                    <td>{val.gender}</td>
                     <td>{`₱ ${val.balance}`}</td>
                     <td>
                       <button title="Withdraw">
@@ -46,6 +42,12 @@ const UsersTable = ({ users }) => {
                         <BoxIcons.BiTransferAlt
                           size={16}
                           style={{ color: '#436CFB' }}
+                        />
+                      </button>
+                      <button title="Edit">
+                        <BoxIcons.BiPencil
+                          size={16}
+                          style={{ color: '#FCE37E' }}
                         />
                       </button>
                       <button title="Delete">
