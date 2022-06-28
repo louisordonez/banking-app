@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as BoxIcons from 'react-icons/bi';
-import { SidebarData } from './SidebarData';
+import { SidebarData } from '../Navbar/SidebarData';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
