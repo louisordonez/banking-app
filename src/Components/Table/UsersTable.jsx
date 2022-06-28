@@ -30,25 +30,25 @@ const UsersTable = ({ users }) => {
                     <td>{val.gender}</td>
                     <td>{`₱ ${val.balance}`}</td>
                     <td>
-                      <button>
+                      <button title="Withdraw">
                         <BoxIcons.BiArrowToBottom
                           size={16}
                           style={{ color: '#83DEA4' }}
                         />
                       </button>
-                      <button>
+                      <button title="Deposit">
                         <BoxIcons.BiArrowToTop
                           size={16}
                           style={{ color: '#A789FF' }}
                         />
                       </button>
-                      <button>
+                      <button title="Transfer">
                         <BoxIcons.BiTransferAlt
                           size={16}
                           style={{ color: '#436CFB' }}
                         />
                       </button>
-                      <button>
+                      <button title="Delete">
                         <BoxIcons.BiTrash
                           size={16}
                           style={{ color: '#F53C3D' }}
