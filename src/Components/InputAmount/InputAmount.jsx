@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputText = () => {
+const InputAmount = () => {
   return (
     <div className='input-container'>
       <div>
@@ -13,4 +13,4 @@ const InputText = () => {
   );
 }
 
-export default InputText;
+export default InputAmount;
