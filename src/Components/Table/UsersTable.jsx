@@ -1,4 +1,5 @@
 import React from 'react';
+import * as BoxIcons from 'react-icons/bi';
 
 const UsersTable = ({ users }) => {
   return (
@@ -14,6 +15,8 @@ const UsersTable = ({ users }) => {
               <th>Name</th>
               <th>Age</th>
               <th>Gender</th>
+              <th>Balance</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -24,6 +27,10 @@ const UsersTable = ({ users }) => {
                   <td>{`${val.firstName} ${val.lastName}`}</td>
                   <td>{val.age}</td>
                   <td>{val.gender}</td>
+                  <td>{`₱ ${val.balance}`}</td>
+                  <td>
+                    <BoxIcons.BiDotsVerticalRounded size={16} />
+                  </td>
                 </tr>
               );
             })}

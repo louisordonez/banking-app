@@ -10,6 +10,7 @@ const users = [
     gender: 'Male',
     email: 'jd@email.com',
     password: 'jd',
+    balance: 100.25,
   },
   {
     accountNumber: 1656396733,
@@ -19,6 +20,7 @@ const users = [
     gender: 'Male',
     email: 'jd@email.com',
     password: 'jd',
+    balance: 100.25,
   },
   {
     accountNumber: 1656396733,
@@ -28,6 +30,7 @@ const users = [
     gender: 'Male',
     email: 'jd@email.com',
     password: 'jd',
+    balance: 100.25,
   },
   {
     accountNumber: 1656396733,
@@ -37,6 +40,7 @@ const users = [
     gender: 'Male',
     email: 'jd@email.com',
     password: 'jd',
+    balance: 100.25,
   },
   {
     accountNumber: 1656396733,
@@ -46,6 +50,7 @@ const users = [
     gender: 'Male',
     email: 'jd@email.com',
     password: 'jd',
+    balance: 100.25,
   },
 ];
 
