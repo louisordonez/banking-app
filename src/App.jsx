@@ -1,22 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import Dashboard from './Routes/Dashboard';
+import Users from './Routes/Users';
+import Transactions from './Routes/Transactions';
+import Settings from './Routes/Settings';
 
 const App = () => {
   return (
-    <div>
-      <h1>Bank</h1>
-      <nav
-        style={{
-          borderBottom: 'solid 1px',
-          paddingBottom: '1rem',
-        }}
-      >
-        <Link to="/Dashboard">Dashboard</Link> |{' '}
-        <Link to="/Users">Users</Link> |{' '}
-        <Link to="/Transactions">Transactions</Link> |{' '}
-        <Link to="/Settings">Settings</Link>
-      </nav>
-    </div>
+    <>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="Users" element={<Users />} />
+          <Route path="Transactions" element={<Transactions />} />
+          <Route path="Settings" element={<Settings />} />
+        </Routes>
+      </Router>
+    </>
   );
 };
 
