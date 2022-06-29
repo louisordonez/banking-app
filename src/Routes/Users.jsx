@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../Components/Button/Button';
 import UsersTable from '../Components/Table/UsersTable';
 
 const users = [
@@ -56,10 +57,16 @@ const users = [
 
 const Users = () => {
   return (
-    <main style={{ padding: '1rem 0' }}>
-      <h2>Users</h2>
-      <UsersTable users={users} />
-    </main>
+    <div className="flex-center center">
+      <div>
+        <div className="add-user-btn">
+          <Button textValue={`Create User`} />
+        </div>
+        <div>
+          <UsersTable users={users} />
+        </div>
+      </div>
+    </div>
   );
 };
 

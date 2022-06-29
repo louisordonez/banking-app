@@ -35,3 +35,23 @@
     outline: none;
   }
 }
+
+.search {
+  position: absolute;
+  right: 0;
+  width: 290px;
+  height: 46px;
+  border: 1px solid #f3f5f9;
+  border-radius: 6px;
+  margin-right: 3.5rem;
+  font-size: 1.4rem;
+  padding: 1.2rem;
+
+  &:focus {
+    outline: 1.55068px solid #819cfd;
+  }
+
+  &::placeholder {
+    color: #8e95a6;
+  }
+}
