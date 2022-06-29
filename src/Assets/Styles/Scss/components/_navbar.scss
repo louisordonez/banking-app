@@ -12,6 +12,10 @@
   background: none;
 }
 
+.menu-bars svg {
+  font-size: 2.5rem;
+}
+
 .nav-menu {
   background-color: #060b26;
   width: 25.2rem;
@@ -62,6 +66,10 @@
 
 .nav-text a:hover {
   background-color: #1a83ff;
+}
+
+.nav-text svg {
+  font-size: 1.8rem;
 }
 
 .nav-menu-items {
