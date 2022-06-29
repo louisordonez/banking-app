@@ -29,6 +29,11 @@ let USER_LIST = [
 
 const Users = () => {
   const [users, setUsers] = useState(USER_LIST);
+  const [create, setCreate] = useState('none');
+
+  const handleCreateShow = () => setCreate('block');
+
+  const handleCreateClose = () => setCreate('none');
 
   const handleCreateUser = () => {
     const newAccountNumber = new Date().getTime();
@@ -45,12 +50,7 @@ const Users = () => {
     <div className="flex-center center">
       <div>
         <div className="add-user-btn">
-          <Button
-            textValue={`Create User`}
-            onClick={() => {
-              handleCreateUser();
-            }}
-          />
+          <Button textValue={`Create User`} onClick={handleCreateShow} />
         </div>
         <div className="flex-center">
           <div className="table">
@@ -117,6 +117,19 @@ const Users = () => {
               </table>
             </div>
           </div>
+        </div>
+        <div style={{ display: `${create}` }}>
+          <h1>Create User</h1>
+          {/* <form> */}
+          <input></input>
+          <Button textValue={`Close`} onClick={handleCreateClose}></Button>
+          <Button
+            textValue={`Create`}
+            onClick={() => {
+              handleCreateUser();
+            }}
+          ></Button>
+          {/* </form> */}
         </div>
       </div>
     </div>
