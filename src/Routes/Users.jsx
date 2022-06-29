@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '../Components/Button/Button';
 import SearchInput from '../Components/Input/SearchInput';
 import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
@@ -9,25 +9,32 @@ const USER_LIST = [
     accountNumber: 1656480543042,
     firstName: 'John',
     lastName: 'Doe',
-    age: 19,
+    birthdate: '1997-06-22',
     gender: 'Male',
     email: 'jd@email.com',
     password: 'jd',
-    balance: 100.25,
+    balance: 10000.25,
   },
   {
     accountNumber: 1656480543188,
     firstName: 'John',
     lastName: 'Smith',
-    age: 20,
+    birthdate: '1998-12-11',
     gender: 'Male',
     email: 'js@email.com',
     password: 'js',
-    balance: 200.25,
+    balance: 20000.25,
   },
 ];
 
 const Users = () => {
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const birthdateRef = useRef(null);
+  const genderRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const balanceRef = useRef(null);
   const [users, setUsers] = useState(USER_LIST);
   const [create, setCreate] = useState('none');
 
@@ -35,15 +42,54 @@ const Users = () => {
 
   const handleCreateClose = () => setCreate('none');
 
-  const handleCreateUser = () => {
+  const handleCreateUser = (userData) => {
     const newAccountNumber = new Date().getTime();
 
-    setUsers((state) => [...state, { accountNumber: newAccountNumber }]);
+    setUsers((state) => [
+      ...state,
+      {
+        accountNumber: newAccountNumber,
+        firstName: `${userData.firstName}`,
+        lastName: `${userData.lastName}`,
+        birthdate: `${userData.birthdate}`,
+        gender: `${userData.gender}`,
+        email: `${userData.email}`,
+        password: `${userData.password}`,
+        balance: `${userData.balance}`,
+      },
+    ]);
   };
 
   const handleDelete = (accountNumber) => {
     const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
+
     setUsers(newUsers);
+  };
+
+  const resetCreateUserForm = () => {
+    firstNameRef.current.value = '';
+    lastNameRef.current.value = '';
+    birthdateRef.current.value = '';
+    genderRef.current.value = '';
+    emailRef.current.value = '';
+    passwordRef.current.value = '';
+    balanceRef.current.value = '';
+  };
+
+  const handleSubmit = (e) => {
+    const userData = {
+      firstName: `${firstNameRef.current.value}`,
+      lastName: `${lastNameRef.current.value}`,
+      birthdate: `${birthdateRef.current.value}`,
+      gender: `${genderRef.current.value}`,
+      email: `${emailRef.current.value}`,
+      password: `${passwordRef.current.value}`,
+      balance: `${balanceRef.current.value}`,
+    };
+
+    e.preventDefault();
+    handleCreateUser(userData);
+    resetCreateUserForm();
   };
 
   return (
@@ -130,90 +176,101 @@ const Users = () => {
               </div>
             </div>
             <div className="modal-body">
-              {/* <form> */}
-              <div className="create-user-flex">
-                <div>
+              <form onSubmit={handleSubmit}>
+                <div className="create-user-flex">
+                  <div>
+                    <input
+                      className="user-input-text"
+                      placeholder="First Name"
+                      type="text"
+                      ref={firstNameRef}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <input
+                      className="user-input-text"
+                      placeholder="Last Name"
+                      type="text"
+                      ref={lastNameRef}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="create-user-flex">
+                  <div>
+                    <input
+                      className="user-input-text"
+                      placeholder="Birthdate"
+                      type="date"
+                      ref={birthdateRef}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <select
+                      className="user-input-text"
+                      ref={genderRef}
+                      defaultValue={''}
+                      required
+                    >
+                      <option value="" disabled hidden>
+                        Select an option
+                      </option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="create-user-flex">
+                  <div>
+                    <input
+                      className="user-input-text"
+                      placeholder="Email"
+                      type="email"
+                      ref={emailRef}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <input
+                      className="user-input-text"
+                      placeholder="Password"
+                      type="password"
+                      ref={passwordRef}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="create-user-flex">
+                  <div>
+                    <input
+                      className="user-input-text"
+                      placeholder="Balance"
+                      type="number"
+                      step=".01"
+                      ref={balanceRef}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="modal-footer">
                   <input
-                    className="user-input-text"
-                    placeholder="First Name"
-                    type="text"
-                    required
+                    className="btn-small btn-cancel"
+                    onClick={handleCreateClose}
+                    type="button"
+                    value="Cancel"
+                  />
+                  <input
+                    className="btn-small btn-primary"
+                    // onClick={() => {
+                    //   handleCreateUser();
+                    // }}
+                    type="submit"
+                    value="Submit"
                   />
                 </div>
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Last Name"
-                    type="text"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="create-user-flex">
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Birthdate"
-                    type="date"
-                    required
-                  />
-                </div>
-                <div>
-                  <select className="user-input-text" required>
-                    <option value="" disabled selected hidden>
-                      Select an option
-                    </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-              </div>
-              <div className="create-user-flex">
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Email"
-                    type="email"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Password"
-                    type="password"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="create-user-flex">
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Balance"
-                    type="number"
-                    step=".01"
-                    required
-                  />
-                </div>
-              </div>
-              {/* </form> */}
-            </div>
-            <div className="modal-footer">
-              <button
-                className="btn-small btn-cancel"
-                onClick={handleCreateClose}
-              >
-                Cancel
-              </button>
-              <button
-                className="btn-small btn-primary"
-                onClick={() => {
-                  handleCreateUser();
-                }}
-              >
-                Save
-              </button>
+              </form>
             </div>
           </div>
         </div>
