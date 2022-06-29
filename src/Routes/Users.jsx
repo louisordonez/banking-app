@@ -58,7 +58,7 @@ const Users = () => {
               <div>
                 <span>{`Users`}</span>
                 <div>
-                  <SearchInput placeholder={`Search a user`} />
+                  <SearchInput placeholder={`Enter account number`} />
                 </div>
               </div>
             </div>
