@@ -6,7 +6,7 @@ import * as BoxIcons from 'react-icons/bi';
 
 let USER_LIST = [
   {
-    accountNumber: 1656396733,
+    accountNumber: 1656480543042,
     firstName: 'John',
     lastName: 'Doe',
     age: 19,
@@ -16,7 +16,7 @@ let USER_LIST = [
     balance: 100.25,
   },
   {
-    accountNumber: 1756396733,
+    accountNumber: 1656480543188,
     firstName: 'John',
     lastName: 'Smith',
     age: 20,
@@ -30,6 +30,12 @@ let USER_LIST = [
 const Users = () => {
   const [users, setUsers] = useState(USER_LIST);
 
+  const handleCreateUser = () => {
+    const newAccountNumber = new Date().getTime();
+
+    setUsers((state) => [...state, { accountNumber: newAccountNumber }]);
+  };
+
   const handleDelete = (accountNumber) => {
     const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
     setUsers(newUsers);
@@ -39,7 +45,12 @@ const Users = () => {
     <div className="flex-center center">
       <div>
         <div className="add-user-btn">
-          <Button textValue={`Create User`} />
+          <Button
+            textValue={`Create User`}
+            onClick={() => {
+              handleCreateUser();
+            }}
+          />
         </div>
         <div className="flex-center">
           <div className="table">
