@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../Components/Button/Button';
 import SearchInput from '../Components/Input/SearchInput';
-import ActionDeleteButton from '../Components/Button/ActionDeleteButton';
+import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
 import * as BoxIcons from 'react-icons/bi';
 
 let USER_LIST = [
@@ -93,7 +93,7 @@ const Users = () => {
                               style={{ color: '#FCE37E' }}
                             />
                           </button>
-                          <ActionDeleteButton
+                          <ActionsDeleteButton
                             onClick={() => {
                               handleDelete(val.accountNumber);
                             }}
