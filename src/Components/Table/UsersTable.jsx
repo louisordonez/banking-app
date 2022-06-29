@@ -1,7 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as BoxIcons from 'react-icons/bi';
 
-const UsersTable = ({ users }) => {
+let USER_LIST = [
+  {
+    accountNumber: 1656396733,
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 19,
+    gender: 'Male',
+    email: 'jd@email.com',
+    password: 'jd',
+    balance: 100.25,
+  },
+  {
+    accountNumber: 1756396733,
+    firstName: 'John',
+    lastName: 'Smith',
+    age: 20,
+    gender: 'Male',
+    email: 'js@email.com',
+    password: 'js',
+    balance: 200.25,
+  },
+];
+
+const UsersTable = () => {
+  const [users, setUsers] = useState(USER_LIST);
+
+  const handleDelete = (accountNumber) => {
+    const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
+    setUsers(newUsers);
+  };
+
   return (
     <div className="flex-center">
       <div className="table">
@@ -24,9 +54,9 @@ const UsersTable = ({ users }) => {
               </tr>
             </thead>
             <tbody>
-              {users.map((val) => {
+              {users.map((val, key) => {
                 return (
-                  <tr>
+                  <tr key={key}>
                     <td>{val.accountNumber}</td>
                     <td>{`${val.firstName} ${val.lastName}`}</td>
                     <td>{`₱ ${val.balance}`}</td>
@@ -55,7 +85,12 @@ const UsersTable = ({ users }) => {
                           style={{ color: '#FCE37E' }}
                         />
                       </button>
-                      <button title="Delete">
+                      <button
+                        title="Delete"
+                        onClick={() => {
+                          handleDelete(val.accountNumber);
+                        }}
+                      >
                         <BoxIcons.BiTrash
                           size={16}
                           style={{ color: '#F53C3D' }}
