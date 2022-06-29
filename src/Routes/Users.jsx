@@ -1,6 +1,6 @@
 import React from 'react';
+import Button from '../Components/Button/Button';
 import UsersTable from '../Components/Table/UsersTable';
-import InputText from '../Components/Input/InputText';
 
 const users = [
   {
@@ -57,8 +57,15 @@ const users = [
 
 const Users = () => {
   return (
-    <div className="users">
-      <UsersTable users={users} />
+    <div className="flex-center center">
+      <div>
+        <div className="add-user-btn">
+          <Button textValue={`Create User`} />
+        </div>
+        <div>
+          <UsersTable users={users} />
+        </div>
+      </div>
     </div>
   );
 };
