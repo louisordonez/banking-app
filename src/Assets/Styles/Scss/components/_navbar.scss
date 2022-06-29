@@ -22,6 +22,15 @@
   top: 0;
   left: -100%;
   transition: 850ms;
+
+  span {
+    margin-left: 1.6rem;
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
 }
 
 .nav-menu.active {
@@ -65,13 +74,4 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-}
-
-span {
-  margin-left: 1.6rem;
-  font-size: 1.6rem;
-}
-
-h2 {
-  font-size: 1.6rem;
 }

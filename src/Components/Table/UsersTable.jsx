@@ -6,7 +6,12 @@ const UsersTable = ({ users }) => {
     <div className="flex-center">
       <div className="table">
         <div className="table-header">
-          <span>{`Users`}</span>
+          <div>
+            <span>{`Users`}</span>
+            <div>
+              <input className="search" placeholder="Search a user" />
+            </div>
+          </div>
         </div>
         <div className="table-container">
           <table>

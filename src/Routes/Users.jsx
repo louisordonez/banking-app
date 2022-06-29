@@ -1,5 +1,6 @@
 import React from 'react';
 import UsersTable from '../Components/Table/UsersTable';
+import InputText from '../Components/Input/InputText';
 
 const users = [
   {
@@ -56,10 +57,9 @@ const users = [
 
 const Users = () => {
   return (
-    <main style={{ padding: '1rem 0' }}>
-      <h2>Users</h2>
+    <div className="users">
       <UsersTable users={users} />
-    </main>
+    </div>
   );
 };
 
