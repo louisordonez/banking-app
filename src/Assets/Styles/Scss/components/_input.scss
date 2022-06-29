@@ -39,19 +39,41 @@
 .search {
   position: absolute;
   right: 0;
-  width: 290px;
-  height: 46px;
-  border: 1px solid #f3f5f9;
-  border-radius: 6px;
+  width: 29rem;
+  height: 4.6rem;
+  border: 0.1rem solid #f3f5f9;
+  border-radius: 0.6rem;
   margin-right: 3.5rem;
   font-size: 1.4rem;
   padding: 1.2rem;
 
   &:focus {
-    outline: 1.55068px solid #819cfd;
+    outline: 0.155068rem solid #819cfd;
   }
 
   &::placeholder {
+    color: #8e95a6;
+  }
+}
+
+.user-input-text {
+  margin-top: 2rem;
+  width: 29rem;
+  height: 4.6rem;
+  border: 0.1rem solid #f3f5f9;
+  border-radius: 0.6rem;
+  font-size: 1.4rem;
+  padding: 1.3rem;
+
+  &:focus {
+    outline: 0.155068rem solid #819cfd;
+  }
+
+  &::placeholder {
+    color: #8e95a6;
+  }
+
+  &:invalid {
     color: #8e95a6;
   }
 }
