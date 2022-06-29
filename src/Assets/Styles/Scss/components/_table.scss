@@ -45,20 +45,37 @@
 }
 
 .table-container {
-  padding: 3.6rem;
+  margin: 3.6rem;
 }
 
 table {
+  width: 100%;
   border-spacing: 0rem;
 }
 
 th {
-  width: 100vw;
   height: 3.4rem;
   font-size: 1.6rem;
   color: #343744;
   background-color: #f9fafe;
   font-weight: 400;
+  text-align: center;
+}
+
+.users-table-header {
+  th {
+    &:nth-child(1) {
+      width: 25%;
+    }
+
+    &:nth-child(2) {
+      width: 25%;
+    }
+
+    &:nth-child(4) {
+      width: 30%;
+    }
+  }
 }
 
 td {

@@ -45,7 +45,7 @@ const UsersTable = () => {
         </div>
         <div className="table-container">
           <table>
-            <thead>
+            <thead className="users-table-header">
               <tr>
                 <th>Account Number</th>
                 <th>Name</th>
