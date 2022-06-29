@@ -192,6 +192,7 @@ const Users = () => {
                     className="user-input-text"
                     placeholder="Balance"
                     type="number"
+                    step=".01"
                     required
                   />
                 </div>
