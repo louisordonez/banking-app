@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../Components/Button/Button';
+import SearchInput from '../Components/Input/SearchInput';
+import ActionDeleteButton from '../Components/Button/ActionDeleteButton';
 import * as BoxIcons from 'react-icons/bi';
 
 let USER_LIST = [
@@ -45,7 +47,7 @@ const Users = () => {
               <div>
                 <span>{`Users`}</span>
                 <div>
-                  <input className="search" placeholder="Search a user" />
+                  <SearchInput placeholder={`Search a user`} />
                 </div>
               </div>
             </div>
@@ -91,17 +93,11 @@ const Users = () => {
                               style={{ color: '#FCE37E' }}
                             />
                           </button>
-                          <button
-                            title="Delete"
+                          <ActionDeleteButton
                             onClick={() => {
                               handleDelete(val.accountNumber);
                             }}
-                          >
-                            <BoxIcons.BiTrash
-                              size={16}
-                              style={{ color: '#F53C3D' }}
-                            />
-                          </button>
+                          />
                         </td>
                       </tr>
                     );
