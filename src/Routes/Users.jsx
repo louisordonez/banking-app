@@ -161,7 +161,7 @@ const Users = () => {
                 <div>
                   <select className="user-input-text" required>
                     <option value="" disabled selected hidden>
-                      Select your option
+                      Select an option
                     </option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
