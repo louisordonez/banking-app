@@ -253,13 +253,12 @@ const Users = () => {
   return (
     <>
       <div className="user-container">
-        <div>
-          <div className="add-user-btn">
-            <Button textValue={`Create User`} onClick={handleShowCreate} />
-          </div>
-          <div className="flex-center">
-            <div className="table">
-              <div className="table-header">
+        <Button textValue={`Create User`} onClick={handleShowCreate} />
+        <div className="flex-center">
+          <div className="table">
+            <div className="table-header">
+              <div>
+                <span>{`Users`}</span>
                 <div>
                   <span>{`Users`}</span>
                   <div>
