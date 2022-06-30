@@ -6,6 +6,7 @@ import ActionsEditButton from '../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
 import CreateUserForm from '../Components/Form/CreateUserForm';
 import EditUserForm from '../Components/Form/EditUserForm';
+import WithdrawForm from '../Components/Form/WithdrawForm';
 import * as BoxIcons from 'react-icons/bi';
 
 const USER_LIST = [
@@ -33,9 +34,14 @@ const USER_LIST = [
 
 const Users = () => {
   const [users, setUsers] = useState(USER_LIST);
+  const [accountNumber, setAccountNumber] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [balance, setBalance] = useState(null);
+  const [withdrawAmount, setWithdrawAmount] = useState(null);
   const [showCreate, setShowCreate] = useState('none');
   const [showEdit, setShowEdit] = useState('none');
-  // const [showWithdraw, setShowWithdraw] = useState('none');
+  const [showWithdraw, setShowWithdraw] = useState('none');
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -44,6 +50,7 @@ const Users = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const balanceRef = useRef(null);
+  const withdrawAmountRef = useRef(null);
 
   const accountNumberEditRef = useRef(null);
   const firstNameEditRef = useRef(null);
@@ -54,8 +61,36 @@ const Users = () => {
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
 
-  // const handleShowWithdraw = () => setShowWithdraw('block');
-  // const handleCloseWithdraw = () => setShowWithdraw('none');
+  const handleShowWithdraw = (accountNumber, firstName, lastName, balance) => {
+    setShowWithdraw('block');
+    setAccountNumber(accountNumber);
+    setFirstName(firstName);
+    setLastName(lastName);
+    setBalance(balance);
+  };
+
+  const handleCloseWithdraw = () => setShowWithdraw('none');
+
+  const handleWithdrawAmount = (e) => {
+    setWithdrawAmount(e.target.value);
+  };
+
+  const resetWithdrawForm = () => {
+    withdrawAmountRef.current.value = '';
+  };
+
+  const handleWithdraw = (e) => {
+    e.preventDefault();
+
+    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
+    const userPrevBalance = users[userIndex].balance;
+    const totalBalance = userPrevBalance - withdrawAmount;
+
+    users[userIndex].balance = totalBalance;
+
+    handleCloseWithdraw();
+    resetWithdrawForm();
+  };
 
   const handleShowCreate = () => setShowCreate('block');
   const handleCloseCreate = () => setShowCreate('none');
@@ -200,7 +235,16 @@ const Users = () => {
                             currency: 'PHP',
                           })}`}</td>
                           <td>
-                            <ActionsWithdrawButton />
+                            <ActionsWithdrawButton
+                              onClick={() => {
+                                handleShowWithdraw(
+                                  val.accountNumber,
+                                  val.firstName,
+                                  val.lastName,
+                                  val.balance
+                                );
+                              }}
+                            />
                             <button title="Deposit">
                               <BoxIcons.BiArrowToTop
                                 size={16}
@@ -257,6 +301,17 @@ const Users = () => {
           passwordEditRef={passwordEditRef}
           balanceEditRef={balanceEditRef}
           handleCloseEdit={handleCloseEdit}
+        />
+        <WithdrawForm
+          showWithdraw={showWithdraw}
+          handleWithdraw={handleWithdraw}
+          accountNumber={accountNumber}
+          firstName={firstName}
+          lastName={lastName}
+          balance={balance}
+          withdrawAmountRef={withdrawAmountRef}
+          handleWithdrawAmount={handleWithdrawAmount}
+          handleCloseWithdraw={handleCloseWithdraw}
         />
       </div>
     </>
