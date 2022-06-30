@@ -201,81 +201,79 @@ const Users = () => {
 
   return (
     <>
-      <div className="flex-center center">
-        <div>
-          <div className="add-user-btn">
-            <Button textValue={`Create User`} onClick={handleShowCreate} />
-          </div>
-          <div className="flex-center">
-            <div className="table">
-              <div className="table-header">
+      <div className="user-container">
+        <div className="add-user-btn">
+          <Button textValue={`Create User`} onClick={handleShowCreate} />
+        </div>
+        <div className="flex-center">
+          <div className="table">
+            <div className="table-header">
+              <div>
+                <span>{`Users`}</span>
                 <div>
-                  <span>{`Users`}</span>
-                  <div>
-                    <SearchInput placeholder={`Enter account number`} />
-                  </div>
+                  <SearchInput placeholder={`Enter account number`} />
                 </div>
               </div>
-              <div className="table-container">
-                <table>
-                  <thead className="users-table-header">
-                    <tr>
-                      <th>Account Number</th>
-                      <th>Name</th>
-                      <th>Balance</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {users.map((val, key) => {
-                      return (
-                        <tr key={key}>
-                          <td>{val.accountNumber}</td>
-                          <td>{`${val.firstName} ${val.lastName}`}</td>
-                          <td>{`${val.balance.toLocaleString('en-US', {
-                            style: 'currency',
-                            currency: 'PHP',
-                          })}`}</td>
-                          <td>
-                            <ActionsWithdrawButton
-                              onClick={() => {
-                                handleShowWithdraw(
-                                  val.accountNumber,
-                                  val.firstName,
-                                  val.lastName,
-                                  val.balance
-                                );
-                              }}
+            </div>
+            <div className="table-container">
+              <table>
+                <thead className="users-table-header">
+                  <tr>
+                    <th>Account Number</th>
+                    <th>Name</th>
+                    <th>Balance</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((val, key) => {
+                    return (
+                      <tr key={key}>
+                        <td>{val.accountNumber}</td>
+                        <td>{`${val.firstName} ${val.lastName}`}</td>
+                        <td>{`${val.balance.toLocaleString('en-US', {
+                          style: 'currency',
+                          currency: 'PHP',
+                        })}`}</td>
+                        <td>
+                          <ActionsWithdrawButton
+                            onClick={() => {
+                              handleShowWithdraw(
+                                val.accountNumber,
+                                val.firstName,
+                                val.lastName,
+                                val.balance
+                              );
+                            }}
+                          />
+                          <button title="Deposit">
+                            <BoxIcons.BiArrowToTop
+                              size={16}
+                              style={{ color: '#A789FF' }}
                             />
-                            <button title="Deposit">
-                              <BoxIcons.BiArrowToTop
-                                size={16}
-                                style={{ color: '#A789FF' }}
-                              />
-                            </button>
-                            <button title="Transfer">
-                              <BoxIcons.BiTransferAlt
-                                size={16}
-                                style={{ color: '#436CFB' }}
-                              />
-                            </button>
-                            <ActionsEditButton
-                              onClick={() => {
-                                handleShowEdit(val.accountNumber);
-                              }}
+                          </button>
+                          <button title="Transfer">
+                            <BoxIcons.BiTransferAlt
+                              size={16}
+                              style={{ color: '#436CFB' }}
                             />
-                            <ActionsDeleteButton
-                              onClick={() => {
-                                handleDelete(val.accountNumber);
-                              }}
-                            />
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+                          </button>
+                          <ActionsEditButton
+                            onClick={() => {
+                              handleShowEdit(val.accountNumber);
+                            }}
+                          />
+                          <ActionsDeleteButton
+                            onClick={() => {
+                              handleDelete(val.accountNumber);
+                            }}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
