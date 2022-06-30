@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import * as BoxIcons from 'react-icons/bi';
-import Button from '../Components/Button/Button';
+import CreateUserButton from '../Components/Button/CreateUserButton';
 import SearchInput from '../Components/Input/SearchInput';
 import ActionsWithdrawButton from '../Components/Button/ActionsWithdrawButton';
 import ActionsDepositButton from '../Components/Button/ActionsDepositButton';
@@ -253,7 +253,10 @@ const Users = () => {
   return (
     <>
       <div className="user-container">
-        <Button textValue={`Create User`} onClick={handleShowCreate} />
+        <CreateUserButton
+          textValue={`Create User`}
+          onClick={handleShowCreate}
+        />
         <div className="flex-center">
           <div className="table">
             <div className="table-header">
