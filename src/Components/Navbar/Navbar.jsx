@@ -11,19 +11,19 @@ const SidebarData = [
   },
   {
     title: 'Users',
-    path: 'Users',
+    path: 'users',
     icon: <BoxIcons.BiUser />,
     cName: 'nav-text',
   },
   {
     title: 'Transactions',
-    path: 'Transactions',
+    path: 'transactions',
     icon: <BoxIcons.BiMoney />,
     cName: 'nav-text',
   },
   {
     title: 'Settings',
-    path: 'Settings',
+    path: 'settings',
     icon: <BoxIcons.BiCog />,
     cName: 'nav-text',
   },
