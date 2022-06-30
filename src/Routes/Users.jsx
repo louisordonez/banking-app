@@ -191,7 +191,10 @@ const Users = () => {
                         <tr key={key}>
                           <td>{val.accountNumber}</td>
                           <td>{`${val.firstName} ${val.lastName}`}</td>
-                          <td>{`₱ ${val.balance}`}</td>
+                          <td>{`${val.balance.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'PHP',
+                          })}`}</td>
                           <td>
                             <button title="Withdraw">
                               <BoxIcons.BiArrowToBottom
