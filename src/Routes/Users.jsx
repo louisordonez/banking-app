@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Button from '../Components/Button/Button';
 import SearchInput from '../Components/Input/SearchInput';
+import ActionsWithdrawButton from '../Components/Button/ActionsWithdrawButton';
 import ActionsEditButton from '../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
 import CreateUserForm from '../Components/Form/CreateUserForm';
@@ -34,6 +35,7 @@ const Users = () => {
   const [users, setUsers] = useState(USER_LIST);
   const [showCreate, setShowCreate] = useState('none');
   const [showEdit, setShowEdit] = useState('none');
+  // const [showWithdraw, setShowWithdraw] = useState('none');
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -52,8 +54,10 @@ const Users = () => {
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
 
-  const handleShowCreate = () => setShowCreate('block');
+  // const handleShowWithdraw = () => setShowWithdraw('block');
+  // const handleCloseWithdraw = () => setShowWithdraw('none');
 
+  const handleShowCreate = () => setShowCreate('block');
   const handleCloseCreate = () => setShowCreate('none');
 
   const handleCreateUser = (userData) => {
@@ -196,12 +200,7 @@ const Users = () => {
                             currency: 'PHP',
                           })}`}</td>
                           <td>
-                            <button title="Withdraw">
-                              <BoxIcons.BiArrowToBottom
-                                size={16}
-                                style={{ color: '#83DEA4' }}
-                              />
-                            </button>
+                            <ActionsWithdrawButton />
                             <button title="Deposit">
                               <BoxIcons.BiArrowToTop
                                 size={16}
