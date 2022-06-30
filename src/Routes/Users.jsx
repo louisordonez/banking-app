@@ -283,10 +283,13 @@ const Users = () => {
                         <tr key={key} data-row="">
                           <td data-account-number="">{val.accountNumber}</td>
                           <td>{`${val.firstName} ${val.lastName}`}</td>
-                          <td>{`${val.balance.toLocaleString('en-US', {
-                            style: 'currency',
-                            currency: 'PHP',
-                          })}`}</td>
+                          <td>{`${parseFloat(val.balance).toLocaleString(
+                            'en-US',
+                            {
+                              style: 'currency',
+                              currency: 'PHP',
+                            }
+                          )}`}</td>
                           <td>
                             <ActionsWithdrawButton
                               onClick={() => {
