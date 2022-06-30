@@ -1,13 +1,15 @@
 import React, { useRef, useState } from 'react';
+import * as BoxIcons from 'react-icons/bi';
 import Button from '../Components/Button/Button';
 import SearchInput from '../Components/Input/SearchInput';
 import ActionsWithdrawButton from '../Components/Button/ActionsWithdrawButton';
+import ActionsDepositButton from '../Components/Button/ActionsDepositButton';
 import ActionsEditButton from '../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
 import CreateUserForm from '../Components/Form/CreateUserForm';
 import EditUserForm from '../Components/Form/EditUserForm';
 import WithdrawForm from '../Components/Form/WithdrawForm';
-import * as BoxIcons from 'react-icons/bi';
+import DepositForm from '../Components/Form/DepositForm';
 
 const USER_LIST = [
   {
@@ -18,7 +20,7 @@ const USER_LIST = [
     gender: 'Male',
     email: 'jd@email.com',
     password: 'jd',
-    balance: 13459823.25,
+    balance: 15000000.0,
   },
   {
     accountNumber: 1656480543188,
@@ -28,7 +30,7 @@ const USER_LIST = [
     gender: 'Female',
     email: 'mdc@email.com',
     password: 'mdc',
-    balance: 23423459.56,
+    balance: 20000000.0,
   },
 ];
 
@@ -39,9 +41,11 @@ const Users = () => {
   const [lastName, setLastName] = useState(null);
   const [balance, setBalance] = useState(null);
   const [withdrawAmount, setWithdrawAmount] = useState(null);
+  const [depositAmount, setDepositAmount] = useState(null);
   const [showCreate, setShowCreate] = useState('none');
   const [showEdit, setShowEdit] = useState('none');
   const [showWithdraw, setShowWithdraw] = useState('none');
+  const [showDeposit, setShowDeposit] = useState('none');
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -51,6 +55,7 @@ const Users = () => {
   const passwordRef = useRef(null);
   const balanceRef = useRef(null);
   const withdrawAmountRef = useRef(null);
+  const depositAmountRef = useRef(null);
 
   const accountNumberEditRef = useRef(null);
   const firstNameEditRef = useRef(null);
@@ -60,37 +65,6 @@ const Users = () => {
   const emailEditRef = useRef(null);
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
-
-  const handleShowWithdraw = (accountNumber, firstName, lastName, balance) => {
-    setShowWithdraw('block');
-    setAccountNumber(accountNumber);
-    setFirstName(firstName);
-    setLastName(lastName);
-    setBalance(balance);
-  };
-
-  const handleCloseWithdraw = () => setShowWithdraw('none');
-
-  const handleWithdrawAmount = (e) => {
-    setWithdrawAmount(e.target.value);
-  };
-
-  const resetWithdrawForm = () => {
-    withdrawAmountRef.current.value = '';
-  };
-
-  const handleWithdraw = (e) => {
-    e.preventDefault();
-
-    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
-    const userPrevBalance = users[userIndex].balance;
-    const totalBalance = userPrevBalance - withdrawAmount;
-
-    users[userIndex].balance = totalBalance;
-
-    handleCloseWithdraw();
-    resetWithdrawForm();
-  };
 
   const handleShowCreate = () => setShowCreate('block');
   const handleCloseCreate = () => setShowCreate('none');
@@ -147,6 +121,68 @@ const Users = () => {
     resetCreateUserForm();
   };
 
+  const handleShowWithdraw = (accountNumber, firstName, lastName, balance) => {
+    setShowWithdraw('block');
+    setAccountNumber(accountNumber);
+    setFirstName(firstName);
+    setLastName(lastName);
+    setBalance(balance);
+  };
+
+  const handleCloseWithdraw = () => setShowWithdraw('none');
+
+  const handleWithdrawAmount = (e) => {
+    setWithdrawAmount(parseFloat(e.target.value));
+  };
+
+  const resetWithdrawForm = () => {
+    withdrawAmountRef.current.value = '';
+  };
+
+  const handleWithdraw = (e) => {
+    e.preventDefault();
+
+    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
+    const userPrevBalance = users[userIndex].balance;
+    const totalBalance = userPrevBalance - withdrawAmount;
+
+    users[userIndex].balance = totalBalance;
+
+    handleCloseWithdraw();
+    resetWithdrawForm();
+  };
+
+  const handleShowDeposit = (accountNumber, firstName, lastName, balance) => {
+    setShowDeposit('block');
+    setAccountNumber(accountNumber);
+    setFirstName(firstName);
+    setLastName(lastName);
+    setBalance(balance);
+  };
+
+  const handleCloseDeposit = () => setShowDeposit('none');
+
+  const handleDepositAmount = (e) => {
+    setDepositAmount(parseFloat(e.target.value));
+  };
+
+  const resetDepositForm = () => {
+    depositAmountRef.current.value = '';
+  };
+
+  const handleDeposit = (e) => {
+    e.preventDefault();
+
+    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
+    const userPrevBalance = users[userIndex].balance;
+    const totalBalance = userPrevBalance + depositAmount;
+
+    users[userIndex].balance = totalBalance;
+
+    handleCloseDeposit();
+    resetDepositForm();
+  };
+
   const handleShowEdit = (accountNumber) => {
     const user = users.find((u) => u.accountNumber === accountNumber);
 
@@ -199,6 +235,21 @@ const Users = () => {
     resetEditCreateUserForm();
   };
 
+  const handleSearch = (e) => {
+    const tr = document.querySelectorAll('[data-row]');
+    const td = document.querySelectorAll('[data-account-number]');
+
+    for (let i = 0; i < tr.length; i++) {
+      let trValue = td[i].textContent;
+
+      if (trValue.toUpperCase().indexOf(e.target.value) > -1) {
+        tr[i].style.display = '';
+      } else {
+        tr[i].style.display = 'none';
+      }
+    }
+  };
+
   return (
     <>
       <div className="user-container">
@@ -209,69 +260,80 @@ const Users = () => {
               <div>
                 <span>{`Users`}</span>
                 <div>
-                  <SearchInput placeholder={`Enter account number`} />
+                  <span>{`Users`}</span>
+                  <div>
+                    <SearchInput
+                      placeholder={`Enter account number`}
+                      handleSearch={handleSearch}
+                      type={`number`}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="table-container">
-              <table>
-                <thead className="users-table-header">
-                  <tr>
-                    <th>Account Number</th>
-                    <th>Name</th>
-                    <th>Balance</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {users.map((val, key) => {
-                    return (
-                      <tr key={key}>
-                        <td>{val.accountNumber}</td>
-                        <td>{`${val.firstName} ${val.lastName}`}</td>
-                        <td>{`${val.balance.toLocaleString('en-US', {
-                          style: 'currency',
-                          currency: 'PHP',
-                        })}`}</td>
-                        <td>
-                          <ActionsWithdrawButton
-                            onClick={() => {
-                              handleShowWithdraw(
-                                val.accountNumber,
-                                val.firstName,
-                                val.lastName,
-                                val.balance
-                              );
-                            }}
-                          />
-                          <button title="Deposit">
-                            <BoxIcons.BiArrowToTop
-                              size={16}
-                              style={{ color: '#A789FF' }}
+              <div className="table-container">
+                <table>
+                  <thead className="users-table-header">
+                    <tr>
+                      <th>Account Number</th>
+                      <th>Name</th>
+                      <th>Balance</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((val, key) => {
+                      return (
+                        <tr key={key} data-row="">
+                          <td data-account-number="">{val.accountNumber}</td>
+                          <td>{`${val.firstName} ${val.lastName}`}</td>
+                          <td>{`${val.balance.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'PHP',
+                          })}`}</td>
+                          <td>
+                            <ActionsWithdrawButton
+                              onClick={() => {
+                                handleShowWithdraw(
+                                  val.accountNumber,
+                                  val.firstName,
+                                  val.lastName,
+                                  val.balance
+                                );
+                              }}
                             />
-                          </button>
-                          <button title="Transfer">
-                            <BoxIcons.BiTransferAlt
-                              size={16}
-                              style={{ color: '#436CFB' }}
+                            <ActionsDepositButton
+                              onClick={() => {
+                                handleShowDeposit(
+                                  val.accountNumber,
+                                  val.firstName,
+                                  val.lastName,
+                                  val.balance
+                                );
+                              }}
                             />
-                          </button>
-                          <ActionsEditButton
-                            onClick={() => {
-                              handleShowEdit(val.accountNumber);
-                            }}
-                          />
-                          <ActionsDeleteButton
-                            onClick={() => {
-                              handleDelete(val.accountNumber);
-                            }}
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                            <button title="Transfer">
+                              <BoxIcons.BiTransferAlt
+                                size={16}
+                                style={{ color: '#436CFB' }}
+                              />
+                            </button>
+                            <ActionsEditButton
+                              onClick={() => {
+                                handleShowEdit(val.accountNumber);
+                              }}
+                            />
+                            <ActionsDeleteButton
+                              onClick={() => {
+                                handleDelete(val.accountNumber);
+                              }}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -310,6 +372,17 @@ const Users = () => {
           withdrawAmountRef={withdrawAmountRef}
           handleWithdrawAmount={handleWithdrawAmount}
           handleCloseWithdraw={handleCloseWithdraw}
+        />
+        <DepositForm
+          showDeposit={showDeposit}
+          handleDeposit={handleDeposit}
+          accountNumber={accountNumber}
+          firstName={firstName}
+          lastName={lastName}
+          balance={balance}
+          depositAmountRef={depositAmountRef}
+          handleDepositAmount={handleDepositAmount}
+          handleCloseDeposit={handleCloseDeposit}
         />
       </div>
     </>
