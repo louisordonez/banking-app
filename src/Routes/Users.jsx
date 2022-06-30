@@ -1,7 +1,10 @@
 import React, { useRef, useState } from 'react';
 import Button from '../Components/Button/Button';
 import SearchInput from '../Components/Input/SearchInput';
+import ActionsEditButton from '../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
+import CreateUserForm from '../Components/Form/CreateUserForm';
+import EditUserForm from '../Components/Form/EditUserForm';
 import * as BoxIcons from 'react-icons/bi';
 
 const USER_LIST = [
@@ -28,6 +31,10 @@ const USER_LIST = [
 ];
 
 const Users = () => {
+  const [users, setUsers] = useState(USER_LIST);
+  const [showCreate, setShowCreate] = useState('none');
+  const [showEdit, setShowEdit] = useState('none');
+
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const birthdateRef = useRef(null);
@@ -35,18 +42,24 @@ const Users = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const balanceRef = useRef(null);
-  const [users, setUsers] = useState(USER_LIST);
-  const [create, setCreate] = useState('none');
 
-  const handleCreateShow = () => setCreate('block');
+  const accountNumberEditRef = useRef(null);
+  const firstNameEditRef = useRef(null);
+  const lastNameEditRef = useRef(null);
+  const birthdateEditRef = useRef(null);
+  const genderEditRef = useRef(null);
+  const emailEditRef = useRef(null);
+  const passwordEditRef = useRef(null);
+  const balanceEditRef = useRef(null);
 
-  const handleCreateClose = () => setCreate('none');
+  const handleShowCreate = () => setShowCreate('block');
+
+  const handleCloseCreate = () => setShowCreate('none');
 
   const handleCreateUser = (userData) => {
     const newAccountNumber = new Date().getTime();
 
     setUsers((state) => [
-      ...state,
       {
         accountNumber: newAccountNumber,
         firstName: `${userData.firstName}`,
@@ -57,6 +70,7 @@ const Users = () => {
         password: `${userData.password}`,
         balance: `${userData.balance}`,
       },
+      ...state,
     ]);
   };
 
@@ -77,6 +91,8 @@ const Users = () => {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+
     const userData = {
       firstName: `${firstNameRef.current.value}`,
       lastName: `${lastNameRef.current.value}`,
@@ -87,9 +103,59 @@ const Users = () => {
       balance: `${balanceRef.current.value}`,
     };
 
-    e.preventDefault();
     handleCreateUser(userData);
+    handleCloseCreate();
     resetCreateUserForm();
+  };
+
+  const handleShowEdit = (accountNumber) => {
+    const user = users.find((u) => u.accountNumber === accountNumber);
+
+    setShowEdit('block');
+
+    accountNumberEditRef.current.value = accountNumber;
+    firstNameEditRef.current.value = user.firstName;
+    lastNameEditRef.current.value = user.lastName;
+    birthdateEditRef.current.value = user.birthdate;
+    genderEditRef.current.value = user.gender;
+    emailEditRef.current.value = user.email;
+    passwordEditRef.current.value = user.password;
+    balanceEditRef.current.value = user.balance;
+  };
+
+  const handleCloseEdit = () => setShowEdit('none');
+
+  const handleEditUser = (userIndex) => {
+    users[userIndex].firstName = `${firstNameEditRef.current.value}`;
+    users[userIndex].lastName = `${lastNameEditRef.current.value}`;
+    users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
+    users[userIndex].gender = `${genderEditRef.current.value}`;
+    users[userIndex].email = `${emailEditRef.current.value}`;
+    users[userIndex].password = `${passwordEditRef.current.value}`;
+    users[userIndex].balance = `${balanceEditRef.current.value}`;
+  };
+
+  const resetEditCreateUserForm = () => {
+    accountNumberEditRef.current.value = '';
+    firstNameEditRef.current.value = '';
+    lastNameEditRef.current.value = '';
+    birthdateEditRef.current.value = '';
+    genderEditRef.current.value = '';
+    emailEditRef.current.value = '';
+    passwordEditRef.current.value = '';
+    balanceEditRef.current.value = '';
+  };
+
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+
+    const userIndex = users.findIndex(
+      (u) => u.accountNumber === accountNumberEditRef.current.value
+    );
+
+    handleEditUser(userIndex);
+    handleCloseEdit();
+    resetEditCreateUserForm();
   };
 
   return (
@@ -97,7 +163,7 @@ const Users = () => {
       <div className="flex-center center">
         <div>
           <div className="add-user-btn">
-            <Button textValue={`Create User`} onClick={handleCreateShow} />
+            <Button textValue={`Create User`} onClick={handleShowCreate} />
           </div>
           <div className="flex-center">
             <div className="table">
@@ -145,12 +211,11 @@ const Users = () => {
                                 style={{ color: '#436CFB' }}
                               />
                             </button>
-                            <button title="Edit">
-                              <BoxIcons.BiPencil
-                                size={16}
-                                style={{ color: '#FCE37E' }}
-                              />
-                            </button>
+                            <ActionsEditButton
+                              onClick={() => {
+                                handleShowEdit(val.accountNumber);
+                              }}
+                            />
                             <ActionsDeleteButton
                               onClick={() => {
                                 handleDelete(val.accountNumber);
@@ -166,114 +231,31 @@ const Users = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div style={{ display: `${create}` }}>
-        <div className="modal center">
-          <div className="modal-content center">
-            <div className="modal-header">
-              <div>
-                <span>Create User</span>
-              </div>
-            </div>
-            <div className="modal-body">
-              <form onSubmit={handleSubmit}>
-                <div className="create-user-flex">
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="First Name"
-                      type="text"
-                      ref={firstNameRef}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Last Name"
-                      type="text"
-                      ref={lastNameRef}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="create-user-flex">
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Birthdate"
-                      type="date"
-                      ref={birthdateRef}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <select
-                      className="user-input-text"
-                      ref={genderRef}
-                      defaultValue={''}
-                      required
-                    >
-                      <option value="" disabled hidden>
-                        Select an option
-                      </option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="create-user-flex">
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Email"
-                      type="email"
-                      ref={emailRef}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Password"
-                      type="password"
-                      ref={passwordRef}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="create-user-flex">
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Balance"
-                      type="number"
-                      step=".01"
-                      ref={balanceRef}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <input
-                    className="btn-small btn-cancel"
-                    onClick={handleCreateClose}
-                    type="button"
-                    value="Cancel"
-                  />
-                  <input
-                    className="btn-small btn-primary"
-                    // onClick={() => {
-                    //   handleCreateUser();
-                    // }}
-                    type="submit"
-                    value="Submit"
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+        <CreateUserForm
+          showCreate={showCreate}
+          handleSubmit={handleSubmit}
+          firstNameRef={firstNameRef}
+          lastNameRef={lastNameRef}
+          birthdateRef={birthdateRef}
+          genderRef={genderRef}
+          emailRef={emailRef}
+          passwordRef={passwordRef}
+          balanceRef={balanceRef}
+          handleCloseCreate={handleCloseCreate}
+        />
+        <EditUserForm
+          showEdit={showEdit}
+          handleEditSubmit={handleEditSubmit}
+          accountNumberEditRef={accountNumberEditRef}
+          firstNameEditRef={firstNameEditRef}
+          lastNameEditRef={lastNameEditRef}
+          birthdateEditRef={birthdateEditRef}
+          genderEditRef={genderEditRef}
+          emailEditRef={emailEditRef}
+          passwordEditRef={passwordEditRef}
+          balanceEditRef={balanceEditRef}
+          handleCloseEdit={handleCloseEdit}
+        />
       </div>
     </>
   );
