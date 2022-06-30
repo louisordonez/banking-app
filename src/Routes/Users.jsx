@@ -235,6 +235,21 @@ const Users = () => {
     resetEditCreateUserForm();
   };
 
+  const handleSearch = (e) => {
+    const tr = document.querySelectorAll('[data-row]');
+    const td = document.querySelectorAll('[data-account-number]');
+
+    for (let i = 0; i < tr.length; i++) {
+      let trValue = td[i].textContent;
+
+      if (trValue.toUpperCase().indexOf(e.target.value) > -1) {
+        tr[i].style.display = '';
+      } else {
+        tr[i].style.display = 'none';
+      }
+    }
+  };
+
   return (
     <>
       <div className="flex-center center">
@@ -248,7 +263,11 @@ const Users = () => {
                 <div>
                   <span>{`Users`}</span>
                   <div>
-                    <SearchInput placeholder={`Enter account number`} />
+                    <SearchInput
+                      placeholder={`Enter account number`}
+                      handleSearch={handleSearch}
+                      type={`number`}
+                    />
                   </div>
                 </div>
               </div>
@@ -265,8 +284,8 @@ const Users = () => {
                   <tbody>
                     {users.map((val, key) => {
                       return (
-                        <tr key={key}>
-                          <td>{val.accountNumber}</td>
+                        <tr key={key} data-row="">
+                          <td data-account-number="">{val.accountNumber}</td>
                           <td>{`${val.firstName} ${val.lastName}`}</td>
                           <td>{`${val.balance.toLocaleString('en-US', {
                             style: 'currency',

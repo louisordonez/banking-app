@@ -1,9 +1,14 @@
 import React from 'react';
 
-const InputSearch = ({ placeholder }) => {
+const InputSearch = ({ placeholder, handleSearch, type }) => {
   return (
     <div>
-      <input className="search" placeholder={placeholder} />
+      <input
+        className="search"
+        placeholder={placeholder}
+        onChange={handleSearch}
+        type={type}
+      />
     </div>
   );
 };
