@@ -188,8 +188,10 @@ const Users = () => {
   const handleEditSubmit = (e) => {
     e.preventDefault();
 
+    const accountNumberInt = parseInt(accountNumberEditRef.current.value);
+
     const userIndex = users.findIndex(
-      (u) => u.accountNumber === accountNumberEditRef.current.value
+      (u) => u.accountNumber === accountNumberInt
     );
 
     handleEditUser(userIndex);
