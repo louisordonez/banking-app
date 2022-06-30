@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Button from '../Components/Button/Button';
 import SearchInput from '../Components/Input/SearchInput';
+import ActionsEditButton from '../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
 import * as BoxIcons from 'react-icons/bi';
 
@@ -145,12 +146,11 @@ const Users = () => {
                                 style={{ color: '#436CFB' }}
                               />
                             </button>
-                            <button title="Edit">
-                              <BoxIcons.BiPencil
-                                size={16}
-                                style={{ color: '#FCE37E' }}
-                              />
-                            </button>
+                            <ActionsEditButton
+                            // onClick={() => {
+                            //   handleDelete(val.accountNumber);
+                            // }}
+                            />
                             <ActionsDeleteButton
                               onClick={() => {
                                 handleDelete(val.accountNumber);
@@ -263,9 +263,6 @@ const Users = () => {
                   />
                   <input
                     className="btn-small btn-primary"
-                    // onClick={() => {
-                    //   handleCreateUser();
-                    // }}
                     type="submit"
                     value="Submit"
                   />
