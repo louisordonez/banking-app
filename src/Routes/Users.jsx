@@ -3,6 +3,7 @@ import Button from '../Components/Button/Button';
 import SearchInput from '../Components/Input/SearchInput';
 import ActionsEditButton from '../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
+import CreateUserForm from '../Components/Form/CreateUserForm';
 import * as BoxIcons from 'react-icons/bi';
 
 const USER_LIST = [
@@ -36,12 +37,13 @@ const Users = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const balanceRef = useRef(null);
+
   const [users, setUsers] = useState(USER_LIST);
-  const [create, setCreate] = useState('none');
+  const [showCreate, setShowCreate] = useState('none');
 
-  const handleCreateShow = () => setCreate('block');
+  const handleShowCreate = () => setShowCreate('block');
 
-  const handleCreateClose = () => setCreate('none');
+  const handleCloseCreate = () => setShowCreate('none');
 
   const handleCreateUser = (userData) => {
     const newAccountNumber = new Date().getTime();
@@ -78,6 +80,8 @@ const Users = () => {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+
     const userData = {
       firstName: `${firstNameRef.current.value}`,
       lastName: `${lastNameRef.current.value}`,
@@ -88,8 +92,8 @@ const Users = () => {
       balance: `${balanceRef.current.value}`,
     };
 
-    e.preventDefault();
     handleCreateUser(userData);
+    handleCloseCreate();
     resetCreateUserForm();
   };
 
@@ -98,7 +102,7 @@ const Users = () => {
       <div className="flex-center center">
         <div>
           <div className="add-user-btn">
-            <Button textValue={`Create User`} onClick={handleCreateShow} />
+            <Button textValue={`Create User`} onClick={handleShowCreate} />
           </div>
           <div className="flex-center">
             <div className="table">
@@ -166,111 +170,18 @@ const Users = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div style={{ display: `${create}` }}>
-        <div className="modal center">
-          <div className="modal-content center">
-            <div className="modal-header">
-              <div>
-                <span>Create User</span>
-              </div>
-            </div>
-            <div className="modal-body">
-              <form onSubmit={handleSubmit}>
-                <div className="create-user-flex">
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="First Name"
-                      type="text"
-                      ref={firstNameRef}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Last Name"
-                      type="text"
-                      ref={lastNameRef}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="create-user-flex">
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Birthdate"
-                      type="date"
-                      ref={birthdateRef}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <select
-                      className="user-input-text"
-                      ref={genderRef}
-                      defaultValue={''}
-                      required
-                    >
-                      <option value="" disabled hidden>
-                        Select an option
-                      </option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="create-user-flex">
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Email"
-                      type="email"
-                      ref={emailRef}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Password"
-                      type="password"
-                      ref={passwordRef}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="create-user-flex">
-                  <div>
-                    <input
-                      className="user-input-text"
-                      placeholder="Balance"
-                      type="number"
-                      step=".01"
-                      ref={balanceRef}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <input
-                    className="btn-small btn-cancel"
-                    onClick={handleCreateClose}
-                    type="button"
-                    value="Cancel"
-                  />
-                  <input
-                    className="btn-small btn-primary"
-                    type="submit"
-                    value="Submit"
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+        <CreateUserForm
+          showCreate={showCreate}
+          handleSubmit={handleSubmit}
+          firstNameRef={firstNameRef}
+          lastNameRef={lastNameRef}
+          birthdateRef={birthdateRef}
+          genderRef={genderRef}
+          emailRef={emailRef}
+          passwordRef={passwordRef}
+          balanceRef={balanceRef}
+          handleCloseCreate={handleCloseCreate}
+        />
       </div>
     </>
   );
