@@ -4,6 +4,7 @@ import SearchInput from '../Components/Input/SearchInput';
 import ActionsEditButton from '../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
 import CreateUserForm from '../Components/Form/CreateUserForm';
+import EditUserForm from '../Components/Form/EditUserForm';
 import * as BoxIcons from 'react-icons/bi';
 
 const USER_LIST = [
@@ -30,6 +31,10 @@ const USER_LIST = [
 ];
 
 const Users = () => {
+  const [users, setUsers] = useState(USER_LIST);
+  const [showCreate, setShowCreate] = useState('none');
+  const [showEdit, setShowEdit] = useState('none');
+
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const birthdateRef = useRef(null);
@@ -38,8 +43,14 @@ const Users = () => {
   const passwordRef = useRef(null);
   const balanceRef = useRef(null);
 
-  const [users, setUsers] = useState(USER_LIST);
-  const [showCreate, setShowCreate] = useState('none');
+  const accountNumberEditRef = useRef(null);
+  const firstNameEditRef = useRef(null);
+  const lastNameEditRef = useRef(null);
+  const birthdateEditRef = useRef(null);
+  const genderEditRef = useRef(null);
+  const emailEditRef = useRef(null);
+  const passwordEditRef = useRef(null);
+  const balanceEditRef = useRef(null);
 
   const handleShowCreate = () => setShowCreate('block');
 
@@ -49,7 +60,6 @@ const Users = () => {
     const newAccountNumber = new Date().getTime();
 
     setUsers((state) => [
-      ...state,
       {
         accountNumber: newAccountNumber,
         firstName: `${userData.firstName}`,
@@ -60,6 +70,7 @@ const Users = () => {
         password: `${userData.password}`,
         balance: `${userData.balance}`,
       },
+      ...state,
     ]);
   };
 
@@ -95,6 +106,56 @@ const Users = () => {
     handleCreateUser(userData);
     handleCloseCreate();
     resetCreateUserForm();
+  };
+
+  const handleShowEdit = (accountNumber) => {
+    const user = users.find((u) => u.accountNumber === accountNumber);
+
+    setShowEdit('block');
+
+    accountNumberEditRef.current.value = accountNumber;
+    firstNameEditRef.current.value = user.firstName;
+    lastNameEditRef.current.value = user.lastName;
+    birthdateEditRef.current.value = user.birthdate;
+    genderEditRef.current.value = user.gender;
+    emailEditRef.current.value = user.email;
+    passwordEditRef.current.value = user.password;
+    balanceEditRef.current.value = user.balance;
+  };
+
+  const handleCloseEdit = () => setShowEdit('none');
+
+  const handleEditUser = (userIndex) => {
+    users[userIndex].firstName = `${firstNameEditRef.current.value}`;
+    users[userIndex].lastName = `${lastNameEditRef.current.value}`;
+    users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
+    users[userIndex].gender = `${genderEditRef.current.value}`;
+    users[userIndex].email = `${emailEditRef.current.value}`;
+    users[userIndex].password = `${passwordEditRef.current.value}`;
+    users[userIndex].balance = `${balanceEditRef.current.value}`;
+  };
+
+  const resetEditCreateUserForm = () => {
+    accountNumberEditRef.current.value = '';
+    firstNameEditRef.current.value = '';
+    lastNameEditRef.current.value = '';
+    birthdateEditRef.current.value = '';
+    genderEditRef.current.value = '';
+    emailEditRef.current.value = '';
+    passwordEditRef.current.value = '';
+    balanceEditRef.current.value = '';
+  };
+
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+
+    const userIndex = users.findIndex(
+      (u) => u.accountNumber === accountNumberEditRef.current.value
+    );
+
+    handleEditUser(userIndex);
+    handleCloseEdit();
+    resetEditCreateUserForm();
   };
 
   return (
@@ -151,9 +212,9 @@ const Users = () => {
                               />
                             </button>
                             <ActionsEditButton
-                            // onClick={() => {
-                            //   handleDelete(val.accountNumber);
-                            // }}
+                              onClick={() => {
+                                handleShowEdit(val.accountNumber);
+                              }}
                             />
                             <ActionsDeleteButton
                               onClick={() => {
@@ -181,6 +242,19 @@ const Users = () => {
           passwordRef={passwordRef}
           balanceRef={balanceRef}
           handleCloseCreate={handleCloseCreate}
+        />
+        <EditUserForm
+          showEdit={showEdit}
+          handleEditSubmit={handleEditSubmit}
+          accountNumberEditRef={accountNumberEditRef}
+          firstNameEditRef={firstNameEditRef}
+          lastNameEditRef={lastNameEditRef}
+          birthdateEditRef={birthdateEditRef}
+          genderEditRef={genderEditRef}
+          emailEditRef={emailEditRef}
+          passwordEditRef={passwordEditRef}
+          balanceEditRef={balanceEditRef}
+          handleCloseEdit={handleCloseEdit}
         />
       </div>
     </>
