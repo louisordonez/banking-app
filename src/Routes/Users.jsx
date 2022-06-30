@@ -270,70 +270,73 @@ const Users = () => {
                   />
                 </div>
               </div>
-              <div className="table-container">
-                <table>
-                  <thead className="users-table-header">
-                    <tr>
-                      <th>Account Number</th>
-                      <th>Name</th>
-                      <th>Balance</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {users.map((val, key) => {
-                      return (
-                        <tr key={key} data-row="">
-                          <td data-account-number="">{val.accountNumber}</td>
-                          <td>{`${val.firstName} ${val.lastName}`}</td>
-                          <td>{`${val.balance.toLocaleString('en-US', {
+            </div>
+            <div className="table-container">
+              <table>
+                <thead className="users-table-header">
+                  <tr>
+                    <th>Account Number</th>
+                    <th>Name</th>
+                    <th>Balance</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((val, key) => {
+                    return (
+                      <tr key={key} data-row="">
+                        <td data-account-number="">{val.accountNumber}</td>
+                        <td>{`${val.firstName} ${val.lastName}`}</td>
+                        <td>{`${parseFloat(val.balance).toLocaleString(
+                          'en-US',
+                          {
                             style: 'currency',
                             currency: 'PHP',
-                          })}`}</td>
-                          <td>
-                            <ActionsWithdrawButton
-                              onClick={() => {
-                                handleShowWithdraw(
-                                  val.accountNumber,
-                                  val.firstName,
-                                  val.lastName,
-                                  val.balance
-                                );
-                              }}
+                          }
+                        )}`}</td>
+                        <td>
+                          <ActionsWithdrawButton
+                            onClick={() => {
+                              handleShowWithdraw(
+                                val.accountNumber,
+                                val.firstName,
+                                val.lastName,
+                                val.balance
+                              );
+                            }}
+                          />
+                          <ActionsDepositButton
+                            onClick={() => {
+                              handleShowDeposit(
+                                val.accountNumber,
+                                val.firstName,
+                                val.lastName,
+                                val.balance
+                              );
+                            }}
+                          />
+                          <button title="Transfer">
+                            <BoxIcons.BiTransferAlt
+                              size={16}
+                              style={{ color: '#436CFB' }}
                             />
-                            <ActionsDepositButton
-                              onClick={() => {
-                                handleShowDeposit(
-                                  val.accountNumber,
-                                  val.firstName,
-                                  val.lastName,
-                                  val.balance
-                                );
-                              }}
-                            />
-                            <button title="Transfer">
-                              <BoxIcons.BiTransferAlt
-                                size={16}
-                                style={{ color: '#436CFB' }}
-                              />
-                            </button>
-                            <ActionsEditButton
-                              onClick={() => {
-                                handleShowEdit(val.accountNumber);
-                              }}
-                            />
-                            <ActionsDeleteButton
-                              onClick={() => {
-                                handleDelete(val.accountNumber);
-                              }}
-                            />
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+                          </button>
+                          <ActionsEditButton
+                            onClick={() => {
+                              handleShowEdit(val.accountNumber);
+                            }}
+                          />
+                          <ActionsDeleteButton
+                            onClick={() => {
+                              handleDelete(val.accountNumber);
+                            }}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
