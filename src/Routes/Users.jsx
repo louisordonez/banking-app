@@ -260,14 +260,11 @@ const Users = () => {
               <div>
                 <span>{`Users`}</span>
                 <div>
-                  <span>{`Users`}</span>
-                  <div>
-                    <SearchInput
-                      placeholder={`Enter account number`}
-                      handleSearch={handleSearch}
-                      type={`number`}
-                    />
-                  </div>
+                  <SearchInput
+                    placeholder={`Enter account number`}
+                    handleSearch={handleSearch}
+                    type={`number`}
+                  />
                 </div>
               </div>
               <div className="table-container">
