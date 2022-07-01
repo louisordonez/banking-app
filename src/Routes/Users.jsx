@@ -1,15 +1,16 @@
 import React, { useRef, useState } from 'react';
-import * as BoxIcons from 'react-icons/bi';
 import CreateUserButton from '../Components/Button/CreateUserButton';
 import SearchInput from '../Components/Input/SearchInput';
 import ActionsWithdrawButton from '../Components/Button/ActionsWithdrawButton';
 import ActionsDepositButton from '../Components/Button/ActionsDepositButton';
 import ActionsEditButton from '../Components/Button/ActionsEditButton';
+import ActionsTransferButton from '../Components/Button/ActionsTransferButton';
 import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
 import CreateUserForm from '../Components/Form/CreateUserForm';
 import EditUserForm from '../Components/Form/EditUserForm';
 import WithdrawForm from '../Components/Form/WithdrawForm';
 import DepositForm from '../Components/Form/DepositForm';
+import TransferForm from '../Components/Form/TransferForm';
 
 const USER_LIST = [
   {
@@ -23,7 +24,7 @@ const USER_LIST = [
     balance: 15000000.0,
   },
   {
-    accountNumber: 1656480543188,
+    accountNumber: 2656480543188,
     firstName: 'Maria',
     lastName: 'Dela Cruz',
     birthdate: '1998-12-11',
@@ -315,12 +316,7 @@ const Users = () => {
                               );
                             }}
                           />
-                          <button title="Transfer">
-                            <BoxIcons.BiTransferAlt
-                              size={16}
-                              style={{ color: '#436CFB' }}
-                            />
-                          </button>
+                          <ActionsTransferButton />
                           <ActionsEditButton
                             onClick={() => {
                               handleShowEdit(val.accountNumber);
