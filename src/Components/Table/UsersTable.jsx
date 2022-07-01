@@ -41,7 +41,9 @@ const UsersTable = ({
           </thead>
           <tbody>
             {users.map((val, key) => {
-              const parseFloatBalance = parseFloat(val.balance);
+              const { accountNumber, firstName, lastName, balance } = val;
+              const fullName = `${firstName} ${lastName}`;
+              const parseFloatBalance = parseFloat(balance);
               const balanceLocaleString = parseFloatBalance.toLocaleString(
                 'en-US',
                 {
@@ -52,48 +54,48 @@ const UsersTable = ({
 
               return (
                 <tr key={key} data-row="">
-                  <td data-account-number="">{val.accountNumber}</td>
-                  <td>{`${val.firstName} ${val.lastName}`}</td>
+                  <td data-account-number="">{accountNumber}</td>
+                  <td>{fullName}</td>
                   <td>{balanceLocaleString}</td>
                   <td>
                     <ActionsWithdrawButton
                       onClick={() => {
                         handleShowWithdraw(
-                          val.accountNumber,
-                          val.firstName,
-                          val.lastName,
-                          val.balance
+                          accountNumber,
+                          firstName,
+                          lastName,
+                          balance
                         );
                       }}
                     />
                     <ActionsDepositButton
                       onClick={() => {
                         handleShowDeposit(
-                          val.accountNumber,
-                          val.firstName,
-                          val.lastName,
-                          val.balance
+                          accountNumber,
+                          firstName,
+                          lastName,
+                          balance
                         );
                       }}
                     />
                     <ActionsTransferButton
                       onClick={() => {
                         handleShowTransfer(
-                          val.accountNumber,
-                          val.firstName,
-                          val.lastName,
-                          val.balance
+                          accountNumber,
+                          firstName,
+                          lastName,
+                          balance
                         );
                       }}
                     />
                     <ActionsEditButton
                       onClick={() => {
-                        handleShowEdit(val.accountNumber);
+                        handleShowEdit(accountNumber);
                       }}
                     />
                     <ActionsDeleteButton
                       onClick={() => {
-                        handleDelete(val.accountNumber);
+                        handleDelete(accountNumber);
                       }}
                     />
                   </td>
