@@ -113,6 +113,8 @@ const Users = () => {
     const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
 
     setUsers(newUsers);
+
+    alert(`User delete success`);
   };
 
   const resetCreateUserForm = () => {
