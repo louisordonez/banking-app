@@ -73,6 +73,10 @@ const Users = () => {
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
 
+  const setUserIndex = (accountNumber) => {
+    return users.findIndex((u) => u.accountNumber === accountNumber);
+  };
+
   const handleSearch = (e) => {
     const tr = document.querySelectorAll('[data-row]');
     const td = document.querySelectorAll('[data-account-number]');
@@ -160,7 +164,7 @@ const Users = () => {
   const handleWithdraw = (e) => {
     e.preventDefault();
 
-    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
+    const userIndex = setUserIndex(accountNumber);
     const userPrevBalance = users[userIndex].balance;
     const totalBalance = userPrevBalance - withdrawAmount;
 
@@ -192,7 +196,7 @@ const Users = () => {
   const handleDeposit = (e) => {
     e.preventDefault();
 
-    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
+    const userIndex = setUserIndex(accountNumber);
     const userPrevBalance = users[userIndex].balance;
     const totalBalance = userPrevBalance + depositAmount;
 
@@ -232,17 +236,13 @@ const Users = () => {
   const handleTransfer = (e) => {
     e.preventDefault();
 
-    const transferUserIndex = users.findIndex(
-      (u) => u.accountNumber === transferAccountNumber
-    );
+    const transferUserIndex = setUserIndex(transferAccountNumber);
 
     if (transferUserIndex === -1) {
       alert(`Account number does not exist`);
       return false;
     } else {
-      const userIndex = users.findIndex(
-        (u) => u.accountNumber === accountNumber
-      );
+      const userIndex = setUserIndex(accountNumber);
       const userPrevBalance = users[userIndex].balance;
       const totalBalance = userPrevBalance - transferAmount;
 
