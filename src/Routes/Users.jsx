@@ -203,6 +203,8 @@ const Users = () => {
 
     users[userIndex].balance = totalBalance;
 
+    alert(`Deposit success`);
+
     handleCloseDeposit();
     resetDepositForm();
   };
