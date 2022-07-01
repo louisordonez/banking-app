@@ -107,16 +107,6 @@ const Users = () => {
       },
       ...state,
     ]);
-
-    alert(`User create success`);
-  };
-
-  const handleDelete = (accountNumber) => {
-    const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
-
-    setUsers(newUsers);
-
-    alert(`User delete success`);
   };
 
   const resetCreateUserForm = () => {
@@ -143,6 +133,7 @@ const Users = () => {
     };
 
     handleCreateUser(userData);
+    alert(`User create success`);
     handleCloseCreate();
     resetCreateUserForm();
   };
@@ -175,7 +166,6 @@ const Users = () => {
     users[userIndex].balance = totalBalance;
 
     alert(`Withdraw success`);
-
     handleCloseWithdraw();
     resetWithdrawForm();
   };
@@ -208,7 +198,6 @@ const Users = () => {
     users[userIndex].balance = totalBalance;
 
     alert(`Deposit success`);
-
     handleCloseDeposit();
     resetDepositForm();
   };
@@ -242,12 +231,6 @@ const Users = () => {
   const handleTransfer = (e) => {
     e.preventDefault();
 
-    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
-    const userPrevBalance = users[userIndex].balance;
-    const totalBalance = userPrevBalance - transferAmount;
-
-    users[userIndex].balance = totalBalance;
-
     const transferUserIndex = users.findIndex(
       (u) => u.accountNumber === transferAccountNumber
     );
@@ -256,16 +239,23 @@ const Users = () => {
       alert(`Account number does not exist`);
       return false;
     } else {
+      const userIndex = users.findIndex(
+        (u) => u.accountNumber === accountNumber
+      );
+      const userPrevBalance = users[userIndex].balance;
+      const totalBalance = userPrevBalance - transferAmount;
+
+      users[userIndex].balance = totalBalance;
+
       const transferUserPrevBalance = users[transferUserIndex].balance;
       const transferUserTotalBalance = transferUserPrevBalance + transferAmount;
 
       users[transferUserIndex].balance = transferUserTotalBalance;
 
       alert(`Transfer success`);
+      handleCloseTransfer();
+      resetTransferForm();
     }
-
-    handleCloseTransfer();
-    resetTransferForm();
   };
 
   const handleShowEdit = (accountNumber) => {
@@ -318,6 +308,14 @@ const Users = () => {
     handleEditUser(userIndex);
     handleCloseEdit();
     resetEditCreateUserForm();
+    alert(`User edit success`);
+  };
+
+  const handleDelete = (accountNumber) => {
+    const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
+
+    setUsers(newUsers);
+    alert(`User delete success`);
   };
 
   return (
