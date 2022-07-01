@@ -53,6 +53,12 @@ table {
   border-spacing: 0rem;
 }
 
+tr {
+  &:hover {
+    background: #f9fafe;
+  }
+}
+
 th {
   height: 3.4rem;
   font-size: 1.6rem;
