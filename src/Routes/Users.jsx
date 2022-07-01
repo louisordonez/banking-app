@@ -89,6 +89,7 @@ const Users = () => {
   };
 
   const handleShowCreate = () => setShowCreate('block');
+
   const handleCloseCreate = () => setShowCreate('none');
 
   const handleCreateUser = (userData) => {
