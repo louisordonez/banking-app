@@ -1,11 +1,6 @@
 import React, { useRef, useState } from 'react';
 import CreateUserButton from '../Components/Button/CreateUserButton';
-import SearchInput from '../Components/Input/SearchInput';
-import ActionsWithdrawButton from '../Components/Button/ActionsWithdrawButton';
-import ActionsDepositButton from '../Components/Button/ActionsDepositButton';
-import ActionsEditButton from '../Components/Button/ActionsEditButton';
-import ActionsTransferButton from '../Components/Button/ActionsTransferButton';
-import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
+import UsersTable from '../Components/Table/UsersTable';
 import CreateUserForm from '../Components/Form/CreateUserForm';
 import EditUserForm from '../Components/Form/EditUserForm';
 import WithdrawForm from '../Components/Form/WithdrawForm';
@@ -327,91 +322,15 @@ const Users = () => {
           onClick={handleShowCreate}
         />
         <div className="flex-center">
-          <div className="table">
-            <div className="table-header">
-              <div>
-                <span>{`Users`}</span>
-                <div>
-                  <SearchInput
-                    placeholder={`Enter account number`}
-                    handleSearch={handleSearch}
-                    type={`number`}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="table-container">
-              <table>
-                <thead className="users-table-header">
-                  <tr>
-                    <th>Account Number</th>
-                    <th>Name</th>
-                    <th>Balance</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {users.map((val, key) => {
-                    return (
-                      <tr key={key} data-row="">
-                        <td data-account-number="">{val.accountNumber}</td>
-                        <td>{`${val.firstName} ${val.lastName}`}</td>
-                        <td>{`${parseFloat(val.balance).toLocaleString(
-                          'en-US',
-                          {
-                            style: 'currency',
-                            currency: 'PHP',
-                          }
-                        )}`}</td>
-                        <td>
-                          <ActionsWithdrawButton
-                            onClick={() => {
-                              handleShowWithdraw(
-                                val.accountNumber,
-                                val.firstName,
-                                val.lastName,
-                                val.balance
-                              );
-                            }}
-                          />
-                          <ActionsDepositButton
-                            onClick={() => {
-                              handleShowDeposit(
-                                val.accountNumber,
-                                val.firstName,
-                                val.lastName,
-                                val.balance
-                              );
-                            }}
-                          />
-                          <ActionsTransferButton
-                            onClick={() => {
-                              handleShowTransfer(
-                                val.accountNumber,
-                                val.firstName,
-                                val.lastName,
-                                val.balance
-                              );
-                            }}
-                          />
-                          <ActionsEditButton
-                            onClick={() => {
-                              handleShowEdit(val.accountNumber);
-                            }}
-                          />
-                          <ActionsDeleteButton
-                            onClick={() => {
-                              handleDelete(val.accountNumber);
-                            }}
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <UsersTable
+            handleSearch={handleSearch}
+            users={users}
+            handleShowWithdraw={handleShowWithdraw}
+            handleShowDeposit={handleShowDeposit}
+            handleShowTransfer={handleShowTransfer}
+            handleShowEdit={handleShowEdit}
+            handleDelete={handleDelete}
+          />
         </div>
         <CreateUserForm
           showCreate={showCreate}
