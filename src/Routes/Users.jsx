@@ -107,6 +107,8 @@ const Users = () => {
       },
       ...state,
     ]);
+
+    alert(`User create success`);
   };
 
   const handleDelete = (accountNumber) => {
