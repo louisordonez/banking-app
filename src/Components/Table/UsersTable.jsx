@@ -41,14 +41,20 @@ const UsersTable = ({
           </thead>
           <tbody>
             {users.map((val, key) => {
+              const parseFloatBalance = parseFloat(val.balance);
+              const balanceLocaleString = parseFloatBalance.toLocaleString(
+                'en-US',
+                {
+                  style: 'currency',
+                  currency: 'PHP',
+                }
+              );
+
               return (
                 <tr key={key} data-row="">
                   <td data-account-number="">{val.accountNumber}</td>
                   <td>{`${val.firstName} ${val.lastName}`}</td>
-                  <td>{`${parseFloat(val.balance).toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'PHP',
-                  })}`}</td>
+                  <td>{balanceLocaleString}</td>
                   <td>
                     <ActionsWithdrawButton
                       onClick={() => {
