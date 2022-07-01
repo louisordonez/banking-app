@@ -228,15 +228,15 @@ const Users = () => {
       return false;
     } else {
       const userIndex = setUserIndex(accountNumber);
-      const userPrevBalance = users[userIndex].balance;
+      const user = users[userIndex];
+      const userPrevBalance = user.balance;
       const totalBalance = userPrevBalance - transferAmount;
-
-      users[userIndex].balance = totalBalance;
-
-      const transferUserPrevBalance = users[transferUserIndex].balance;
+      const transferUser = users[transferUserIndex];
+      const transferUserPrevBalance = transferUser.balance;
       const transferUserTotalBalance = transferUserPrevBalance + transferAmount;
 
-      users[transferUserIndex].balance = transferUserTotalBalance;
+      user.balance = totalBalance;
+      transferUser.balance = transferUserTotalBalance;
 
       alert(`Transfer success`);
       handleCloseTransfer();
