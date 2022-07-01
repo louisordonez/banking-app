@@ -73,13 +73,15 @@ const Users = () => {
   };
 
   const handleSearch = (e) => {
+    const accountNumberValue = e.target.value;
+
     const tr = document.querySelectorAll('[data-row]');
     const td = document.querySelectorAll('[data-account-number]');
 
     for (let i = 0; i < tr.length; i++) {
       let trValue = td[i].textContent;
 
-      if (trValue.toUpperCase().indexOf(e.target.value) > -1) {
+      if (trValue.indexOf(accountNumberValue) > -1) {
         tr[i].style.display = '';
       } else {
         tr[i].style.display = 'none';
@@ -137,7 +139,10 @@ const Users = () => {
   const handleCloseWithdraw = () => setShowWithdraw('none');
 
   const handleWithdrawAmount = (e) => {
-    setWithdrawAmount(parseFloat(e.target.value));
+    const withdrawAmountValue = e.target.value;
+    const parseWithdrawAmount = parseFloat(withdrawAmountValue);
+
+    setWithdrawAmount(parseWithdrawAmount);
   };
 
   const resetWithdrawForm = () => {
@@ -170,7 +175,10 @@ const Users = () => {
   const handleCloseDeposit = () => setShowDeposit('none');
 
   const handleDepositAmount = (e) => {
-    setDepositAmount(parseFloat(e.target.value));
+    const depositAmountValue = e.target.value;
+    const parseDepositAmount = parseFloat(depositAmountValue);
+
+    setDepositAmount(parseDepositAmount);
   };
 
   const resetDepositForm = () => {
@@ -206,11 +214,18 @@ const Users = () => {
   };
 
   const handleTransferAccountNumber = (e) => {
-    setTransferAccountNumber(parseInt(e.target.value.replace('.', '')));
+    const transferAccountNumberValue = e.target.value;
+    const replacePeriod = transferAccountNumberValue.replace('.', '');
+    const parseAccountNumber = parseInt(replacePeriod);
+
+    setTransferAccountNumber(parseAccountNumber);
   };
 
   const handleTransferAmount = (e) => {
-    setTransferAmount(parseFloat(e.target.value));
+    const transferAmountValue = e.target.value;
+    const parseTransferAmount = parseFloat(transferAmountValue);
+
+    setTransferAmount(parseTransferAmount);
   };
 
   const resetTransferForm = () => {
@@ -285,10 +300,9 @@ const Users = () => {
   const handleEditSubmit = (e) => {
     e.preventDefault();
 
-    const accountNumberInt = parseInt(accountNumberEditRef.current.value);
-
+    const parseAccountNumber = parseInt(accountNumberEditRef.current.value);
     const userIndex = users.findIndex(
-      (u) => u.accountNumber === accountNumberInt
+      (u) => u.accountNumber === parseAccountNumber
     );
 
     handleEditUser(userIndex);
