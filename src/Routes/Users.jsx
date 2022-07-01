@@ -148,10 +148,11 @@ const Users = () => {
     e.preventDefault();
 
     const userIndex = setUserIndex(accountNumber);
-    const userPrevBalance = users[userIndex].balance;
+    const user = users[userIndex];
+    const userPrevBalance = user.balance;
     const totalBalance = userPrevBalance - withdrawAmount;
 
-    users[userIndex].balance = totalBalance;
+    user.balance = totalBalance;
 
     alert(`Withdraw success`);
     handleCloseWithdraw();
