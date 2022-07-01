@@ -170,6 +170,8 @@ const Users = () => {
 
     users[userIndex].balance = totalBalance;
 
+    alert(`Withdraw success`);
+
     handleCloseWithdraw();
     resetWithdrawForm();
   };
