@@ -92,21 +92,7 @@ const Users = () => {
   const handleCloseCreate = () => setShowCreate('none');
 
   const handleCreateUser = (userData) => {
-    const newAccountNumber = new Date().getTime();
-
-    setUsers((state) => [
-      {
-        accountNumber: newAccountNumber,
-        firstName: `${userData.firstName}`,
-        lastName: `${userData.lastName}`,
-        birthdate: `${userData.birthdate}`,
-        gender: `${userData.gender}`,
-        email: `${userData.email}`,
-        password: `${userData.password}`,
-        balance: `${userData.balance}`,
-      },
-      ...state,
-    ]);
+    setUsers((state) => [userData, ...state]);
   };
 
   const resetCreateUserForm = () => {
@@ -122,7 +108,9 @@ const Users = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const newAccountNumber = new Date().getTime();
     const userData = {
+      accountNumber: `${newAccountNumber}`,
       firstName: `${firstNameRef.current.value}`,
       lastName: `${lastNameRef.current.value}`,
       birthdate: `${birthdateRef.current.value}`,
