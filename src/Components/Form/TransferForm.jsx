@@ -1,66 +1,57 @@
 import React from 'react';
 
 const TransferForm = ({
-  showDeposit,
-  handleDeposit,
-  accountNumber,
-  firstName,
-  lastName,
+  showTransfer,
+  handleTransfer,
+  fullName,
   balance,
-  depositAmountRef,
-  handleDepositAmount,
-  handleCloseDeposit,
+  handleTransferAccountNumber,
+  transferAccountNumberRef,
+  handleTransferAmount,
+  transferAmountRef,
+  handleCloseTransfer,
 }) => {
   return (
-    <div style={{ display: `${showDeposit}` }}>
+    <div style={{ display: `${showTransfer}` }}>
       <div className="modal center">
         <div className="modal-content center">
           <div className="modal-header">
             <div>
-              <span>Deposit</span>
+              <span>Transfer</span>
             </div>
           </div>
           <div className="modal-body">
-            <form onSubmit={handleDeposit}>
+            <form onSubmit={handleTransfer}>
               <div className="create-user-flex">
+                <div>
+                  <input
+                    className="user-input-text"
+                    placeholder="Full Name"
+                    type="text"
+                    defaultValue={fullName}
+                    disabled
+                  />
+                </div>
                 <div>
                   <input
                     className="user-input-text"
                     placeholder="Balance"
                     type="number"
-                    defaultValue={accountNumber}
-                    disabled
-                  />
-                </div>
-              </div>
-              <div className="create-user-flex">
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="First Name"
-                    type="text"
-                    defaultValue={firstName}
-                    disabled
-                  />
-                </div>
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Last Name"
-                    type="text"
-                    defaultValue={lastName}
-                    disabled
-                  />
-                </div>
-              </div>
-              <div className="create-user-flex">
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Balance"
-                    type="number"
+                    step=".01"
                     defaultValue={balance}
                     disabled
+                  />
+                </div>
+              </div>
+              <div className="create-user-flex">
+                <div>
+                  <input
+                    className="user-input-text"
+                    placeholder="Account Number"
+                    type="number"
+                    onChange={handleTransferAccountNumber}
+                    ref={transferAccountNumberRef}
+                    required
                   />
                 </div>
                 <div>
@@ -70,8 +61,8 @@ const TransferForm = ({
                     placeholder="Amount"
                     type="number"
                     step=".01"
-                    onChange={handleDepositAmount}
-                    ref={depositAmountRef}
+                    onChange={handleTransferAmount}
+                    ref={transferAmountRef}
                     required
                   />
                 </div>
@@ -79,7 +70,7 @@ const TransferForm = ({
               <div className="modal-footer">
                 <input
                   className="btn-small btn-cancel"
-                  onClick={handleCloseDeposit}
+                  onClick={handleCloseTransfer}
                   type="button"
                   value="Cancel"
                 />

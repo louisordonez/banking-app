@@ -40,13 +40,17 @@ const Users = () => {
   const [accountNumber, setAccountNumber] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
+  const [fullName, setFullName] = useState(null);
   const [balance, setBalance] = useState(null);
   const [withdrawAmount, setWithdrawAmount] = useState(null);
   const [depositAmount, setDepositAmount] = useState(null);
+  const [transferAmount, setTransferAmount] = useState(null);
+  const [transferAccountNumber, setTransferAccountNumber] = useState(null);
   const [showCreate, setShowCreate] = useState('none');
   const [showEdit, setShowEdit] = useState('none');
   const [showWithdraw, setShowWithdraw] = useState('none');
   const [showDeposit, setShowDeposit] = useState('none');
+  const [showTransfer, setShowTransfer] = useState('none');
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -57,6 +61,8 @@ const Users = () => {
   const balanceRef = useRef(null);
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
+  const transferAccountNumberRef = useRef(null);
+  const transferAmountRef = useRef(null);
 
   const accountNumberEditRef = useRef(null);
   const firstNameEditRef = useRef(null);
@@ -66,6 +72,21 @@ const Users = () => {
   const emailEditRef = useRef(null);
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
+
+  const handleSearch = (e) => {
+    const tr = document.querySelectorAll('[data-row]');
+    const td = document.querySelectorAll('[data-account-number]');
+
+    for (let i = 0; i < tr.length; i++) {
+      let trValue = td[i].textContent;
+
+      if (trValue.toUpperCase().indexOf(e.target.value) > -1) {
+        tr[i].style.display = '';
+      } else {
+        tr[i].style.display = 'none';
+      }
+    }
+  };
 
   const handleShowCreate = () => setShowCreate('block');
   const handleCloseCreate = () => setShowCreate('none');
@@ -184,6 +205,39 @@ const Users = () => {
     resetDepositForm();
   };
 
+  const handleShowTransfer = (accountNumber, firstName, lastName, balance) => {
+    setShowTransfer('block');
+    setAccountNumber(accountNumber);
+    setFirstName(firstName);
+    setLastName(lastName);
+    setFullName(`${firstName} ${lastName}`);
+    setBalance(balance);
+  };
+
+  const handleCloseTransfer = () => {
+    setShowTransfer('none');
+  };
+
+  const handleTransferAccountNumber = (e) => {
+    setTransferAccountNumber(e.target.value);
+  };
+
+  const handleTransferAmount = (e) => {
+    setTransferAmount(parseFloat(e.target.value));
+  };
+
+  const resetTransferForm = () => {
+    transferAccountNumberRef.current.value = '';
+    transferAmountRef.current.value = '';
+  };
+
+  const handleTransfer = () => {
+    // transferAccountNumber;
+    // transferAmount;
+    // handleCloseTransfer();
+    // resetTransferForm();
+  };
+
   const handleShowEdit = (accountNumber) => {
     const user = users.find((u) => u.accountNumber === accountNumber);
 
@@ -234,21 +288,6 @@ const Users = () => {
     handleEditUser(userIndex);
     handleCloseEdit();
     resetEditCreateUserForm();
-  };
-
-  const handleSearch = (e) => {
-    const tr = document.querySelectorAll('[data-row]');
-    const td = document.querySelectorAll('[data-account-number]');
-
-    for (let i = 0; i < tr.length; i++) {
-      let trValue = td[i].textContent;
-
-      if (trValue.toUpperCase().indexOf(e.target.value) > -1) {
-        tr[i].style.display = '';
-      } else {
-        tr[i].style.display = 'none';
-      }
-    }
   };
 
   return (
@@ -316,7 +355,16 @@ const Users = () => {
                               );
                             }}
                           />
-                          <ActionsTransferButton />
+                          <ActionsTransferButton
+                            onClick={() => {
+                              handleShowTransfer(
+                                val.accountNumber,
+                                val.firstName,
+                                val.lastName,
+                                val.balance
+                              );
+                            }}
+                          />
                           <ActionsEditButton
                             onClick={() => {
                               handleShowEdit(val.accountNumber);
@@ -382,6 +430,17 @@ const Users = () => {
           depositAmountRef={depositAmountRef}
           handleDepositAmount={handleDepositAmount}
           handleCloseDeposit={handleCloseDeposit}
+        />
+        <TransferForm
+          showTransfer={showTransfer}
+          handleTransfer={handleTransfer}
+          fullName={fullName}
+          balance={balance}
+          handleTransferAccountNumber={handleTransferAccountNumber}
+          transferAccountNumberRef={transferAccountNumberRef}
+          handleTransferAmount={handleTransferAmount}
+          transferAmountRef={transferAmountRef}
+          handleCloseTransfer={handleCloseTransfer}
         />
       </div>
     </>
