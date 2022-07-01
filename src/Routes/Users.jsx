@@ -219,7 +219,7 @@ const Users = () => {
   };
 
   const handleTransferAccountNumber = (e) => {
-    setTransferAccountNumber(e.target.value.replace('.', ''));
+    setTransferAccountNumber(parseInt(e.target.value.replace('.', '')));
   };
 
   const handleTransferAmount = (e) => {
@@ -231,11 +231,33 @@ const Users = () => {
     transferAmountRef.current.value = '';
   };
 
-  const handleTransfer = () => {
-    // transferAccountNumber;
-    // transferAmount;
-    // handleCloseTransfer();
-    // resetTransferForm();
+  const handleTransfer = (e) => {
+    e.preventDefault();
+
+    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
+    const userPrevBalance = users[userIndex].balance;
+    const totalBalance = userPrevBalance - transferAmount;
+
+    users[userIndex].balance = totalBalance;
+
+    const transferUserIndex = users.findIndex(
+      (u) => u.accountNumber === transferAccountNumber
+    );
+
+    if (transferUserIndex === -1) {
+      alert(`Account number does not exist`);
+      return false;
+    } else {
+      const transferUserPrevBalance = users[transferUserIndex].balance;
+      const transferUserTotalBalance = transferUserPrevBalance + transferAmount;
+
+      users[transferUserIndex].balance = transferUserTotalBalance;
+
+      alert(`Transfer success`);
+    }
+
+    handleCloseTransfer();
+    resetTransferForm();
   };
 
   const handleShowEdit = (accountNumber) => {
