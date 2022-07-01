@@ -219,7 +219,7 @@ const Users = () => {
   };
 
   const handleTransferAccountNumber = (e) => {
-    setTransferAccountNumber(e.target.value);
+    setTransferAccountNumber(e.target.value.replace('.', ''));
   };
 
   const handleTransferAmount = (e) => {

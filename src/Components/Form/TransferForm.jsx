@@ -49,6 +49,7 @@ const TransferForm = ({
                     className="user-input-text"
                     placeholder="Account Number"
                     type="number"
+                    pattern="[0-9]*"
                     onChange={handleTransferAccountNumber}
                     ref={transferAccountNumberRef}
                     required
