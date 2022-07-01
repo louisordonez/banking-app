@@ -26,7 +26,7 @@ const TransferForm = ({
                 <div>
                   <input
                     className="user-input-text"
-                    placeholder="Full Name"
+                    placeholder="Name"
                     type="text"
                     defaultValue={fullName}
                     disabled
