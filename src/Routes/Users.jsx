@@ -1,15 +1,11 @@
 import React, { useRef, useState } from 'react';
-import * as BoxIcons from 'react-icons/bi';
 import CreateUserButton from '../Components/Button/CreateUserButton';
-import SearchInput from '../Components/Input/SearchInput';
-import ActionsWithdrawButton from '../Components/Button/ActionsWithdrawButton';
-import ActionsDepositButton from '../Components/Button/ActionsDepositButton';
-import ActionsEditButton from '../Components/Button/ActionsEditButton';
-import ActionsDeleteButton from '../Components/Button/ActionsDeleteButton';
+import UsersTable from '../Components/Table/UsersTable';
 import CreateUserForm from '../Components/Form/CreateUserForm';
 import EditUserForm from '../Components/Form/EditUserForm';
 import WithdrawForm from '../Components/Form/WithdrawForm';
 import DepositForm from '../Components/Form/DepositForm';
+import TransferForm from '../Components/Form/TransferForm';
 
 const USER_LIST = [
   {
@@ -23,7 +19,7 @@ const USER_LIST = [
     balance: 15000000.0,
   },
   {
-    accountNumber: 1656480543188,
+    accountNumber: 2656480543188,
     firstName: 'Maria',
     lastName: 'Dela Cruz',
     birthdate: '1998-12-11',
@@ -39,13 +35,17 @@ const Users = () => {
   const [accountNumber, setAccountNumber] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
+  const [fullName, setFullName] = useState(null);
   const [balance, setBalance] = useState(null);
   const [withdrawAmount, setWithdrawAmount] = useState(null);
   const [depositAmount, setDepositAmount] = useState(null);
+  const [transferAmount, setTransferAmount] = useState(null);
+  const [transferAccountNumber, setTransferAccountNumber] = useState(null);
   const [showCreate, setShowCreate] = useState('none');
   const [showEdit, setShowEdit] = useState('none');
   const [showWithdraw, setShowWithdraw] = useState('none');
   const [showDeposit, setShowDeposit] = useState('none');
+  const [showTransfer, setShowTransfer] = useState('none');
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -56,6 +56,8 @@ const Users = () => {
   const balanceRef = useRef(null);
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
+  const transferAccountNumberRef = useRef(null);
+  const transferAmountRef = useRef(null);
 
   const accountNumberEditRef = useRef(null);
   const firstNameEditRef = useRef(null);
@@ -66,31 +68,33 @@ const Users = () => {
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
 
+  const setUserIndex = (accountNumber) => {
+    return users.findIndex((u) => u.accountNumber === accountNumber);
+  };
+
+  const handleSearch = (e) => {
+    const accountNumberValue = e.target.value;
+
+    const tr = document.querySelectorAll('[data-row]');
+    const td = document.querySelectorAll('[data-account-number]');
+
+    for (let i = 0; i < tr.length; i++) {
+      let trValue = td[i].textContent;
+
+      if (trValue.indexOf(accountNumberValue) > -1) {
+        tr[i].style.display = '';
+      } else {
+        tr[i].style.display = 'none';
+      }
+    }
+  };
+
   const handleShowCreate = () => setShowCreate('block');
+
   const handleCloseCreate = () => setShowCreate('none');
 
   const handleCreateUser = (userData) => {
-    const newAccountNumber = new Date().getTime();
-
-    setUsers((state) => [
-      {
-        accountNumber: newAccountNumber,
-        firstName: `${userData.firstName}`,
-        lastName: `${userData.lastName}`,
-        birthdate: `${userData.birthdate}`,
-        gender: `${userData.gender}`,
-        email: `${userData.email}`,
-        password: `${userData.password}`,
-        balance: `${userData.balance}`,
-      },
-      ...state,
-    ]);
-  };
-
-  const handleDelete = (accountNumber) => {
-    const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
-
-    setUsers(newUsers);
+    setUsers((state) => [userData, ...state]);
   };
 
   const resetCreateUserForm = () => {
@@ -106,7 +110,9 @@ const Users = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const newAccountNumber = new Date().getTime();
     const userData = {
+      accountNumber: `${newAccountNumber}`,
       firstName: `${firstNameRef.current.value}`,
       lastName: `${lastNameRef.current.value}`,
       birthdate: `${birthdateRef.current.value}`,
@@ -117,6 +123,7 @@ const Users = () => {
     };
 
     handleCreateUser(userData);
+    alert(`User create success`);
     handleCloseCreate();
     resetCreateUserForm();
   };
@@ -132,7 +139,10 @@ const Users = () => {
   const handleCloseWithdraw = () => setShowWithdraw('none');
 
   const handleWithdrawAmount = (e) => {
-    setWithdrawAmount(parseFloat(e.target.value));
+    const withdrawAmountValue = e.target.value;
+    const parseWithdrawAmount = parseFloat(withdrawAmountValue);
+
+    setWithdrawAmount(parseWithdrawAmount);
   };
 
   const resetWithdrawForm = () => {
@@ -142,12 +152,14 @@ const Users = () => {
   const handleWithdraw = (e) => {
     e.preventDefault();
 
-    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
-    const userPrevBalance = users[userIndex].balance;
+    const userIndex = setUserIndex(accountNumber);
+    const user = users[userIndex];
+    const userPrevBalance = user.balance;
     const totalBalance = userPrevBalance - withdrawAmount;
 
-    users[userIndex].balance = totalBalance;
+    user.balance = totalBalance;
 
+    alert(`Withdraw success`);
     handleCloseWithdraw();
     resetWithdrawForm();
   };
@@ -163,7 +175,10 @@ const Users = () => {
   const handleCloseDeposit = () => setShowDeposit('none');
 
   const handleDepositAmount = (e) => {
-    setDepositAmount(parseFloat(e.target.value));
+    const depositAmountValue = e.target.value;
+    const parseDepositAmount = parseFloat(depositAmountValue);
+
+    setDepositAmount(parseDepositAmount);
   };
 
   const resetDepositForm = () => {
@@ -173,14 +188,75 @@ const Users = () => {
   const handleDeposit = (e) => {
     e.preventDefault();
 
-    const userIndex = users.findIndex((u) => u.accountNumber === accountNumber);
-    const userPrevBalance = users[userIndex].balance;
+    const userIndex = setUserIndex(accountNumber);
+    const user = users[userIndex];
+    const userPrevBalance = user.balance;
     const totalBalance = userPrevBalance + depositAmount;
 
-    users[userIndex].balance = totalBalance;
+    user.balance = totalBalance;
 
+    alert(`Deposit success`);
     handleCloseDeposit();
     resetDepositForm();
+  };
+
+  const handleShowTransfer = (accountNumber, firstName, lastName, balance) => {
+    setShowTransfer('block');
+    setAccountNumber(accountNumber);
+    setFirstName(firstName);
+    setLastName(lastName);
+    setFullName(`${firstName} ${lastName}`);
+    setBalance(balance);
+  };
+
+  const handleCloseTransfer = () => {
+    setShowTransfer('none');
+  };
+
+  const handleTransferAccountNumber = (e) => {
+    const transferAccountNumberValue = e.target.value;
+    const replacePeriod = transferAccountNumberValue.replace('.', '');
+    const parseAccountNumber = parseInt(replacePeriod);
+
+    setTransferAccountNumber(parseAccountNumber);
+  };
+
+  const handleTransferAmount = (e) => {
+    const transferAmountValue = e.target.value;
+    const parseTransferAmount = parseFloat(transferAmountValue);
+
+    setTransferAmount(parseTransferAmount);
+  };
+
+  const resetTransferForm = () => {
+    transferAccountNumberRef.current.value = '';
+    transferAmountRef.current.value = '';
+  };
+
+  const handleTransfer = (e) => {
+    e.preventDefault();
+
+    const transferUserIndex = setUserIndex(transferAccountNumber);
+
+    if (transferUserIndex === -1) {
+      alert(`Account number does not exist`);
+      return false;
+    } else {
+      const userIndex = setUserIndex(accountNumber);
+      const user = users[userIndex];
+      const userPrevBalance = user.balance;
+      const totalBalance = userPrevBalance - transferAmount;
+      const transferUser = users[transferUserIndex];
+      const transferUserPrevBalance = transferUser.balance;
+      const transferUserTotalBalance = transferUserPrevBalance + transferAmount;
+
+      user.balance = totalBalance;
+      transferUser.balance = transferUserTotalBalance;
+
+      alert(`Transfer success`);
+      handleCloseTransfer();
+      resetTransferForm();
+    }
   };
 
   const handleShowEdit = (accountNumber) => {
@@ -224,30 +300,22 @@ const Users = () => {
   const handleEditSubmit = (e) => {
     e.preventDefault();
 
-    const accountNumberInt = parseInt(accountNumberEditRef.current.value);
-
+    const parseAccountNumber = parseInt(accountNumberEditRef.current.value);
     const userIndex = users.findIndex(
-      (u) => u.accountNumber === accountNumberInt
+      (u) => u.accountNumber === parseAccountNumber
     );
 
     handleEditUser(userIndex);
     handleCloseEdit();
     resetEditCreateUserForm();
+    alert(`User edit success`);
   };
 
-  const handleSearch = (e) => {
-    const tr = document.querySelectorAll('[data-row]');
-    const td = document.querySelectorAll('[data-account-number]');
+  const handleDelete = (accountNumber) => {
+    const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
 
-    for (let i = 0; i < tr.length; i++) {
-      let trValue = td[i].textContent;
-
-      if (trValue.toUpperCase().indexOf(e.target.value) > -1) {
-        tr[i].style.display = '';
-      } else {
-        tr[i].style.display = 'none';
-      }
-    }
+    setUsers(newUsers);
+    alert(`User delete success`);
   };
 
   return (
@@ -258,87 +326,15 @@ const Users = () => {
           onClick={handleShowCreate}
         />
         <div className="flex-center">
-          <div className="table">
-            <div className="table-header">
-              <div>
-                <span>{`Users`}</span>
-                <div>
-                  <SearchInput
-                    placeholder={`Enter account number`}
-                    handleSearch={handleSearch}
-                    type={`number`}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="table-container">
-              <table>
-                <thead className="users-table-header">
-                  <tr>
-                    <th>Account Number</th>
-                    <th>Name</th>
-                    <th>Balance</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {users.map((val, key) => {
-                    return (
-                      <tr key={key} data-row="">
-                        <td data-account-number="">{val.accountNumber}</td>
-                        <td>{`${val.firstName} ${val.lastName}`}</td>
-                        <td>{`${parseFloat(val.balance).toLocaleString(
-                          'en-US',
-                          {
-                            style: 'currency',
-                            currency: 'PHP',
-                          }
-                        )}`}</td>
-                        <td>
-                          <ActionsWithdrawButton
-                            onClick={() => {
-                              handleShowWithdraw(
-                                val.accountNumber,
-                                val.firstName,
-                                val.lastName,
-                                val.balance
-                              );
-                            }}
-                          />
-                          <ActionsDepositButton
-                            onClick={() => {
-                              handleShowDeposit(
-                                val.accountNumber,
-                                val.firstName,
-                                val.lastName,
-                                val.balance
-                              );
-                            }}
-                          />
-                          <button title="Transfer">
-                            <BoxIcons.BiTransferAlt
-                              size={16}
-                              style={{ color: '#436CFB' }}
-                            />
-                          </button>
-                          <ActionsEditButton
-                            onClick={() => {
-                              handleShowEdit(val.accountNumber);
-                            }}
-                          />
-                          <ActionsDeleteButton
-                            onClick={() => {
-                              handleDelete(val.accountNumber);
-                            }}
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <UsersTable
+            handleSearch={handleSearch}
+            users={users}
+            handleShowWithdraw={handleShowWithdraw}
+            handleShowDeposit={handleShowDeposit}
+            handleShowTransfer={handleShowTransfer}
+            handleShowEdit={handleShowEdit}
+            handleDelete={handleDelete}
+          />
         </div>
         <CreateUserForm
           showCreate={showCreate}
@@ -386,6 +382,17 @@ const Users = () => {
           depositAmountRef={depositAmountRef}
           handleDepositAmount={handleDepositAmount}
           handleCloseDeposit={handleCloseDeposit}
+        />
+        <TransferForm
+          showTransfer={showTransfer}
+          handleTransfer={handleTransfer}
+          fullName={fullName}
+          balance={balance}
+          handleTransferAccountNumber={handleTransferAccountNumber}
+          transferAccountNumberRef={transferAccountNumberRef}
+          handleTransferAmount={handleTransferAmount}
+          transferAmountRef={transferAmountRef}
+          handleCloseTransfer={handleCloseTransfer}
         />
       </div>
     </>
