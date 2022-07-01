@@ -19,7 +19,7 @@ const EditUserForm = ({
         <div className="modal-content center">
           <div className="modal-header">
             <div>
-              <span>Edit</span>
+              <span>Edit User</span>
             </div>
           </div>
           <div className="modal-body">
