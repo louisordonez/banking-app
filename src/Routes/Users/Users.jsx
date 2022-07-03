@@ -159,6 +159,7 @@ const Users = () => {
       return false;
     } else {
       user.balance = totalBalance;
+
       updateUserListLocalStorage(users);
       alert(`Withdraw success`);
       handleCloseWithdraw();
@@ -243,13 +244,18 @@ const Users = () => {
       const transferUserPrevBalance = transferUser.balance;
       const transferUserTotalBalance = transferUserPrevBalance + transferAmount;
 
-      user.balance = totalBalance;
-      transferUser.balance = transferUserTotalBalance;
+      if (transferAmount > userPrevBalance) {
+        alert(`Insufficient Balance`);
+        return false;
+      } else {
+        user.balance = totalBalance;
+        transferUser.balance = transferUserTotalBalance;
 
-      updateUserListLocalStorage(users);
-      alert(`Transfer success`);
-      handleCloseTransfer();
-      resetTransferForm();
+        updateUserListLocalStorage(users);
+        alert(`Transfer success`);
+        handleCloseTransfer();
+        resetTransferForm();
+      }
     }
   };
 
