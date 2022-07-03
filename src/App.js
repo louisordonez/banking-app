@@ -8,17 +8,28 @@ import Transactions from './Routes/Admin/Transactions/Transactions';
 import Settings from './Routes/Admin/Settings/Settings';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+  useEffect(() => {
+    if (localStorage.getItem('isLoggedIn') === null) {
+      handleIsLoggedIn(false);
+    }
+  }, []);
+
+  const handleIsLoggedIn = (isLoggedIn) => {
+    localStorage.setItem('isLoggedIn', isLoggedIn);
+  };
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
+    handleIsLoggedIn(true);
   };
 
   const handleLogOut = () => {
-    setIsLoggedIn(false);
+    handleIsLoggedIn(false);
+    window.location.reload();
   };
 
-  if (isLoggedIn) {
+  if (isLoggedIn === 'true') {
     return (
       <>
         <Router>
@@ -32,7 +43,7 @@ const App = () => {
         </Router>
       </>
     );
-  } else {
+  } else if (isLoggedIn === 'false') {
     return <Login handleLogin={handleLogin} />;
   }
 };

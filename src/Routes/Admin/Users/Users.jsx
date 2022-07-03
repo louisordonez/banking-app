@@ -7,7 +7,7 @@ import WithdrawForm from '../../../Components/Form/WithdrawForm';
 import DepositForm from '../../../Components/Form/DepositForm';
 import TransferForm from '../../../Components/Form/TransferForm';
 import Alert from '../../../Components/Alert/Alert';
-import { USER_LIST } from './UserList';
+import { USER_LIST } from '../../../Assets/JS/UserList';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
