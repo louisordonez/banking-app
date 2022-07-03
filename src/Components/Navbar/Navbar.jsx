@@ -4,7 +4,7 @@ import * as SimpleIcons from 'react-icons/si';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 
-const Navbar = () => {
+const Navbar = ({ handleLogOut }) => {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -38,7 +38,7 @@ const Navbar = () => {
               })}
             </ul>
           </div>
-          <Link to="#" className="nav-link active">
+          <Link to="#" className="nav-link active" onClick={handleLogOut}>
             <i className="nav-icon">
               <BoxIcons.BiLogOut />
             </i>
