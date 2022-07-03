@@ -27,6 +27,7 @@ const Users = () => {
   const [showTransfer, setShowTransfer] = useState('none');
   const [showAlert, setShowAlert] = useState('none');
   const [alertType, setAlertType] = useState('');
+  const [alertHeader, setAlertHeader] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
 
   const firstNameRef = useRef(null);
@@ -79,11 +80,12 @@ const Users = () => {
     setShowAlert('none');
   };
 
-  const handleAlert = (alertType, alertMessage) => {
+  const handleAlert = (alertType, alertHeader, alertMessage) => {
     setAlertType(alertType);
+    setAlertHeader(alertHeader);
     setAlertMessage(alertMessage);
     setShowAlert('block');
-    setTimeout(handleCloseAlert, 3000);
+    setTimeout(handleCloseAlert, 5000);
   };
 
   const setUserIndex = (accountNumber) => {
@@ -138,7 +140,7 @@ const Users = () => {
 
     setUsers((state) => [userData, ...state]);
     updateUserListLocalStorage([userData, ...users]);
-    handleAlert(`success`, `User has been successfully created`);
+    handleAlert(`success`, `Success!`, `User has been successfully created`);
     handleCloseCreate();
     resetCreateUserForm();
   };
@@ -170,16 +172,20 @@ const Users = () => {
     const totalBalance = userPrevBalance - withdrawAmount;
 
     if (withdrawAmount > userPrevBalance) {
-      alert(`Insufficient Balance`);
-      return false;
+      handleAlert(`danger`, `Failed!`, `User has insufficient balance`);
     } else {
       user.balance = totalBalance;
-
       updateUserListLocalStorage(users);
-      handleAlert(`success`, `Money has been successfully withdrew`);
+      handleAlert(
+        `success`,
+        `Success!`,
+        `Money has been successfully withdrew`
+      );
       handleCloseWithdraw();
-      resetWithdrawForm();
     }
+
+    handleCloseWithdraw();
+    resetWithdrawForm();
   };
 
   const handleShowDeposit = (accountNumber, firstName, lastName, balance) => {
@@ -211,7 +217,7 @@ const Users = () => {
     user.balance = totalBalance;
 
     updateUserListLocalStorage(users);
-    handleAlert(`success`, `Money has been successfully deposited`);
+    handleAlert(`success`, `Success!`, `Money has been successfully deposited`);
     handleCloseDeposit();
     resetDepositForm();
   };
@@ -248,8 +254,7 @@ const Users = () => {
     const transferUserIndex = setUserIndex(transferAccountNumber);
 
     if (transferUserIndex === -1) {
-      alert(`Account number does not exist`);
-      return false;
+      handleAlert(`danger`, `Failed!`, `User account number does not exist`);
     } else {
       const userIndex = setUserIndex(accountNumber);
       const user = users[userIndex];
@@ -260,18 +265,22 @@ const Users = () => {
       const transferUserTotalBalance = transferUserPrevBalance + transferAmount;
 
       if (transferAmount > userPrevBalance) {
-        alert(`Insufficient Balance`);
-        return false;
+        handleAlert(`danger`, `Failed!`, `User has insufficient balance`);
       } else {
         user.balance = totalBalance;
         transferUser.balance = transferUserTotalBalance;
 
         updateUserListLocalStorage(users);
-        handleAlert(`success`, `Money has been successfully transfered`);
-        handleCloseTransfer();
-        resetTransferForm();
+        handleAlert(
+          `success`,
+          `Success!`,
+          `Money has been successfully transferred`
+        );
       }
     }
+
+    handleCloseTransfer();
+    resetTransferForm();
   };
 
   const handleShowEdit = (accountNumber) => {
@@ -318,7 +327,7 @@ const Users = () => {
     users[userIndex].balance = parseFloat(balanceEditRef.current.value);
 
     updateUserListLocalStorage(users);
-    handleAlert(`success`, `User has been successfully edited`);
+    handleAlert(`success`, `Success!`, `User has been successfully edited`);
     handleCloseEdit();
     resetEditCreateUserForm();
   };
@@ -328,7 +337,7 @@ const Users = () => {
 
     setUsers(newUsers);
     updateUserListLocalStorage(newUsers);
-    handleAlert(`success`, `User has been successfully deleted`);
+    handleAlert(`success`, `Success!`, `User has been successfully deleted`);
   };
 
   return (
@@ -336,6 +345,7 @@ const Users = () => {
       <div className="user-container">
         <Alert
           alertType={alertType}
+          alertHeader={alertHeader}
           alertText={alertMessage}
           showAlert={showAlert}
           onClick={handleCloseAlert}

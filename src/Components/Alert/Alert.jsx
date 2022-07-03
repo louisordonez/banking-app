@@ -1,9 +1,13 @@
 import React from 'react';
 import * as BoxIcons from 'react-icons/bi';
 
-const SuccessAlert = ({ showAlert, alertType, alertText, onClick }) => {
-  // setTimeout(closeAlert, 5000);
-
+const SuccessAlert = ({
+  showAlert,
+  alertType,
+  alertHeader,
+  alertText,
+  onClick,
+}) => {
   return (
     <div
       style={{ display: `${showAlert}` }}
@@ -14,7 +18,7 @@ const SuccessAlert = ({ showAlert, alertType, alertText, onClick }) => {
         <a href="#" className="close" onClick={onClick}>
           <BoxIcons.BiX size={16} />
         </a>
-        <span>Success! </span>
+        <span className="alert-header">{alertHeader} </span>
         <span>{alertText}</span>
       </div>
     </div>
