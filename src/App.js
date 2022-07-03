@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Routes/Login/Login';
 import Navbar from './Components/Navbar/Navbar';
-import Dashboard from './Routes/Dashboard/Dashboard';
-import Users from './Routes/Users/Users';
-import Transactions from './Routes/Transactions/Transactions';
-import Settings from './Routes/Settings/Settings';
+import Dashboard from './Routes/Admin/Dashboard/Dashboard';
+import Users from './Routes/Admin/Users/Users';
+import Transactions from './Routes/Admin/Transactions/Transactions';
+import Settings from './Routes/Admin/Settings/Settings';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
