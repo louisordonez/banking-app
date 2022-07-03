@@ -1,87 +1,96 @@
-.navbar {
-  background-color: var(--fourth-color);
-  height: 7.5rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.menu-bars {
-  margin-left: 3.2rem;
-  font-size: 3.2rem;
-  background: none;
-}
-
-.menu-bars svg {
-  font-size: 2.5rem;
-  color: #fff;
-}
-
-.nav-menu {
-  background-color: var(--fourth-color);
-  width: 25.2rem;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
+.l-navbar {
   position: fixed;
   top: 0;
-  left: -100%;
-  transition: 850ms;
-  z-index: 1;
-
-  span {
-    margin-left: 1.6rem;
-    font-size: 1.6rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-}
-
-.nav-menu.active {
   left: 0;
-  transition: 350ms;
+  width: 5.2rem;
+  height: 100vh;
+  background-color: var(--fourth-color);
+  padding: 2rem 0.8rem 3.2rem;
+  transition: 0.5s;
+  z-index: 100;
 }
 
-.nav-text {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0.8rem 0 0.8rem 1.6rem;
-  list-style: none;
-  height: 6rem;
-}
-
-.nav-text a {
-  text-decoration: none;
-  color: #f5f5f5;
-  font-size: 1.8rem;
-  width: 95%;
+.nav {
   height: 100%;
   display: flex;
-  align-items: center;
-  padding: 0 1.6rem;
-  border-radius: 0.4rem;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3.2rem;
+    padding: 0 0.8rem;
+
+    .nav-logo-icon {
+      margin-right: 1.92rem;
+      font-size: 1.8rem;
+    }
+
+    .nav-logo-text {
+      color: #ededed;
+      font-weight: var(--font-bold);
+      text-transform: uppercase;
+    }
+  }
+
+  .nav-toggle {
+    position: absolute;
+    top: 1.76rem;
+    right: -0.96rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: #f5a623;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    margin-bottom: 1.6rem;
+    border-radius: 0.8rem;
+    color: #ededed;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: var(--third-color);
+    }
+  }
+
+  .nav-icon {
+    font-size: 2.4rem;
+    margin-right: 1.6rem;
+  }
+
+  .nav-text {
+    font-weight: var(--font-bold);
+  }
 }
 
-.nav-text a:hover {
-  background-color: var(--second-color);
+.nav-logo-text,
+.nav-text {
+  font-size: 1.5rem;
+  color: #ededed;
 }
 
-.nav-text svg {
-  font-size: 1.8rem;
+svg {
+  font-size: 2rem;
+  color: #ededed;
 }
 
-.nav-menu-items {
-  width: 100%;
+.show {
+  width: 20rem;
 }
 
-.navbar-toggle {
-  background-color: var(--fourth-color);
-  width: 100%;
-  height: 8rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.rotate {
+  transform: rotate(180deg);
+  transition: 0.5s;
 }
