@@ -9,6 +9,7 @@ import Settings from './Routes/Admin/Settings/Settings';
 import { USER_LIST } from './Assets/JS/UserList';
 
 const App = () => {
+  // eslint-disable-next-line
   const [users, setUsers] = useState([]);
 
   const isLoggedIn = localStorage.getItem('isLoggedIn');
