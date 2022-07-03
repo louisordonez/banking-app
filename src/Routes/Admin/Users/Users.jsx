@@ -10,7 +10,9 @@ import Alert from '../../../Components/Alert/Alert';
 import { USER_LIST } from '../../../Assets/JS/UserList';
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(
+    JSON.parse(localStorage.getItem('userList'))
+  );
   const [accountNumber, setAccountNumber] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -51,26 +53,26 @@ const Users = () => {
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
 
-  useEffect(() => {
-    const userList = JSON.parse(localStorage.getItem('userList'));
+  // useEffect(() => {
+  //   const userList = JSON.parse(localStorage.getItem('userList'));
 
-    if (userList) {
-      setUsers(userList);
-    }
-  }, []);
+  //   if (userList) {
+  //     setUsers(userList);
+  //   }
+  // }, []);
 
-  const loadUserListLocalStorage = () => {
-    localStorage.setItem('userList', JSON.stringify(USER_LIST));
+  // const loadUserListLocalStorage = () => {
+  //   localStorage.setItem('userList', JSON.stringify(USER_LIST));
 
-    const userList = JSON.parse(localStorage.getItem('userList'));
+  //   const userList = JSON.parse(localStorage.getItem('userList'));
 
-    setUsers(userList);
-  };
+  //   setUsers(userList);
+  // };
 
-  const removeUserListLocalStorage = () => {
-    localStorage.removeItem('userList');
-    setUsers([]);
-  };
+  // const removeUserListLocalStorage = () => {
+  //   localStorage.removeItem('userList');
+  //   setUsers([]);
+  // };
 
   const updateUserListLocalStorage = (item) => {
     localStorage.setItem('userList', JSON.stringify(item));
@@ -354,8 +356,8 @@ const Users = () => {
           textValue={`Create User`}
           onClick={handleShowCreate}
         />
-        <button onClick={loadUserListLocalStorage}>Load Users</button>
-        <button onClick={removeUserListLocalStorage}>Delete Users</button>
+        {/* <button onClick={loadUserListLocalStorage}>Load Users</button> */}
+        {/* <button onClick={removeUserListLocalStorage}>Delete Users</button> */}
         <div className="flex-center">
           <UsersTable
             handleSearch={handleSearch}

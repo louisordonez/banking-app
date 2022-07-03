@@ -6,15 +6,34 @@ import Dashboard from './Routes/Admin/Dashboard/Dashboard';
 import Users from './Routes/Admin/Users/Users';
 import Transactions from './Routes/Admin/Transactions/Transactions';
 import Settings from './Routes/Admin/Settings/Settings';
+import { USER_LIST } from './Assets/JS/UserList';
 
 const App = () => {
+  const [users, setUsers] = useState([]);
+
   const isLoggedIn = localStorage.getItem('isLoggedIn');
 
   useEffect(() => {
+    const userList = JSON.parse(localStorage.getItem('userList'));
+
     if (localStorage.getItem('isLoggedIn') === null) {
       handleIsLoggedIn(false);
     }
+
+    if (userList) {
+      setUsers(userList);
+    } else {
+      loadUserListLocalStorage();
+    }
   }, []);
+
+  const loadUserListLocalStorage = () => {
+    localStorage.setItem('userList', JSON.stringify(USER_LIST));
+
+    const userList = JSON.parse(localStorage.getItem('userList'));
+
+    setUsers(userList);
+  };
 
   const handleIsLoggedIn = (isLoggedIn) => {
     localStorage.setItem('isLoggedIn', isLoggedIn);
