@@ -6,37 +6,13 @@ import EditUserForm from '../../Components/Form/EditUserForm';
 import WithdrawForm from '../../Components/Form/WithdrawForm';
 import DepositForm from '../../Components/Form/DepositForm';
 import TransferForm from '../../Components/Form/TransferForm';
+import { USER_LIST } from './UserList';
 
-const USER_LIST = [
-  {
-    accountNumber: 1656480543042,
-    firstName: 'John',
-    lastName: 'Doe',
-    birthdate: '1997-06-22',
-    gender: 'Male',
-    email: 'jd@email.com',
-    password: 'jd',
-    balance: 15000000.0,
-  },
-  {
-    accountNumber: 2656480543188,
-    firstName: 'Maria',
-    lastName: 'Dela Cruz',
-    birthdate: '1998-12-11',
-    gender: 'Female',
-    email: 'mdc@email.com',
-    password: 'mdc',
-    balance: 20000000.0,
-  },
-];
+localStorage.setItem('userList', JSON.stringify(USER_LIST));
 
-// localStorage.setItem('userList', JSON.stringify(USER_LIST));
+let userListArray = localStorage.getItem('userList');
 
-// let array = localStorage.getItem('userList');
-
-// array = JSON.parse(array);
-
-// console.log(array);
+userListArray = JSON.parse(userListArray);
 
 const Users = () => {
   const [users, setUsers] = useState(USER_LIST);
