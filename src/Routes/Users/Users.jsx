@@ -107,14 +107,14 @@ const Users = () => {
 
     const newAccountNumber = new Date().getTime();
     const userData = {
-      accountNumber: `${newAccountNumber}`,
+      accountNumber: newAccountNumber,
       firstName: `${firstNameRef.current.value}`,
       lastName: `${lastNameRef.current.value}`,
       birthdate: `${birthdateRef.current.value}`,
       gender: `${genderRef.current.value}`,
       email: `${emailRef.current.value}`,
       password: `${passwordRef.current.value}`,
-      balance: `${balanceRef.current.value}`,
+      balance: parseFloat(balanceRef.current.value),
     };
 
     setUsers((state) => [userData, ...state]);
@@ -135,10 +135,7 @@ const Users = () => {
   const handleCloseWithdraw = () => setShowWithdraw('none');
 
   const handleWithdrawAmount = (e) => {
-    const withdrawAmountValue = e.target.value;
-    const parseWithdrawAmount = parseFloat(withdrawAmountValue);
-
-    setWithdrawAmount(parseWithdrawAmount);
+    setWithdrawAmount(parseFloat(e.target.value));
   };
 
   const resetWithdrawForm = () => {
@@ -171,10 +168,7 @@ const Users = () => {
   const handleCloseDeposit = () => setShowDeposit('none');
 
   const handleDepositAmount = (e) => {
-    const depositAmountValue = e.target.value;
-    const parseDepositAmount = parseFloat(depositAmountValue);
-
-    setDepositAmount(parseDepositAmount);
+    setDepositAmount(parseFloat(e.target.value));
   };
 
   const resetDepositForm = () => {
@@ -210,18 +204,11 @@ const Users = () => {
   };
 
   const handleTransferAccountNumber = (e) => {
-    const transferAccountNumberValue = e.target.value;
-    const replacePeriod = transferAccountNumberValue.replace('.', '');
-    const parseAccountNumber = parseInt(replacePeriod);
-
-    setTransferAccountNumber(parseAccountNumber);
+    setTransferAccountNumber(parseInt(e.target.value.replace('.', '')));
   };
 
   const handleTransferAmount = (e) => {
-    const transferAmountValue = e.target.value;
-    const parseTransferAmount = parseFloat(transferAmountValue);
-
-    setTransferAmount(parseTransferAmount);
+    setTransferAmount(parseFloat(e.target.value));
   };
 
   const resetTransferForm = () => {
@@ -286,9 +273,8 @@ const Users = () => {
   const handleEditUser = (e) => {
     e.preventDefault();
 
-    const parseAccountNumber = parseInt(accountNumberEditRef.current.value);
     const userIndex = users.findIndex(
-      (u) => u.accountNumber === parseAccountNumber
+      (u) => u.accountNumber === parseInt(accountNumberEditRef.current.value)
     );
 
     users[userIndex].firstName = `${firstNameEditRef.current.value}`;
@@ -297,11 +283,12 @@ const Users = () => {
     users[userIndex].gender = `${genderEditRef.current.value}`;
     users[userIndex].email = `${emailEditRef.current.value}`;
     users[userIndex].password = `${passwordEditRef.current.value}`;
-    users[userIndex].balance = `${balanceEditRef.current.value}`;
+    users[userIndex].balance = parseFloat(balanceEditRef.current.value);
 
+    localStorage.setItem('userList', JSON.stringify(users));
+    alert(`User edit success`);
     handleCloseEdit();
     resetEditCreateUserForm();
-    alert(`User edit success`);
   };
 
   const handleDelete = (accountNumber) => {
