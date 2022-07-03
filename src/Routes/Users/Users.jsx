@@ -54,7 +54,7 @@ const Users = () => {
     }
   }, []);
 
-  const loadLocalStorage = () => {
+  const loadUserListLocalStorage = () => {
     localStorage.setItem('userList', JSON.stringify(USER_LIST));
 
     const userList = JSON.parse(localStorage.getItem('userList'));
@@ -62,9 +62,13 @@ const Users = () => {
     setUsers(userList);
   };
 
-  const removeLocalStorage = () => {
+  const removeUserListLocalStorage = () => {
     localStorage.removeItem('userList');
     setUsers([]);
+  };
+
+  const updateUserListLocalStorage = (item) => {
+    localStorage.setItem('userList', JSON.stringify(item));
   };
 
   const setUserIndex = (accountNumber) => {
@@ -118,7 +122,7 @@ const Users = () => {
     };
 
     setUsers((state) => [userData, ...state]);
-    localStorage.setItem('userList', JSON.stringify([userData, ...users]));
+    updateUserListLocalStorage([userData, ...users]);
     alert(`User create success`);
     handleCloseCreate();
     resetCreateUserForm();
@@ -285,7 +289,7 @@ const Users = () => {
     users[userIndex].password = `${passwordEditRef.current.value}`;
     users[userIndex].balance = parseFloat(balanceEditRef.current.value);
 
-    localStorage.setItem('userList', JSON.stringify(users));
+    updateUserListLocalStorage(users);
     alert(`User edit success`);
     handleCloseEdit();
     resetEditCreateUserForm();
@@ -295,6 +299,7 @@ const Users = () => {
     const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
 
     setUsers(newUsers);
+    updateUserListLocalStorage(newUsers);
     alert(`User delete success`);
   };
 
@@ -305,8 +310,8 @@ const Users = () => {
           textValue={`Create User`}
           onClick={handleShowCreate}
         />
-        <button onClick={loadLocalStorage}>Load localStorage</button>
-        <button onClick={removeLocalStorage}>Remove localStorage</button>
+        <button onClick={loadUserListLocalStorage}>Load Users</button>
+        <button onClick={removeUserListLocalStorage}>Remove Users</button>
         <div className="flex-center">
           <UsersTable
             handleSearch={handleSearch}
