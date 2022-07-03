@@ -154,12 +154,16 @@ const Users = () => {
     const userPrevBalance = user.balance;
     const totalBalance = userPrevBalance - withdrawAmount;
 
-    user.balance = totalBalance;
-
-    updateUserListLocalStorage(users);
-    alert(`Withdraw success`);
-    handleCloseWithdraw();
-    resetWithdrawForm();
+    if (withdrawAmount > userPrevBalance) {
+      alert(`Insufficient Balance`);
+      return false;
+    } else {
+      user.balance = totalBalance;
+      updateUserListLocalStorage(users);
+      alert(`Withdraw success`);
+      handleCloseWithdraw();
+      resetWithdrawForm();
+    }
   };
 
   const handleShowDeposit = (accountNumber, firstName, lastName, balance) => {
