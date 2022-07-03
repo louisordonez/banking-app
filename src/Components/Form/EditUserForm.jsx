@@ -2,7 +2,7 @@ import React from 'react';
 
 const EditUserForm = ({
   showEdit,
-  handleEditSubmit,
+  handleEditUser,
   accountNumberEditRef,
   firstNameEditRef,
   lastNameEditRef,
@@ -23,7 +23,7 @@ const EditUserForm = ({
             </div>
           </div>
           <div className="modal-body">
-            <form onSubmit={handleEditSubmit}>
+            <form onSubmit={handleEditUser}>
               <div className="create-user-flex">
                 <div>
                   <input

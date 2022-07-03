@@ -8,11 +8,11 @@ import DepositForm from '../../Components/Form/DepositForm';
 import TransferForm from '../../Components/Form/TransferForm';
 import { USER_LIST } from './UserList';
 
+let userList;
+
 localStorage.setItem('userList', JSON.stringify(USER_LIST));
-
-let userListArray = localStorage.getItem('userList');
-
-userListArray = JSON.parse(userListArray);
+userList = localStorage.getItem('userList');
+userList = JSON.parse(userList);
 
 const Users = () => {
   const [users, setUsers] = useState(USER_LIST);
@@ -77,10 +77,6 @@ const Users = () => {
 
   const handleCloseCreate = () => setShowCreate('none');
 
-  const handleCreateUser = (userData) => {
-    setUsers((state) => [userData, ...state]);
-  };
-
   const resetCreateUserForm = () => {
     firstNameRef.current.value = '';
     lastNameRef.current.value = '';
@@ -91,7 +87,7 @@ const Users = () => {
     balanceRef.current.value = '';
   };
 
-  const handleSubmit = (e) => {
+  const handleCreateUser = (e) => {
     e.preventDefault();
 
     const newAccountNumber = new Date().getTime();
@@ -106,7 +102,7 @@ const Users = () => {
       balance: `${balanceRef.current.value}`,
     };
 
-    handleCreateUser(userData);
+    setUsers((state) => [userData, ...state]);
     alert(`User create success`);
     handleCloseCreate();
     resetCreateUserForm();
@@ -260,16 +256,6 @@ const Users = () => {
 
   const handleCloseEdit = () => setShowEdit('none');
 
-  const handleEditUser = (userIndex) => {
-    users[userIndex].firstName = `${firstNameEditRef.current.value}`;
-    users[userIndex].lastName = `${lastNameEditRef.current.value}`;
-    users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
-    users[userIndex].gender = `${genderEditRef.current.value}`;
-    users[userIndex].email = `${emailEditRef.current.value}`;
-    users[userIndex].password = `${passwordEditRef.current.value}`;
-    users[userIndex].balance = `${balanceEditRef.current.value}`;
-  };
-
   const resetEditCreateUserForm = () => {
     accountNumberEditRef.current.value = '';
     firstNameEditRef.current.value = '';
@@ -281,7 +267,7 @@ const Users = () => {
     balanceEditRef.current.value = '';
   };
 
-  const handleEditSubmit = (e) => {
+  const handleEditUser = (e) => {
     e.preventDefault();
 
     const parseAccountNumber = parseInt(accountNumberEditRef.current.value);
@@ -289,7 +275,14 @@ const Users = () => {
       (u) => u.accountNumber === parseAccountNumber
     );
 
-    handleEditUser(userIndex);
+    users[userIndex].firstName = `${firstNameEditRef.current.value}`;
+    users[userIndex].lastName = `${lastNameEditRef.current.value}`;
+    users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
+    users[userIndex].gender = `${genderEditRef.current.value}`;
+    users[userIndex].email = `${emailEditRef.current.value}`;
+    users[userIndex].password = `${passwordEditRef.current.value}`;
+    users[userIndex].balance = `${balanceEditRef.current.value}`;
+
     handleCloseEdit();
     resetEditCreateUserForm();
     alert(`User edit success`);
@@ -322,7 +315,7 @@ const Users = () => {
         </div>
         <CreateUserForm
           showCreate={showCreate}
-          handleSubmit={handleSubmit}
+          handleCreateUser={handleCreateUser}
           firstNameRef={firstNameRef}
           lastNameRef={lastNameRef}
           birthdateRef={birthdateRef}
@@ -334,7 +327,7 @@ const Users = () => {
         />
         <EditUserForm
           showEdit={showEdit}
-          handleEditSubmit={handleEditSubmit}
+          handleEditUser={handleEditUser}
           accountNumberEditRef={accountNumberEditRef}
           firstNameEditRef={firstNameEditRef}
           lastNameEditRef={lastNameEditRef}
