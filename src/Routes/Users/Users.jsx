@@ -190,6 +190,7 @@ const Users = () => {
 
     user.balance = totalBalance;
 
+    updateUserListLocalStorage(users);
     alert(`Deposit success`);
     handleCloseDeposit();
     resetDepositForm();
