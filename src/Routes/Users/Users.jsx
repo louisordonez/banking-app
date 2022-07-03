@@ -48,17 +48,17 @@ const Users = () => {
 
   useEffect(() => {
     const userList = JSON.parse(localStorage.getItem('userList'));
+
     if (userList) {
       setUsers(userList);
     }
   }, []);
 
   const loadLocalStorage = () => {
-    let userList;
-
     localStorage.setItem('userList', JSON.stringify(USER_LIST));
-    userList = localStorage.getItem('userList');
-    userList = JSON.parse(userList);
+
+    const userList = JSON.parse(localStorage.getItem('userList'));
+
     setUsers(userList);
   };
 
@@ -118,6 +118,7 @@ const Users = () => {
     };
 
     setUsers((state) => [userData, ...state]);
+    localStorage.setItem('userList', JSON.stringify([userData, ...users]));
     alert(`User create success`);
     handleCloseCreate();
     resetCreateUserForm();
