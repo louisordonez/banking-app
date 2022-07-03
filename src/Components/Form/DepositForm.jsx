@@ -70,6 +70,7 @@ const DepositForm = ({
                     placeholder="Amount"
                     type="number"
                     step=".01"
+                    min=".01"
                     onChange={handleDepositAmount}
                     ref={depositAmountRef}
                     required
