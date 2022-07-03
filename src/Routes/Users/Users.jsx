@@ -6,6 +6,7 @@ import EditUserForm from '../../Components/Form/EditUserForm';
 import WithdrawForm from '../../Components/Form/WithdrawForm';
 import DepositForm from '../../Components/Form/DepositForm';
 import TransferForm from '../../Components/Form/TransferForm';
+import Alert from '../../Components/Alert/Alert';
 import { USER_LIST } from './UserList';
 
 const Users = () => {
@@ -24,6 +25,10 @@ const Users = () => {
   const [showWithdraw, setShowWithdraw] = useState('none');
   const [showDeposit, setShowDeposit] = useState('none');
   const [showTransfer, setShowTransfer] = useState('none');
+  const [showAlert, setShowAlert] = useState('none');
+  const [alertType, setAlertType] = useState('');
+  const [alertHeader, setAlertHeader] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -69,6 +74,18 @@ const Users = () => {
 
   const updateUserListLocalStorage = (item) => {
     localStorage.setItem('userList', JSON.stringify(item));
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert('none');
+  };
+
+  const handleAlert = (alertType, alertHeader, alertMessage) => {
+    setAlertType(alertType);
+    setAlertHeader(alertHeader);
+    setAlertMessage(alertMessage);
+    setShowAlert('block');
+    setTimeout(handleCloseAlert, 5000);
   };
 
   const setUserIndex = (accountNumber) => {
@@ -123,7 +140,7 @@ const Users = () => {
 
     setUsers((state) => [userData, ...state]);
     updateUserListLocalStorage([userData, ...users]);
-    alert(`User create success`);
+    handleAlert(`success`, `Success!`, `User has been successfully created`);
     handleCloseCreate();
     resetCreateUserForm();
   };
@@ -154,10 +171,19 @@ const Users = () => {
     const userPrevBalance = user.balance;
     const totalBalance = userPrevBalance - withdrawAmount;
 
-    user.balance = totalBalance;
+    if (withdrawAmount > userPrevBalance) {
+      handleAlert(`danger`, `Failed!`, `User has insufficient balance`);
+    } else {
+      user.balance = totalBalance;
+      updateUserListLocalStorage(users);
+      handleAlert(
+        `success`,
+        `Success!`,
+        `Money has been successfully withdrew`
+      );
+      handleCloseWithdraw();
+    }
 
-    updateUserListLocalStorage(users);
-    alert(`Withdraw success`);
     handleCloseWithdraw();
     resetWithdrawForm();
   };
@@ -191,7 +217,7 @@ const Users = () => {
     user.balance = totalBalance;
 
     updateUserListLocalStorage(users);
-    alert(`Deposit success`);
+    handleAlert(`success`, `Success!`, `Money has been successfully deposited`);
     handleCloseDeposit();
     resetDepositForm();
   };
@@ -228,8 +254,7 @@ const Users = () => {
     const transferUserIndex = setUserIndex(transferAccountNumber);
 
     if (transferUserIndex === -1) {
-      alert(`Account number does not exist`);
-      return false;
+      handleAlert(`danger`, `Failed!`, `User account number does not exist`);
     } else {
       const userIndex = setUserIndex(accountNumber);
       const user = users[userIndex];
@@ -239,14 +264,23 @@ const Users = () => {
       const transferUserPrevBalance = transferUser.balance;
       const transferUserTotalBalance = transferUserPrevBalance + transferAmount;
 
-      user.balance = totalBalance;
-      transferUser.balance = transferUserTotalBalance;
+      if (transferAmount > userPrevBalance) {
+        handleAlert(`danger`, `Failed!`, `User has insufficient balance`);
+      } else {
+        user.balance = totalBalance;
+        transferUser.balance = transferUserTotalBalance;
 
-      updateUserListLocalStorage(users);
-      alert(`Transfer success`);
-      handleCloseTransfer();
-      resetTransferForm();
+        updateUserListLocalStorage(users);
+        handleAlert(
+          `success`,
+          `Success!`,
+          `Money has been successfully transferred`
+        );
+      }
     }
+
+    handleCloseTransfer();
+    resetTransferForm();
   };
 
   const handleShowEdit = (accountNumber) => {
@@ -293,7 +327,7 @@ const Users = () => {
     users[userIndex].balance = parseFloat(balanceEditRef.current.value);
 
     updateUserListLocalStorage(users);
-    alert(`User edit success`);
+    handleAlert(`success`, `Success!`, `User has been successfully edited`);
     handleCloseEdit();
     resetEditCreateUserForm();
   };
@@ -303,12 +337,19 @@ const Users = () => {
 
     setUsers(newUsers);
     updateUserListLocalStorage(newUsers);
-    alert(`User delete success`);
+    handleAlert(`success`, `Success!`, `User has been successfully deleted`);
   };
 
   return (
     <>
       <div className="user-container">
+        <Alert
+          alertType={alertType}
+          alertHeader={alertHeader}
+          alertText={alertMessage}
+          showAlert={showAlert}
+          onClick={handleCloseAlert}
+        />
         <CreateUserButton
           textValue={`Create User`}
           onClick={handleShowCreate}

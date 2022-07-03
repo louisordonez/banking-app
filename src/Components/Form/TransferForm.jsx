@@ -62,6 +62,7 @@ const TransferForm = ({
                     placeholder="Amount"
                     type="number"
                     step=".01"
+                    min=".01"
                     onChange={handleTransferAmount}
                     ref={transferAmountRef}
                     required

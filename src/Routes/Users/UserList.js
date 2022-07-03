@@ -19,4 +19,14 @@ export const USER_LIST = [
     password: 'mdc',
     balance: 20000000.0,
   },
+  {
+    accountNumber: 3656842687,
+    firstName: 'Juan',
+    lastName: 'Dela Cruz',
+    birthdate: '1998-01-01',
+    gender: 'Male',
+    email: 'jdc@email.com',
+    password: 'mdc',
+    balance: 0.0,
+  },
 ];
