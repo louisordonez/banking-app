@@ -3,7 +3,7 @@ import * as BoxIcons from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 
-function Navbar() {
+function Navbar({ handleLogOut }) {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -32,6 +32,12 @@ function Navbar() {
               </li>
             );
           })}
+          <li className="nav-text" onClick={handleLogOut}>
+            <Link to="/">
+              <BoxIcons.BiLogOut />
+              <span>Log Out</span>
+            </Link>
+          </li>
         </ul>
       </nav>
     </>
