@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CreateUserButton from '../../Components/Button/CreateUserButton';
 import UsersTable from '../../Components/Table/UsersTable';
 import CreateUserForm from '../../Components/Form/CreateUserForm';
@@ -8,14 +8,8 @@ import DepositForm from '../../Components/Form/DepositForm';
 import TransferForm from '../../Components/Form/TransferForm';
 import { USER_LIST } from './UserList';
 
-let userList;
-
-localStorage.setItem('userList', JSON.stringify(USER_LIST));
-userList = localStorage.getItem('userList');
-userList = JSON.parse(userList);
-
 const Users = () => {
-  const [users, setUsers] = useState(USER_LIST);
+  const [users, setUsers] = useState([]);
   const [accountNumber, setAccountNumber] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -51,6 +45,27 @@ const Users = () => {
   const emailEditRef = useRef(null);
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
+
+  useEffect(() => {
+    const userList = JSON.parse(localStorage.getItem('userList'));
+    if (userList) {
+      setUsers(userList);
+    }
+  }, []);
+
+  const loadLocalStorage = () => {
+    let userList;
+
+    localStorage.setItem('userList', JSON.stringify(USER_LIST));
+    userList = localStorage.getItem('userList');
+    userList = JSON.parse(userList);
+    setUsers(userList);
+  };
+
+  const removeLocalStorage = () => {
+    localStorage.removeItem('userList');
+    setUsers([]);
+  };
 
   const setUserIndex = (accountNumber) => {
     return users.findIndex((u) => u.accountNumber === accountNumber);
@@ -302,6 +317,8 @@ const Users = () => {
           textValue={`Create User`}
           onClick={handleShowCreate}
         />
+        <button onClick={loadLocalStorage}>Load localStorage</button>
+        <button onClick={removeLocalStorage}>Remove localStorage</button>
         <div className="flex-center">
           <UsersTable
             handleSearch={handleSearch}
