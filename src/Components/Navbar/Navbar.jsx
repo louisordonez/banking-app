@@ -38,7 +38,7 @@ const Navbar = ({ handleLogOut }) => {
               })}
             </ul>
           </div>
-          <Link to="#" className="nav-link active" onClick={handleLogOut}>
+          <Link to="/" className="nav-link active" onClick={handleLogOut}>
             <i className="nav-icon">
               <BoxIcons.BiLogOut />
             </i>
