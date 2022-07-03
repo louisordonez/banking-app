@@ -1,47 +1,53 @@
 import React, { useState } from 'react';
 import * as BoxIcons from 'react-icons/bi';
+import * as SimpleIcons from 'react-icons/si';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 
-function Navbar({ handleLogOut }) {
+const Navbar = ({ handleLogOut }) => {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
 
   return (
     <>
-      <div className="navbar">
-        <Link to="#" className="menu-bars">
-          <BoxIcons.BiMenu onClick={showSidebar} />
-        </Link>
-      </div>
-      <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-        <ul className="nav-menu-items" onClick={showSidebar}>
-          <li className="navbar-toggle">
-            <Link to="#" className="menu-bars">
-              <BoxIcons.BiX />
+      <div className={sidebar ? 'l-navbar show' : 'l-navbar'} id="navbar">
+        <nav className="nav">
+          <div>
+            <Link to="#" className="nav-logo">
+              <i>
+                <SimpleIcons.SiWebmoney className="nav-logo-icon" />
+              </i>
+              <span className="nav-logo-text">Banking</span>
             </Link>
-          </li>
-          {SidebarData.map((item, index) => {
-            return (
-              <li key={index} className={item.cName}>
-                <Link to={item.path}>
-                  {item.icon}
-                  <span>{item.title}</span>
-                </Link>
-              </li>
-            );
-          })}
-          <li className="nav-text" onClick={handleLogOut}>
-            <Link to="/">
+            <div
+              className={sidebar ? 'nav-toggle rotate' : 'nav-toggle'}
+              id="nav-toggle"
+              onClick={showSidebar}
+            >
+              <BoxIcons.BiChevronRight />
+            </div>
+            <ul className="nav-list">
+              {SidebarData.map((item, index) => {
+                return (
+                  <Link to={item.path} key={index} className="nav-link active">
+                    <i className="nav-icon">{item.icon}</i>
+                    <span className={item.cName}>{item.title}</span>
+                  </Link>
+                );
+              })}
+            </ul>
+          </div>
+          <Link to="#" className="nav-link active" onClick={handleLogOut}>
+            <i className="nav-icon">
               <BoxIcons.BiLogOut />
-              <span>Log Out</span>
-            </Link>
-          </li>
-        </ul>
-      </nav>
+            </i>
+            <span className="nav-text">Log&nbsp;Out</span>
+          </Link>
+        </nav>
+      </div>
     </>
   );
-}
+};
 
 export default Navbar;
