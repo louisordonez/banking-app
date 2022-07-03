@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import CreateUserButton from '../Components/Button/CreateUserButton';
-import UsersTable from '../Components/Table/UsersTable';
-import CreateUserForm from '../Components/Form/CreateUserForm';
-import EditUserForm from '../Components/Form/EditUserForm';
-import WithdrawForm from '../Components/Form/WithdrawForm';
-import DepositForm from '../Components/Form/DepositForm';
-import TransferForm from '../Components/Form/TransferForm';
+import CreateUserButton from '../../Components/Button/CreateUserButton';
+import UsersTable from '../../Components/Table/UsersTable';
+import CreateUserForm from '../../Components/Form/CreateUserForm';
+import EditUserForm from '../../Components/Form/EditUserForm';
+import WithdrawForm from '../../Components/Form/WithdrawForm';
+import DepositForm from '../../Components/Form/DepositForm';
+import TransferForm from '../../Components/Form/TransferForm';
 
 const USER_LIST = [
   {
@@ -29,6 +29,14 @@ const USER_LIST = [
     balance: 20000000.0,
   },
 ];
+
+// localStorage.setItem('userList', JSON.stringify(USER_LIST));
+
+// let array = localStorage.getItem('userList');
+
+// array = JSON.parse(array);
+
+// console.log(array);
 
 const Users = () => {
   const [users, setUsers] = useState(USER_LIST);
