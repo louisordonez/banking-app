@@ -6,6 +6,7 @@ import EditUserForm from '../../Components/Form/EditUserForm';
 import WithdrawForm from '../../Components/Form/WithdrawForm';
 import DepositForm from '../../Components/Form/DepositForm';
 import TransferForm from '../../Components/Form/TransferForm';
+import Alert from '../../Components/Alert/Alert';
 import { USER_LIST } from './UserList';
 
 const Users = () => {
@@ -24,6 +25,9 @@ const Users = () => {
   const [showWithdraw, setShowWithdraw] = useState('none');
   const [showDeposit, setShowDeposit] = useState('none');
   const [showTransfer, setShowTransfer] = useState('none');
+  const [showAlert, setShowAlert] = useState('none');
+  const [alertType, setAlertType] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -69,6 +73,17 @@ const Users = () => {
 
   const updateUserListLocalStorage = (item) => {
     localStorage.setItem('userList', JSON.stringify(item));
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert('none');
+  };
+
+  const handleAlert = (alertType, alertMessage) => {
+    setAlertType(alertType);
+    setAlertMessage(alertMessage);
+    setShowAlert('block');
+    setTimeout(handleCloseAlert, 3000);
   };
 
   const setUserIndex = (accountNumber) => {
@@ -162,6 +177,7 @@ const Users = () => {
 
       updateUserListLocalStorage(users);
       alert(`Withdraw success`);
+      handleAlert(`success`, `Withdraw success`);
       handleCloseWithdraw();
       resetWithdrawForm();
     }
@@ -319,6 +335,12 @@ const Users = () => {
   return (
     <>
       <div className="user-container">
+        <Alert
+          alertType={alertType}
+          alertText={alertMessage}
+          showAlert={showAlert}
+          onClick={handleCloseAlert}
+        />
         <CreateUserButton
           textValue={`Create User`}
           onClick={handleShowCreate}
