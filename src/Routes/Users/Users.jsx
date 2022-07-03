@@ -242,6 +242,7 @@ const Users = () => {
       user.balance = totalBalance;
       transferUser.balance = transferUserTotalBalance;
 
+      updateUserListLocalStorage(users);
       alert(`Transfer success`);
       handleCloseTransfer();
       resetTransferForm();
