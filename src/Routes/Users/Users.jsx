@@ -138,7 +138,7 @@ const Users = () => {
 
     setUsers((state) => [userData, ...state]);
     updateUserListLocalStorage([userData, ...users]);
-    alert(`User create success`);
+    handleAlert(`success`, `User has been successfully created`);
     handleCloseCreate();
     resetCreateUserForm();
   };
@@ -176,8 +176,7 @@ const Users = () => {
       user.balance = totalBalance;
 
       updateUserListLocalStorage(users);
-      alert(`Withdraw success`);
-      handleAlert(`success`, `Withdraw success`);
+      handleAlert(`success`, `Money has been successfully withdrew`);
       handleCloseWithdraw();
       resetWithdrawForm();
     }
@@ -212,7 +211,7 @@ const Users = () => {
     user.balance = totalBalance;
 
     updateUserListLocalStorage(users);
-    alert(`Deposit success`);
+    handleAlert(`success`, `Money has been successfully deposited`);
     handleCloseDeposit();
     resetDepositForm();
   };
@@ -268,7 +267,7 @@ const Users = () => {
         transferUser.balance = transferUserTotalBalance;
 
         updateUserListLocalStorage(users);
-        alert(`Transfer success`);
+        handleAlert(`success`, `Money has been successfully transfered`);
         handleCloseTransfer();
         resetTransferForm();
       }
@@ -319,7 +318,7 @@ const Users = () => {
     users[userIndex].balance = parseFloat(balanceEditRef.current.value);
 
     updateUserListLocalStorage(users);
-    alert(`User edit success`);
+    handleAlert(`success`, `User has been successfully edited`);
     handleCloseEdit();
     resetEditCreateUserForm();
   };
@@ -329,7 +328,7 @@ const Users = () => {
 
     setUsers(newUsers);
     updateUserListLocalStorage(newUsers);
-    alert(`User delete success`);
+    handleAlert(`success`, `User has been successfully deleted`);
   };
 
   return (
