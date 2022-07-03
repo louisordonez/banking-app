@@ -2,7 +2,7 @@ import React from 'react';
 
 const CreateUserForm = ({
   showCreate,
-  handleSubmit,
+  handleCreateUser,
   firstNameRef,
   lastNameRef,
   birthdateRef,
@@ -22,7 +22,7 @@ const CreateUserForm = ({
             </div>
           </div>
           <div className="modal-body">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleCreateUser}>
               <div className="create-user-flex">
                 <div>
                   <input
@@ -63,8 +63,8 @@ const CreateUserForm = ({
                     <option value="" disabled hidden>
                       Select an option
                     </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                   </select>
                 </div>
               </div>

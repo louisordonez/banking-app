@@ -1,37 +1,15 @@
-import React, { useRef, useState } from 'react';
-import CreateUserButton from '../Components/Button/CreateUserButton';
-import UsersTable from '../Components/Table/UsersTable';
-import CreateUserForm from '../Components/Form/CreateUserForm';
-import EditUserForm from '../Components/Form/EditUserForm';
-import WithdrawForm from '../Components/Form/WithdrawForm';
-import DepositForm from '../Components/Form/DepositForm';
-import TransferForm from '../Components/Form/TransferForm';
-
-const USER_LIST = [
-  {
-    accountNumber: 1656480543042,
-    firstName: 'John',
-    lastName: 'Doe',
-    birthdate: '1997-06-22',
-    gender: 'Male',
-    email: 'jd@email.com',
-    password: 'jd',
-    balance: 15000000.0,
-  },
-  {
-    accountNumber: 2656480543188,
-    firstName: 'Maria',
-    lastName: 'Dela Cruz',
-    birthdate: '1998-12-11',
-    gender: 'Female',
-    email: 'mdc@email.com',
-    password: 'mdc',
-    balance: 20000000.0,
-  },
-];
+import React, { useEffect, useRef, useState } from 'react';
+import CreateUserButton from '../../Components/Button/CreateUserButton';
+import UsersTable from '../../Components/Table/UsersTable';
+import CreateUserForm from '../../Components/Form/CreateUserForm';
+import EditUserForm from '../../Components/Form/EditUserForm';
+import WithdrawForm from '../../Components/Form/WithdrawForm';
+import DepositForm from '../../Components/Form/DepositForm';
+import TransferForm from '../../Components/Form/TransferForm';
+import { USER_LIST } from './UserList';
 
 const Users = () => {
-  const [users, setUsers] = useState(USER_LIST);
+  const [users, setUsers] = useState([]);
   const [accountNumber, setAccountNumber] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -68,6 +46,31 @@ const Users = () => {
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
 
+  useEffect(() => {
+    const userList = JSON.parse(localStorage.getItem('userList'));
+
+    if (userList) {
+      setUsers(userList);
+    }
+  }, []);
+
+  const loadUserListLocalStorage = () => {
+    localStorage.setItem('userList', JSON.stringify(USER_LIST));
+
+    const userList = JSON.parse(localStorage.getItem('userList'));
+
+    setUsers(userList);
+  };
+
+  const removeUserListLocalStorage = () => {
+    localStorage.removeItem('userList');
+    setUsers([]);
+  };
+
+  const updateUserListLocalStorage = (item) => {
+    localStorage.setItem('userList', JSON.stringify(item));
+  };
+
   const setUserIndex = (accountNumber) => {
     return users.findIndex((u) => u.accountNumber === accountNumber);
   };
@@ -93,10 +96,6 @@ const Users = () => {
 
   const handleCloseCreate = () => setShowCreate('none');
 
-  const handleCreateUser = (userData) => {
-    setUsers((state) => [userData, ...state]);
-  };
-
   const resetCreateUserForm = () => {
     firstNameRef.current.value = '';
     lastNameRef.current.value = '';
@@ -107,22 +106,23 @@ const Users = () => {
     balanceRef.current.value = '';
   };
 
-  const handleSubmit = (e) => {
+  const handleCreateUser = (e) => {
     e.preventDefault();
 
     const newAccountNumber = new Date().getTime();
     const userData = {
-      accountNumber: `${newAccountNumber}`,
+      accountNumber: newAccountNumber,
       firstName: `${firstNameRef.current.value}`,
       lastName: `${lastNameRef.current.value}`,
       birthdate: `${birthdateRef.current.value}`,
       gender: `${genderRef.current.value}`,
       email: `${emailRef.current.value}`,
       password: `${passwordRef.current.value}`,
-      balance: `${balanceRef.current.value}`,
+      balance: parseFloat(balanceRef.current.value),
     };
 
-    handleCreateUser(userData);
+    setUsers((state) => [userData, ...state]);
+    updateUserListLocalStorage([userData, ...users]);
     alert(`User create success`);
     handleCloseCreate();
     resetCreateUserForm();
@@ -139,10 +139,7 @@ const Users = () => {
   const handleCloseWithdraw = () => setShowWithdraw('none');
 
   const handleWithdrawAmount = (e) => {
-    const withdrawAmountValue = e.target.value;
-    const parseWithdrawAmount = parseFloat(withdrawAmountValue);
-
-    setWithdrawAmount(parseWithdrawAmount);
+    setWithdrawAmount(parseFloat(e.target.value));
   };
 
   const resetWithdrawForm = () => {
@@ -159,6 +156,7 @@ const Users = () => {
 
     user.balance = totalBalance;
 
+    updateUserListLocalStorage(users);
     alert(`Withdraw success`);
     handleCloseWithdraw();
     resetWithdrawForm();
@@ -175,10 +173,7 @@ const Users = () => {
   const handleCloseDeposit = () => setShowDeposit('none');
 
   const handleDepositAmount = (e) => {
-    const depositAmountValue = e.target.value;
-    const parseDepositAmount = parseFloat(depositAmountValue);
-
-    setDepositAmount(parseDepositAmount);
+    setDepositAmount(parseFloat(e.target.value));
   };
 
   const resetDepositForm = () => {
@@ -195,6 +190,7 @@ const Users = () => {
 
     user.balance = totalBalance;
 
+    updateUserListLocalStorage(users);
     alert(`Deposit success`);
     handleCloseDeposit();
     resetDepositForm();
@@ -214,18 +210,11 @@ const Users = () => {
   };
 
   const handleTransferAccountNumber = (e) => {
-    const transferAccountNumberValue = e.target.value;
-    const replacePeriod = transferAccountNumberValue.replace('.', '');
-    const parseAccountNumber = parseInt(replacePeriod);
-
-    setTransferAccountNumber(parseAccountNumber);
+    setTransferAccountNumber(parseInt(e.target.value.replace('.', '')));
   };
 
   const handleTransferAmount = (e) => {
-    const transferAmountValue = e.target.value;
-    const parseTransferAmount = parseFloat(transferAmountValue);
-
-    setTransferAmount(parseTransferAmount);
+    setTransferAmount(parseFloat(e.target.value));
   };
 
   const resetTransferForm = () => {
@@ -253,6 +242,7 @@ const Users = () => {
       user.balance = totalBalance;
       transferUser.balance = transferUserTotalBalance;
 
+      updateUserListLocalStorage(users);
       alert(`Transfer success`);
       handleCloseTransfer();
       resetTransferForm();
@@ -276,16 +266,6 @@ const Users = () => {
 
   const handleCloseEdit = () => setShowEdit('none');
 
-  const handleEditUser = (userIndex) => {
-    users[userIndex].firstName = `${firstNameEditRef.current.value}`;
-    users[userIndex].lastName = `${lastNameEditRef.current.value}`;
-    users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
-    users[userIndex].gender = `${genderEditRef.current.value}`;
-    users[userIndex].email = `${emailEditRef.current.value}`;
-    users[userIndex].password = `${passwordEditRef.current.value}`;
-    users[userIndex].balance = `${balanceEditRef.current.value}`;
-  };
-
   const resetEditCreateUserForm = () => {
     accountNumberEditRef.current.value = '';
     firstNameEditRef.current.value = '';
@@ -297,24 +277,32 @@ const Users = () => {
     balanceEditRef.current.value = '';
   };
 
-  const handleEditSubmit = (e) => {
+  const handleEditUser = (e) => {
     e.preventDefault();
 
-    const parseAccountNumber = parseInt(accountNumberEditRef.current.value);
     const userIndex = users.findIndex(
-      (u) => u.accountNumber === parseAccountNumber
+      (u) => u.accountNumber === parseInt(accountNumberEditRef.current.value)
     );
 
-    handleEditUser(userIndex);
+    users[userIndex].firstName = `${firstNameEditRef.current.value}`;
+    users[userIndex].lastName = `${lastNameEditRef.current.value}`;
+    users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
+    users[userIndex].gender = `${genderEditRef.current.value}`;
+    users[userIndex].email = `${emailEditRef.current.value}`;
+    users[userIndex].password = `${passwordEditRef.current.value}`;
+    users[userIndex].balance = parseFloat(balanceEditRef.current.value);
+
+    updateUserListLocalStorage(users);
+    alert(`User edit success`);
     handleCloseEdit();
     resetEditCreateUserForm();
-    alert(`User edit success`);
   };
 
   const handleDelete = (accountNumber) => {
     const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
 
     setUsers(newUsers);
+    updateUserListLocalStorage(newUsers);
     alert(`User delete success`);
   };
 
@@ -325,6 +313,8 @@ const Users = () => {
           textValue={`Create User`}
           onClick={handleShowCreate}
         />
+        <button onClick={loadUserListLocalStorage}>Load Users</button>
+        <button onClick={removeUserListLocalStorage}>Delete Users</button>
         <div className="flex-center">
           <UsersTable
             handleSearch={handleSearch}
@@ -338,7 +328,7 @@ const Users = () => {
         </div>
         <CreateUserForm
           showCreate={showCreate}
-          handleSubmit={handleSubmit}
+          handleCreateUser={handleCreateUser}
           firstNameRef={firstNameRef}
           lastNameRef={lastNameRef}
           birthdateRef={birthdateRef}
@@ -350,7 +340,7 @@ const Users = () => {
         />
         <EditUserForm
           showEdit={showEdit}
-          handleEditSubmit={handleEditSubmit}
+          handleEditUser={handleEditUser}
           accountNumberEditRef={accountNumberEditRef}
           firstNameEditRef={firstNameEditRef}
           lastNameEditRef={lastNameEditRef}

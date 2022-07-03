@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
-import Dashboard from './Routes/Dashboard';
-import Users from './Routes/Users';
-import Transactions from './Routes/Transactions';
-import Settings from './Routes/Settings';
+import Dashboard from './Routes/Dashboard/Dashboard';
+import Users from './Routes/Users/Users';
+import Transactions from './Routes/Transactions/Transactions';
+import Settings from './Routes/Settings/Settings';
 
 const App = () => {
   return (
