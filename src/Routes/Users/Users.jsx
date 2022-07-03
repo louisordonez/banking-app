@@ -156,6 +156,7 @@ const Users = () => {
 
     user.balance = totalBalance;
 
+    updateUserListLocalStorage(users);
     alert(`Withdraw success`);
     handleCloseWithdraw();
     resetWithdrawForm();
@@ -311,7 +312,7 @@ const Users = () => {
           onClick={handleShowCreate}
         />
         <button onClick={loadUserListLocalStorage}>Load Users</button>
-        <button onClick={removeUserListLocalStorage}>Remove Users</button>
+        <button onClick={removeUserListLocalStorage}>Delete Users</button>
         <div className="flex-center">
           <UsersTable
             handleSearch={handleSearch}
