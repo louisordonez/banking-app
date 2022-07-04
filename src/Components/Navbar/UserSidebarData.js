@@ -1,17 +1,11 @@
 import React from 'react';
 import * as BoxIcons from 'react-icons/bi';
 
-export const SidebarData = [
+export const UserSidebarData = [
   {
-    title: 'Dashboard',
+    title: 'Home',
     path: '/',
-    icon: <BoxIcons.BiCategoryAlt />,
-    cName: 'nav-text',
-  },
-  {
-    title: 'Users',
-    path: 'users',
-    icon: <BoxIcons.BiUser />,
+    icon: <BoxIcons.BiHome />,
     cName: 'nav-text',
   },
   {
