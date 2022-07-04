@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as BoxIcons from 'react-icons/bi';
 
 const Dashboard = () => {
+  const [totalUsers, setTotalUsers] = useState(null);
+  const [totalBalance, setTotalBalance] = useState(null);
+
+  useEffect(() => {
+    const userList = JSON.parse(localStorage.getItem('userList'));
+
+    setTotalUsers(userList.length);
+
+    let total = 0;
+
+    userList.forEach((element) => {
+      total += element.balance;
+    });
+
+    setTotalBalance(total);
+  }, []);
+
   return (
     <>
       <h2 className="page-header">Dashboard</h2>
@@ -16,7 +33,7 @@ const Dashboard = () => {
               </span>
             </div>
             <div className="box-text">
-              <span>100</span>
+              <span>{totalUsers}</span>
             </div>
           </div>
         </Link>
@@ -30,7 +47,12 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="box-text">
-            <span>100.00</span>
+            <span>
+              {totalBalance.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'PHP',
+              })}
+            </span>
           </div>
         </Link>
       </div>
