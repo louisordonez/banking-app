@@ -20,7 +20,7 @@ const Dashboard = () => {
             </div>
           </div>
         </Link>
-        <Link to="/transactions" className="dashboard-box green-box">
+        <Link to="/transactions" className="dashboard-box light-green-box">
           <div className="box-header">
             <div className="align-items-center">
               <BoxIcons.BiMoney size={32} />
