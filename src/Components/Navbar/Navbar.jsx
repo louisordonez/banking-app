@@ -5,9 +5,14 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 
 const Navbar = ({ handleLogOut }) => {
+  document.body.classList.add('default');
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
+
+  const expandBody = () => {
+    document.body.classList.toggle('expanded');
+  };
 
   return (
     <>
@@ -23,7 +28,10 @@ const Navbar = ({ handleLogOut }) => {
             <div
               className={sidebar ? 'nav-toggle rotate' : 'nav-toggle'}
               id="nav-toggle"
-              onClick={showSidebar}
+              onClick={() => {
+                showSidebar();
+                expandBody();
+              }}
             >
               <BoxIcons.BiChevronRight />
             </div>
