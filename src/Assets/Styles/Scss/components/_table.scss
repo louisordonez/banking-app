@@ -3,7 +3,7 @@
   height: 47rem;
   background: var(--white);
   border: 0.1rem solid #f4f4f4;
-  box-shadow: 0rem 3.2rem 3.2rem -3.2rem rgba(142, 142, 142, 0.18);
+  box-shadow: 0.2rem 0.4rem 1.6rem rgba(0, 0, 0, 0.2);
   border-radius: 1.2rem;
   overflow-y: scroll;
 
@@ -21,6 +21,10 @@
       background-color: #f9fafe;
     }
   }
+}
+
+.table-whole {
+  width: 80%;
 }
 
 .table-header {

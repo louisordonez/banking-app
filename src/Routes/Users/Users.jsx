@@ -353,7 +353,7 @@ const Users = () => {
           textValue={`Create User`}
           onClick={handleShowCreate}
         />
-        <div className="flex-center">
+        <div className="flex-center table-whole">
           <UsersTable
             handleSearch={handleSearch}
             users={users}
