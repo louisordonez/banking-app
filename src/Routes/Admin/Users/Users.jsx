@@ -117,10 +117,16 @@ const Users = () => {
       password: `${passwordRef.current.value}`,
       balance: parseFloat(balanceRef.current.value),
     };
+    const user = users.find((u) => u.email === emailRef.current.value);
 
-    setUsers((state) => [userData, ...state]);
-    updateUserListLocalStorage([userData, ...users]);
-    handleAlert(`success`, `Success!`, `User has been successfully created`);
+    if (user !== undefined && user.email === emailRef.current.value) {
+      handleAlert(`danger`, `Failed!`, `Email has already been taken`);
+    } else {
+      setUsers((state) => [userData, ...state]);
+      updateUserListLocalStorage([userData, ...users]);
+      handleAlert(`success`, `Success!`, `User has been successfully created`);
+    }
+
     handleCloseCreate();
     resetCreateUserForm();
   };
@@ -297,7 +303,6 @@ const Users = () => {
     const userIndex = users.findIndex(
       (u) => u.accountNumber === parseInt(accountNumberEditRef.current.value)
     );
-
     const user = users.find((u) => u.email === emailEditRef.current.value);
 
     if (
@@ -311,6 +316,7 @@ const Users = () => {
       users[userIndex].email = `${emailEditRef.current.value}`;
       users[userIndex].password = `${passwordEditRef.current.value}`;
       users[userIndex].balance = parseFloat(balanceEditRef.current.value);
+
       updateUserListLocalStorage(users);
       handleAlert(`success`, `Success!`, `User has been successfully edited`);
     } else if (
@@ -319,6 +325,7 @@ const Users = () => {
     ) {
       handleAlert(`danger`, `Failed!`, `Email has already been taken`);
     }
+
     handleCloseEdit();
     resetEditCreateUserForm();
   };
