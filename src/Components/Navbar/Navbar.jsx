@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import * as BoxIcons from 'react-icons/bi';
 import * as SimpleIcons from 'react-icons/si';
 import { Link } from 'react-router-dom';
-import { SidebarData } from './SidebarData';
+import { AdminSidebarData } from './AdminSidebarData';
+import { UserSidebarData } from './UserSidebarData';
 
 const Navbar = ({ handleLogOut }) => {
   document.body.classList.add('default');
   const [sidebar, setSidebar] = useState(false);
+  const role = localStorage.getItem('role');
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -36,14 +38,20 @@ const Navbar = ({ handleLogOut }) => {
               <BoxIcons.BiChevronRight />
             </div>
             <ul className="nav-list">
-              {SidebarData.map((item, index) => {
-                return (
-                  <Link to={item.path} key={index} className="nav-link active">
-                    <i className="nav-icon">{item.icon}</i>
-                    <span className={item.cName}>{item.title}</span>
-                  </Link>
-                );
-              })}
+              {(role === 'admin' ? AdminSidebarData : UserSidebarData).map(
+                (item, index) => {
+                  return (
+                    <Link
+                      to={item.path}
+                      key={index}
+                      className="nav-link active"
+                    >
+                      <i className="nav-icon">{item.icon}</i>
+                      <span className={item.cName}>{item.title}</span>
+                    </Link>
+                  );
+                }
+              )}
             </ul>
           </div>
           <Link to="/" className="nav-link active" onClick={handleLogOut}>
