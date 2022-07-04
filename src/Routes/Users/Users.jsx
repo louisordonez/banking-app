@@ -167,7 +167,6 @@ const Users = () => {
         `Success!`,
         `Money has been successfully withdrew`
       );
-      handleCloseWithdraw();
     }
 
     handleCloseWithdraw();
