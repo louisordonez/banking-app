@@ -144,7 +144,7 @@ const App = () => {
     setIsLoggedIn(false);
     setRole('');
     localStorage.setItem('role', '');
-    window.location.reload();
+    window.location.assign('/');
   };
 
   if (isLoggedIn === true && role === 'admin') {
