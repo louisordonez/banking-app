@@ -19,7 +19,7 @@ const Navbar = ({ handleLogOut }) => {
       <div className={sidebar ? 'l-navbar show' : 'l-navbar'} id="navbar">
         <nav className="nav">
           <div>
-            <Link to="#" className="nav-logo">
+            <Link to="/" className="nav-logo">
               <i>
                 <SimpleIcons.SiWebmoney className="nav-logo-icon" />
               </i>
