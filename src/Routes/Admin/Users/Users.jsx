@@ -353,8 +353,6 @@ const Users = () => {
           textValue={`Create User`}
           onClick={handleShowCreate}
         />
-        {/* <button onClick={loadUserListLocalStorage}>Load Users</button> */}
-        {/* <button onClick={removeUserListLocalStorage}>Delete Users</button> */}
         <div className="flex-center">
           <UsersTable
             handleSearch={handleSearch}
