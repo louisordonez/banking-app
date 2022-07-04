@@ -37,6 +37,12 @@ const App = () => {
     ) {
       setIsLoggedIn(true);
       setRole('admin');
+    } else if (
+      isLoggedInLocalStorage === 'true' &&
+      roleLocalStorage === 'user'
+    ) {
+      setIsLoggedIn(true);
+      setRole('user');
     }
 
     if (userList) {
@@ -105,66 +111,60 @@ const App = () => {
 
   if (isLoggedIn === true && role === 'admin') {
     return (
-      <>
-        <Router>
-          <Navbar handleLogOut={handleLogOut} />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="users" element={<Users />} />
-            <Route path="transactions" element={<Transactions />} />
-            <Route path="settings" element={<Settings />} />
-          </Routes>
-        </Router>
-      </>
+      <Router>
+        <Navbar handleLogOut={handleLogOut} />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="users" element={<Users />} />
+          <Route path="transactions" element={<Transactions />} />
+          <Route path="settings" element={<Settings />} />
+        </Routes>
+      </Router>
     );
   } else if (isLoggedIn === true && role === 'user') {
     return (
-      <>
-        <Router>
-          <Navbar handleLogOut={handleLogOut} />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="users" element={<Users />} />
-            <Route path="transactions" element={<Transactions />} />
-            <Route path="settings" element={<Settings />} />
-          </Routes>
-        </Router>
-      </>
+      <Router>
+        <Navbar handleLogOut={handleLogOut} />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="users" element={<Users />} />
+          <Route path="transactions" element={<Transactions />} />
+          <Route path="settings" element={<Settings />} />
+        </Routes>
+      </Router>
     );
   } else if (isLoggedIn === false) {
     return (
-      <>
-        <Router>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="center">
-                  <LogIn
-                    handleLogin={handleLogin}
-                    emailRef={emailRef}
-                    passwordRef={passwordRef}
-                    handleAlert={handleAlert}
-                    showAlert={showAlert}
-                    alertType={alertType}
-                    alertHeader={alertHeader}
-                    alertMessage={alertMessage}
-                    handleCloseAlert={handleCloseAlert}
-                  />
-                </div>
-              }
-            />
-            <Route
-              path="/signup"
-              element={
-                <div className="center">
-                  <SignUp />
-                </div>
-              }
-            />
-          </Routes>
-        </Router>
-      </>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="center">
+                <LogIn
+                  handleLogin={handleLogin}
+                  emailRef={emailRef}
+                  passwordRef={passwordRef}
+                  handleAlert={handleAlert}
+                  showAlert={showAlert}
+                  alertType={alertType}
+                  alertHeader={alertHeader}
+                  alertMessage={alertMessage}
+                  handleCloseAlert={handleCloseAlert}
+                />
+              </div>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <div className="center">
+                <SignUp />
+              </div>
+            }
+          />
+        </Routes>
+      </Router>
     );
   }
 };
