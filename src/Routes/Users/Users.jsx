@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CreateUserButton from '../../Components/Button/CreateUserButton';
 import UsersTable from '../../Components/Table/UsersTable';
 import CreateUserForm from '../../Components/Form/CreateUserForm';
@@ -51,6 +51,10 @@ const Users = ({ userList }) => {
   const emailEditRef = useRef(null);
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
+
+  useEffect(() => {
+    setUsers(JSON.parse(localStorage.getItem('userList')));
+  }, []);
 
   const updateUserListLocalStorage = (item) => {
     localStorage.setItem('userList', JSON.stringify(item));
