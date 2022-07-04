@@ -340,6 +340,7 @@ const Users = () => {
 
   return (
     <>
+      <h2 className="page-header">Users</h2>
       <div className="user-container">
         <Alert
           alertType={alertType}
