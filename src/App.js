@@ -80,8 +80,14 @@ const App = () => {
         user.email === emailRef.current.value &&
         user.password === passwordRef.current.value
       ) {
-        setRole('admin');
-        localStorage.setItem('role', 'admin');
+        if (user.role === 'admin') {
+          setRole('admin');
+          localStorage.setItem('role', 'admin');
+        } else if (user.role === 'user') {
+          setRole('user');
+          localStorage.setItem('role', 'user');
+        }
+
         handleIsLoggedIn(true);
         setIsLoggedIn(true);
       } else {

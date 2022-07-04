@@ -39,7 +39,7 @@ export const USER_LIST = [
     birthdate: '1998-01-01',
     gender: 'Male',
     email: 'jdc@email.com',
-    password: 'mdc',
+    password: 'jdc',
     balance: 0.0,
     role: 'user',
   },
