@@ -15,6 +15,7 @@ const Users = ({ userList }) => {
   const [lastName, setLastName] = useState(null);
   const [fullName, setFullName] = useState(null);
   const [balance, setBalance] = useState(null);
+  // eslint-disable-next-line
   const [email, setEmail] = useState(null);
   const [withdrawAmount, setWithdrawAmount] = useState(null);
   const [depositAmount, setDepositAmount] = useState(null);
