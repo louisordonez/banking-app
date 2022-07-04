@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Routes/Login/Login';
+import LogIn from './Routes/LogIn/LogIn';
+import SignUp from './Routes/SignUp/SignUp';
 import Navbar from './Components/Navbar/Navbar';
 import Dashboard from './Routes/Admin/Dashboard/Dashboard';
 import Users from './Routes/Admin/Users/Users';
@@ -11,14 +12,16 @@ import { USER_LIST } from './Assets/JS/UserList';
 const App = () => {
   // eslint-disable-next-line
   const [users, setUsers] = useState([]);
-
-  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const userList = JSON.parse(localStorage.getItem('userList'));
+    const isLoggedInLocalStorage = localStorage.getItem('isLoggedIn');
 
-    if (localStorage.getItem('isLoggedIn') === null) {
+    if (isLoggedInLocalStorage === null) {
       handleIsLoggedIn(false);
+    } else if (isLoggedInLocalStorage === 'true') {
+      setIsLoggedIn(true);
     }
 
     if (userList) {
@@ -42,14 +45,15 @@ const App = () => {
 
   const handleLogin = () => {
     handleIsLoggedIn(true);
+    setIsLoggedIn(true);
   };
 
   const handleLogOut = () => {
     handleIsLoggedIn(false);
-    window.location.reload();
+    setIsLoggedIn(false);
   };
 
-  if (isLoggedIn === 'true') {
+  if (isLoggedIn === true) {
     return (
       <>
         <Router>
@@ -63,8 +67,17 @@ const App = () => {
         </Router>
       </>
     );
-  } else if (isLoggedIn === 'false') {
-    return <Login handleLogin={handleLogin} />;
+  } else if (isLoggedIn === false) {
+    return (
+      <>
+        <Router>
+          <Routes>
+            <Route path="/" element={<LogIn handleLogin={handleLogin} />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </Router>
+      </>
+    );
   }
 };
 

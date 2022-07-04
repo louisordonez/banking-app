@@ -1,6 +1,7 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-const Login = ({ handleLogin }) => {
+const LogIn = ({ handleLogin }) => {
   return (
     <div className="center">
       <h1>Login</h1>
@@ -15,12 +16,15 @@ const Login = ({ handleLogin }) => {
         </div>
         <div>
           <button type="submit" value="Submit">
-            Login
+            Log In
           </button>
         </div>
       </form>
+      <Link to="/signup">
+        <span>Sign Up</span>
+      </Link>
     </div>
   );
 };
 
-export default Login;
+export default LogIn;
