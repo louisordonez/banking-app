@@ -1,0 +1,39 @@
+.dashboard-box {
+  position: relative;
+  width: 24rem;
+  height: 14rem;
+  border-radius: 0.6rem;
+  margin: 10rem;
+  margin-top: 4rem;
+}
+
+.box-header {
+  margin: 1rem;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  font-size: 2.4rem;
+  color: var(--white);
+}
+
+.box-text {
+  position: absolute;
+  font-size: 3.6rem;
+  bottom: 0;
+  left: 0;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.box-icon {
+  width: 3.3rem;
+  height: 3.3rem;
+}
+
+.green-box {
+  background: var(--second-color);
+}
+
+.light-green-box {
+  background: var(--first-color);
+}
