@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as BoxIcons from 'react-icons/bi';
 
 const Dashboard = () => {
@@ -6,7 +7,7 @@ const Dashboard = () => {
     <>
       <h2 className="page-header">Dashboard</h2>
       <div className="align-items-center page-header">
-        <div className="dashboard-box green-box">
+        <Link to="/users" className="dashboard-box green-box">
           <div className="box-header">
             <div className="align-items-center">
               <BoxIcons.BiUser size={32} />
@@ -14,12 +15,13 @@ const Dashboard = () => {
                 Total Users
               </span>
             </div>
+
+            <div className="box-text">
+              <span>100</span>
+            </div>
           </div>
-          <div className="box-text">
-            <span>100</span>
-          </div>
-        </div>
-        <div className="dashboard-box green-box">
+        </Link>
+        <Link to="/transactions" className="dashboard-box green-box">
           <div className="box-header">
             <div className="align-items-center">
               <BoxIcons.BiMoney size={32} />
@@ -31,7 +33,7 @@ const Dashboard = () => {
           <div className="box-text">
             <span>100.00</span>
           </div>
-        </div>
+        </Link>
       </div>
     </>
   );
