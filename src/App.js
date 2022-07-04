@@ -7,6 +7,7 @@ import Dashboard from './Routes/Dashboard/Dashboard';
 import Users from './Routes/Users/Users';
 import Transactions from './Routes/Transactions/Transactions';
 import Settings from './Routes/Settings/Settings';
+import Home from './Routes/Home/Home';
 import { USER_LIST } from './Assets/JS/UserList';
 
 const App = () => {
@@ -164,7 +165,7 @@ const App = () => {
       <Router>
         <Navbar handleLogOut={handleLogOut} />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Home />} />
           <Route path="users" element={<Users />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="settings" element={<Settings />} />
