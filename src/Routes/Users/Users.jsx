@@ -8,10 +8,8 @@ import DepositForm from '../../Components/Form/DepositForm';
 import TransferForm from '../../Components/Form/TransferForm';
 import Alert from '../../Components/Alert/Alert';
 
-const Users = () => {
-  const [users, setUsers] = useState(
-    JSON.parse(localStorage.getItem('userList'))
-  );
+const Users = ({ userList }) => {
+  const [users, setUsers] = useState(userList);
   const [accountNumber, setAccountNumber] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -116,6 +114,7 @@ const Users = () => {
       email: `${emailRef.current.value}`,
       password: `${passwordRef.current.value}`,
       balance: parseFloat(balanceRef.current.value),
+      user: `user`,
     };
     const user = users.find((u) => u.email === emailRef.current.value);
 

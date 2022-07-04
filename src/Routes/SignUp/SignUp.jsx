@@ -1,23 +1,46 @@
 import React from 'react';
+// eslint-disable-next-line
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Alert from '../../Components/Alert/Alert';
 
-const SignUp = ({}) => {
+const SignUp = ({
+  showAlert,
+  alertType,
+  alertHeader,
+  alertMessage,
+  handleSignUp,
+  firstNameSignUpRef,
+  lastNameSignUpRef,
+  birthdateSignUpRef,
+  genderSignUpRef,
+  emailSignUpRef,
+  passwordSignUpRef,
+  handleCloseAlert,
+}) => {
   return (
     <div className="modal center">
       <div className="modal-content center">
         <div className="modal-header">
+          <Alert
+            showAlert={showAlert}
+            alertType={alertType}
+            alertHeader={alertHeader}
+            alertText={alertMessage}
+            onClick={handleCloseAlert}
+          />
           <div>
             <span>Sign Up</span>
           </div>
         </div>
         <div className="modal-body">
-          <form>
+          <form onSubmit={handleSignUp}>
             <div className="create-user-flex">
               <div>
                 <input
                   className="user-input-text"
                   placeholder="First Name"
                   type="text"
+                  ref={firstNameSignUpRef}
                   required
                 />
               </div>
@@ -26,6 +49,7 @@ const SignUp = ({}) => {
                   className="user-input-text"
                   placeholder="Last Name"
                   type="text"
+                  ref={lastNameSignUpRef}
                   required
                 />
               </div>
@@ -36,11 +60,17 @@ const SignUp = ({}) => {
                   className="user-input-text"
                   placeholder="Birthdate"
                   type="date"
+                  ref={birthdateSignUpRef}
                   required
                 />
               </div>
               <div>
-                <select className="user-input-text" defaultValue={''} required>
+                <select
+                  className="user-input-text"
+                  defaultValue={''}
+                  ref={genderSignUpRef}
+                  required
+                >
                   <option value="" disabled hidden>
                     Select an option
                   </option>
@@ -55,6 +85,7 @@ const SignUp = ({}) => {
                   className="user-input-text"
                   placeholder="Email"
                   type="email"
+                  ref={emailSignUpRef}
                   required
                 />
               </div>
@@ -63,6 +94,7 @@ const SignUp = ({}) => {
                   className="user-input-text"
                   placeholder="Password"
                   type="password"
+                  ref={passwordSignUpRef}
                   required
                 />
               </div>

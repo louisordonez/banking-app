@@ -24,6 +24,13 @@ const App = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
+  const firstNameSignUpRef = useRef(null);
+  const lastNameSignUpRef = useRef(null);
+  const birthdateSignUpRef = useRef(null);
+  const genderSignUpRef = useRef(null);
+  const emailSignUpRef = useRef(null);
+  const passwordSignUpRef = useRef(null);
+
   useEffect(() => {
     const userList = JSON.parse(localStorage.getItem('userList'));
     const isLoggedInLocalStorage = localStorage.getItem('isLoggedIn');
@@ -102,11 +109,42 @@ const App = () => {
     }
   };
 
+  const handleSignUp = (e) => {
+    e.preventDefault();
+
+    const newAccountNumber = new Date().getTime();
+    const userData = {
+      accountNumber: newAccountNumber,
+      firstName: `${firstNameSignUpRef.current.value}`,
+      lastName: `${lastNameSignUpRef.current.value}`,
+      birthdate: `${birthdateSignUpRef.current.value}`,
+      gender: `${genderSignUpRef.current.value}`,
+      email: `${emailSignUpRef.current.value}`,
+      password: `${passwordSignUpRef.current.value}`,
+      balance: parseFloat(0.0),
+      role: `user`,
+    };
+    const user = users.find((u) => u.email === emailSignUpRef.current.value);
+
+    if (user !== undefined && user.email === emailSignUpRef.current.value) {
+      handleAlert(`danger`, `Failed!`, `Email has already been taken`);
+    } else {
+      setUsers((state) => [userData, ...state]);
+      localStorage.setItem('userList', JSON.stringify([userData, ...users]));
+      handleAlert(
+        `success`,
+        `Success!`,
+        `You may now login with your email and password`
+      );
+    }
+  };
+
   const handleLogOut = () => {
     handleIsLoggedIn(false);
     setIsLoggedIn(false);
     setRole('');
     localStorage.setItem('role', '');
+    window.location.reload();
   };
 
   if (isLoggedIn === true && role === 'admin') {
@@ -115,7 +153,7 @@ const App = () => {
         <Navbar handleLogOut={handleLogOut} />
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="users" element={<Users />} />
+          <Route path="users" element={<Users userList={users} />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="settings" element={<Settings />} />
         </Routes>
@@ -159,7 +197,20 @@ const App = () => {
             path="/signup"
             element={
               <div className="center">
-                <SignUp />
+                <SignUp
+                  showAlert={showAlert}
+                  alertType={alertType}
+                  alertHeader={alertHeader}
+                  alertMessage={alertMessage}
+                  handleSignUp={handleSignUp}
+                  firstNameSignUpRef={firstNameSignUpRef}
+                  lastNameSignUpRef={lastNameSignUpRef}
+                  birthdateSignUpRef={birthdateSignUpRef}
+                  genderSignUpRef={genderSignUpRef}
+                  emailSignUpRef={emailSignUpRef}
+                  passwordSignUpRef={passwordSignUpRef}
+                  handleCloseAlert={handleCloseAlert}
+                />
               </div>
             }
           />
