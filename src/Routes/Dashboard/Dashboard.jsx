@@ -7,7 +7,7 @@ const Dashboard = () => {
     <>
       <h2 className="page-header">Dashboard</h2>
       <div className="align-items-center page-header">
-        <Link to="/users" className="dashboard-box green-box">
+        <Link to="/users" className="dashboard-box primary-box">
           <div className="box-header">
             <div className="align-items-center">
               <BoxIcons.BiUser size={32} />
@@ -20,7 +20,7 @@ const Dashboard = () => {
             </div>
           </div>
         </Link>
-        <Link to="/transactions" className="dashboard-box light-green-box">
+        <Link to="/transactions" className="dashboard-box secondary-box">
           <div className="box-header">
             <div className="align-items-center">
               <BoxIcons.BiMoney size={32} />
