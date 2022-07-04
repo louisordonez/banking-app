@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
-import CreateUserButton from '../../../Components/Button/CreateUserButton';
-import UsersTable from '../../../Components/Table/UsersTable';
-import CreateUserForm from '../../../Components/Form/CreateUserForm';
-import EditUserForm from '../../../Components/Form/EditUserForm';
-import WithdrawForm from '../../../Components/Form/WithdrawForm';
-import DepositForm from '../../../Components/Form/DepositForm';
-import TransferForm from '../../../Components/Form/TransferForm';
-import Alert from '../../../Components/Alert/Alert';
+import CreateUserButton from '../../Components/Button/CreateUserButton';
+import UsersTable from '../../Components/Table/UsersTable';
+import CreateUserForm from '../../Components/Form/CreateUserForm';
+import EditUserForm from '../../Components/Form/EditUserForm';
+import WithdrawForm from '../../Components/Form/WithdrawForm';
+import DepositForm from '../../Components/Form/DepositForm';
+import TransferForm from '../../Components/Form/TransferForm';
+import Alert from '../../Components/Alert/Alert';
 
 const Users = () => {
   const [users, setUsers] = useState(

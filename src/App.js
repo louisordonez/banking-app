@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LogIn from './Routes/LogIn/LogIn';
 import SignUp from './Routes/SignUp/SignUp';
 import Navbar from './Components/Navbar/Navbar';
-import Dashboard from './Routes/Admin/Dashboard/Dashboard';
-import Users from './Routes/Admin/Users/Users';
-import Transactions from './Routes/Admin/Transactions/Transactions';
-import Settings from './Routes/Admin/Settings/Settings';
+import Dashboard from './Routes/Dashboard/Dashboard';
+import Users from './Routes/Users/Users';
+import Transactions from './Routes/Transactions/Transactions';
+import Settings from './Routes/Settings/Settings';
 import { USER_LIST } from './Assets/JS/UserList';
 
 const App = () => {
@@ -75,13 +75,18 @@ const App = () => {
 
     const user = users.find((u) => u.email === emailRef.current.value);
 
-    if (user === undefined) {
-      handleAlert(`danger`, `Failed!`, `Check your email and password`);
-    } else {
-      setRole('admin');
-      localStorage.setItem('role', 'admin');
-      handleIsLoggedIn(true);
-      setIsLoggedIn(true);
+    if (user !== undefined) {
+      if (
+        user.email === emailRef.current.value &&
+        user.password === passwordRef.current.value
+      ) {
+        setRole('admin');
+        localStorage.setItem('role', 'admin');
+        handleIsLoggedIn(true);
+        setIsLoggedIn(true);
+      } else {
+        handleAlert(`danger`, `Failed!`, `Check your email and password`);
+      }
     }
   };
 
@@ -93,6 +98,20 @@ const App = () => {
   };
 
   if (isLoggedIn === true && role === 'admin') {
+    return (
+      <>
+        <Router>
+          <Navbar handleLogOut={handleLogOut} />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="transactions" element={<Transactions />} />
+            <Route path="settings" element={<Settings />} />
+          </Routes>
+        </Router>
+      </>
+    );
+  } else if (isLoggedIn === true && role === 'user') {
     return (
       <>
         <Router>
