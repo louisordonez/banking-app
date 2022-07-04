@@ -298,16 +298,27 @@ const Users = () => {
       (u) => u.accountNumber === parseInt(accountNumberEditRef.current.value)
     );
 
-    users[userIndex].firstName = `${firstNameEditRef.current.value}`;
-    users[userIndex].lastName = `${lastNameEditRef.current.value}`;
-    users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
-    users[userIndex].gender = `${genderEditRef.current.value}`;
-    users[userIndex].email = `${emailEditRef.current.value}`;
-    users[userIndex].password = `${passwordEditRef.current.value}`;
-    users[userIndex].balance = parseFloat(balanceEditRef.current.value);
+    const user = users.find((u) => u.email === emailEditRef.current.value);
 
-    updateUserListLocalStorage(users);
-    handleAlert(`success`, `Success!`, `User has been successfully edited`);
+    if (
+      user.accountNumber === parseInt(accountNumberEditRef.current.value) &&
+      user.email === emailEditRef.current.value
+    ) {
+      users[userIndex].firstName = `${firstNameEditRef.current.value}`;
+      users[userIndex].lastName = `${lastNameEditRef.current.value}`;
+      users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
+      users[userIndex].gender = `${genderEditRef.current.value}`;
+      users[userIndex].email = `${emailEditRef.current.value}`;
+      users[userIndex].password = `${passwordEditRef.current.value}`;
+      users[userIndex].balance = parseFloat(balanceEditRef.current.value);
+      updateUserListLocalStorage(users);
+      handleAlert(`success`, `Success!`, `User has been successfully edited`);
+    } else if (
+      user.accountNumber !== parseInt(accountNumberEditRef.current.value) &&
+      user.email === emailEditRef.current.value
+    ) {
+      handleAlert(`danger`, `Failed!`, `Email has already been taken`);
+    }
     handleCloseEdit();
     resetEditCreateUserForm();
   };
