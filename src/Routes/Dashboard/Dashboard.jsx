@@ -15,7 +15,6 @@ const Dashboard = () => {
                 Total Users
               </span>
             </div>
-
             <div className="box-text">
               <span>100</span>
             </div>
