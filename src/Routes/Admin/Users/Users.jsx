@@ -1,4 +1,3 @@
-// import React, { useEffect, useRef, useState } from 'react';
 import React, { useRef, useState } from 'react';
 import CreateUserButton from '../../../Components/Button/CreateUserButton';
 import UsersTable from '../../../Components/Table/UsersTable';
@@ -8,7 +7,6 @@ import WithdrawForm from '../../../Components/Form/WithdrawForm';
 import DepositForm from '../../../Components/Form/DepositForm';
 import TransferForm from '../../../Components/Form/TransferForm';
 import Alert from '../../../Components/Alert/Alert';
-// import { USER_LIST } from '../../../Assets/JS/UserList';
 
 const Users = () => {
   const [users, setUsers] = useState(
@@ -53,27 +51,6 @@ const Users = () => {
   const emailEditRef = useRef(null);
   const passwordEditRef = useRef(null);
   const balanceEditRef = useRef(null);
-
-  // useEffect(() => {
-  //   const userList = JSON.parse(localStorage.getItem('userList'));
-
-  //   if (userList) {
-  //     setUsers(userList);
-  //   }
-  // }, []);
-
-  // const loadUserListLocalStorage = () => {
-  //   localStorage.setItem('userList', JSON.stringify(USER_LIST));
-
-  //   const userList = JSON.parse(localStorage.getItem('userList'));
-
-  //   setUsers(userList);
-  // };
-
-  // const removeUserListLocalStorage = () => {
-  //   localStorage.removeItem('userList');
-  //   setUsers([]);
-  // };
 
   const updateUserListLocalStorage = (item) => {
     localStorage.setItem('userList', JSON.stringify(item));
