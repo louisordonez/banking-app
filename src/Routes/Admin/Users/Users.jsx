@@ -355,7 +355,7 @@ const Users = () => {
         />
         {/* <button onClick={loadUserListLocalStorage}>Load Users</button> */}
         {/* <button onClick={removeUserListLocalStorage}>Delete Users</button> */}
-        <div className="flex-center">
+        <div className="flex-center table-whole">
           <UsersTable
             handleSearch={handleSearch}
             users={users}
