@@ -4,7 +4,7 @@ import * as BoxIcons from 'react-icons/bi';
 
 const Dashboard = () => {
   const [totalUsers, setTotalUsers] = useState(null);
-  const [totalBalance, setTotalBalance] = useState(null);
+  const [totalBalance, setTotalBalance] = useState('');
 
   useEffect(() => {
     const userList = JSON.parse(localStorage.getItem('userList'));
@@ -17,7 +17,12 @@ const Dashboard = () => {
       total += element.balance;
     });
 
-    setTotalBalance(total);
+    setTotalBalance(
+      total.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'PHP',
+      })
+    );
   }, []);
 
   return (
@@ -47,12 +52,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="box-text">
-            <span>
-              {totalBalance.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'PHP',
-              })}
-            </span>
+            <span>{totalBalance}</span>
           </div>
         </Link>
       </div>
