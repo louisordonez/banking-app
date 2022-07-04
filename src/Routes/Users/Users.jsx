@@ -15,6 +15,7 @@ const Users = ({ userList }) => {
   const [lastName, setLastName] = useState(null);
   const [fullName, setFullName] = useState(null);
   const [balance, setBalance] = useState(null);
+  const [email, setEmail] = useState(null);
   const [withdrawAmount, setWithdrawAmount] = useState(null);
   const [depositAmount, setDepositAmount] = useState(null);
   const [transferAmount, setTransferAmount] = useState(null);
@@ -270,6 +271,7 @@ const Users = ({ userList }) => {
   const handleShowEdit = (accountNumber) => {
     const user = users.find((u) => u.accountNumber === accountNumber);
 
+    setEmail(user.email);
     setShowEdit('block');
 
     accountNumberEditRef.current.value = accountNumber;
@@ -301,27 +303,27 @@ const Users = ({ userList }) => {
     const userIndex = users.findIndex(
       (u) => u.accountNumber === parseInt(accountNumberEditRef.current.value)
     );
+
     const user = users.find((u) => u.email === emailEditRef.current.value);
 
-    if (
-      user.accountNumber === parseInt(accountNumberEditRef.current.value) &&
-      user.email === emailEditRef.current.value
-    ) {
-      users[userIndex].firstName = `${firstNameEditRef.current.value}`;
-      users[userIndex].lastName = `${lastNameEditRef.current.value}`;
-      users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
-      users[userIndex].gender = `${genderEditRef.current.value}`;
-      users[userIndex].email = `${emailEditRef.current.value}`;
-      users[userIndex].password = `${passwordEditRef.current.value}`;
-      users[userIndex].balance = parseFloat(balanceEditRef.current.value);
+    if (user !== undefined) {
+      if (
+        user.accountNumber !== parseInt(accountNumberEditRef.current.value) &&
+        user.email === emailEditRef.current.value
+      ) {
+        handleAlert(`danger`, `Failed!`, `Email has already been taken`);
+      } else {
+        users[userIndex].firstName = `${firstNameEditRef.current.value}`;
+        users[userIndex].lastName = `${lastNameEditRef.current.value}`;
+        users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
+        users[userIndex].gender = `${genderEditRef.current.value}`;
+        users[userIndex].email = `${emailEditRef.current.value}`;
+        users[userIndex].password = `${passwordEditRef.current.value}`;
+        users[userIndex].balance = parseFloat(balanceEditRef.current.value);
 
-      updateUserListLocalStorage(users);
-      handleAlert(`success`, `Success!`, `User has been successfully edited`);
-    } else if (
-      user.accountNumber !== parseInt(accountNumberEditRef.current.value) &&
-      user.email === emailEditRef.current.value
-    ) {
-      handleAlert(`danger`, `Failed!`, `Email has already been taken`);
+        updateUserListLocalStorage(users);
+        handleAlert(`success`, `Success!`, `User has been successfully edited`);
+      }
     }
 
     handleCloseEdit();
@@ -329,11 +331,15 @@ const Users = ({ userList }) => {
   };
 
   const handleDelete = (accountNumber) => {
-    const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
+    if (accountNumber === 1656904372) {
+      handleAlert(`danger`, `Failed!`, `Admin user cannot be deleted`);
+    } else {
+      const newUsers = users.filter((u) => u.accountNumber !== accountNumber);
 
-    setUsers(newUsers);
-    updateUserListLocalStorage(newUsers);
-    handleAlert(`success`, `Success!`, `User has been successfully deleted`);
+      setUsers(newUsers);
+      updateUserListLocalStorage(newUsers);
+      handleAlert(`success`, `Success!`, `User has been successfully deleted`);
+    }
   };
 
   return (
