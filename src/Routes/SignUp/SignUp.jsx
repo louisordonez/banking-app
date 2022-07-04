@@ -1,14 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import SignUpForm from '../../Components/Form/SignUpForm';
 
 const SignUp = () => {
   return (
     <div className="center">
-      <h1>Sign Up</h1>
-
-      <Link to="/">
-        <span>Log In</span>
-      </Link>
+      <SignUpForm />
     </div>
   );
 };
