@@ -1,6 +1,17 @@
 export const USER_LIST = [
   {
-    accountNumber: 1656480543042,
+    accountNumber: 1656904372,
+    firstName: 'Admin',
+    lastName: 'Admin',
+    birthdate: '1990-01-01',
+    gender: 'Male',
+    email: 'admin@email.com',
+    password: 'admin',
+    balance: 20000000.0,
+    role: 'admin',
+  },
+  {
+    accountNumber: 1756480543042,
     firstName: 'John',
     lastName: 'Doe',
     birthdate: '1997-06-22',
@@ -8,6 +19,7 @@ export const USER_LIST = [
     email: 'jd@email.com',
     password: 'jd',
     balance: 15000000.0,
+    role: 'user',
   },
   {
     accountNumber: 2656480543188,
@@ -18,6 +30,7 @@ export const USER_LIST = [
     email: 'mdc@email.com',
     password: 'mdc',
     balance: 20000000.0,
+    role: 'user',
   },
   {
     accountNumber: 3656842687,
@@ -28,5 +41,6 @@ export const USER_LIST = [
     email: 'jdc@email.com',
     password: 'mdc',
     balance: 0.0,
+    role: 'user',
   },
 ];
