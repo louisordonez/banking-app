@@ -100,6 +100,30 @@ const Home = ({ email, users }) => {
                   <td>Tuition Fee</td>
                   <td>80,000.00</td>
                 </tr>
+                <tr>
+                  <td>Tuition Fee</td>
+                  <td>80,000.00</td>
+                </tr>
+                <tr>
+                  <td>Tuition Fee</td>
+                  <td>80,000.00</td>
+                </tr>
+                <tr>
+                  <td>Tuition Fee</td>
+                  <td>80,000.00</td>
+                </tr>
+                <tr>
+                  <td>Tuition Fee</td>
+                  <td>80,000.00</td>
+                </tr>
+                <tr>
+                  <td>Tuition Fee</td>
+                  <td>80,000.00</td>
+                </tr>
+                <tr>
+                  <td>Tuition Fee</td>
+                  <td>80,000.00</td>
+                </tr>
               </tbody>
             </table>
           </div>
