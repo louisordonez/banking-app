@@ -29,7 +29,11 @@ const Dashboard = () => {
     <main>
       <h2 className="page-header">Dashboard</h2>
       <div className="align-items-center page-header">
-        <Link to="/users" className="dashboard-box primary-box">
+        <Link
+          to="/users"
+          className="dashboard-box primary-box"
+          style={{ width: '30%' }}
+        >
           <div className="box-header">
             <div className="align-items-center">
               <BoxIcons.BiUser size={32} />
