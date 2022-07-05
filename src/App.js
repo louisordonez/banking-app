@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LogIn from './Routes/LogIn/LogIn';
-import SignUp from './Routes/SignUp/SignUp';
+import LogIn from './Pages/LogIn/LogIn';
+import SignUp from './Pages/SignUp/SignUp';
 import Navbar from './Components/Navbar/Navbar';
-import Dashboard from './Routes/Dashboard/Dashboard';
-import Users from './Routes/Users/Users';
-import Transactions from './Routes/Transactions/Transactions';
-import Settings from './Routes/Settings/Settings';
-import Home from './Routes/Home/Home';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Users from './Pages/Users/Users';
+import Transactions from './Pages/Transactions/Transactions';
+import Settings from './Pages/Settings/Settings';
+import Home from './Pages/Home/Home';
 import { USER_LIST } from './UserList';
 
 const App = () => {
