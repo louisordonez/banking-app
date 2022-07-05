@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import * as BoxIcons from 'react-icons/bi';
 import UserWithdrawForm from '../../Components/Form/UserWithdrawForm';
 import UserDepositForm from '../../Components/Form/UserDepositForm';
+import UserTransferForm from '../../Components/Form/UserTransferForm';
 import ActionsEditButton from '../../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../../Components/Button/ActionsDeleteButton';
 
@@ -11,6 +12,10 @@ const Home = ({ email, users }) => {
   const [withdrawAmount, setWithdrawAmount] = useState(null);
   const [showDeposit, setShowDeposit] = useState('none');
   const [depositAmount, setDepositAmount] = useState(null);
+  const [showTransfer, setShowTransfer] = useState('none');
+  const [accountNumber, setAccountNumber] = useState(null);
+  const [transferAmount, setTransferAmount] = useState(null);
+  const [transferAccountNumber, setTransferAccountNumber] = useState(null);
   const [displayBalance, setDisplayBalance] = useState('');
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
@@ -88,6 +93,70 @@ const Home = ({ email, users }) => {
     handleResetDepositForm();
   };
 
+  const handleShowTransfer = (accountNumber) => {
+    setShowTransfer('block');
+    setAccountNumber(accountNumber);
+  };
+
+  const handleCloseTransfer = () => {
+    setShowTransfer('none');
+  };
+
+  const handleTransferAmount = (e) => {
+    setTransferAmount(parseFloat(e.target.value));
+  };
+
+  const resetTransferForm = () => {
+    setTransferAccountNumber(null);
+    setTransferAmount(null);
+  };
+
+  const handleTransferAccountNumber = (e) => {
+    setTransferAccountNumber(parseInt(e.target.value.replace('.', '')));
+  };
+
+  const setUserIndex = (accountNumber) => {
+    return userList.findIndex((u) => u.accountNumber === accountNumber);
+  };
+
+  const handleTransfer = (e) => {
+    e.preventDefault();
+
+    const transferUserIndex = setUserIndex(transferAccountNumber);
+
+    if (transferUserIndex === -1) {
+      alert(`danger`, `Failed!`, `User account number does not exist`);
+    } else {
+      const userIndex = userList.findIndex((obj) => obj.email === email);
+      const user = userList[userIndex];
+      const userPrevBalance = user.balance;
+      const totalBalance = userPrevBalance - transferAmount;
+      const transferUser = userList[transferUserIndex];
+      const transferUserPrevBalance = transferUser.balance;
+      const transferUserTotalBalance = transferUserPrevBalance + transferAmount;
+
+      if (transferAmount > userPrevBalance) {
+        alert(`danger`, `Failed!`, `User has insufficient balance`);
+      } else {
+        user.balance = totalBalance;
+        transferUser.balance = transferUserTotalBalance;
+
+        setDisplayBalance(
+          totalBalance.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'PHP',
+          })
+        );
+
+        localStorage.setItem('userList', JSON.stringify(userList));
+        alert(`success`, `Success!`, `Money has been successfully transferred`);
+      }
+    }
+
+    handleCloseTransfer();
+    resetTransferForm();
+  };
+
   const handleWithdrawAmount = (e) => {
     setWithdrawAmount(parseFloat(e.target.value));
   };
@@ -156,7 +225,11 @@ const Home = ({ email, users }) => {
             </div>
           </div>
         </div>
-        <div className="action-card" title="Transfer">
+        <div
+          className="action-card"
+          title="Transfer"
+          onClick={handleShowTransfer}
+        >
           <div className="action-icon-container">
             <div className="action-icon">
               <div>
@@ -319,6 +392,15 @@ const Home = ({ email, users }) => {
         handleDepositAmount={handleDepositAmount}
         handleDeposit={handleDeposit}
         depositAmountRef={depositAmountRef}
+      />
+      <UserTransferForm
+        showTransfer={showTransfer}
+        handleCloseTransfer={handleCloseTransfer}
+        handleTransferAmount={handleTransferAmount}
+        handleTransfer={handleTransfer}
+        handleTransferAccountNumber={handleTransferAccountNumber}
+        transferAmount={transferAmount}
+        transferAccountNumber={transferAccountNumber}
       />
     </main>
   );
