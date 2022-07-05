@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import * as BoxIcons from 'react-icons/bi';
+import UserWithdrawForm from '../../Components/Form/userWithdrawForm';
 
 const Home = ({ email, users }) => {
   // eslint-disable-next-line
   const [userList, setUserList] = useState(users);
+  const [showWithdraw, setShowWithdraw] = useState('none');
+  const [withdrawAmount, setWithdrawAmount] = useState(null);
   // eslint-disable-next-line
-  const [balance, setBalance] = useState(null);
   const [displayBalance, setDisplayBalance] = useState('');
+
+  const withdrawAmountRef = null;
 
   useEffect(() => {
     const currentUser = userList.find((obj) => obj.email === email);
-    setBalance(currentUser.balance);
 
     setDisplayBalance(
       currentUser.balance.toLocaleString('en-US', {
@@ -19,6 +22,42 @@ const Home = ({ email, users }) => {
       })
     );
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleShowWithdraw = () => {
+    setShowWithdraw('block');
+  };
+
+  const handleCloseWithdraw = () => {
+    setShowWithdraw('none');
+  };
+
+  const handleWithdraw = (e) => {
+    e.preventDefault();
+
+    const userIndex = userList.findIndex((obj) => obj.email === email);
+    const prevBalance = userList[userIndex].balance;
+    const totalBalance = prevBalance - withdrawAmount;
+
+    if (withdrawAmount > prevBalance) {
+      alert('Insufficient balance.');
+    } else {
+      userList[userIndex].balance = totalBalance;
+    }
+
+    setDisplayBalance(
+      totalBalance.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'PHP',
+      })
+    );
+
+    localStorage.setItem('userList', JSON.stringify(userList));
+    handleCloseWithdraw();
+  };
+
+  const handleWithdrawAmount = (e) => {
+    setWithdrawAmount(parseFloat(e.target.value));
+  };
 
   return (
     <main>
@@ -40,7 +79,11 @@ const Home = ({ email, users }) => {
             </div>
           </div>
         </div>
-        <div className="action-card" title="Withdraw">
+        <div
+          className="action-card"
+          title="Withdraw"
+          onClick={handleShowWithdraw}
+        >
           <div className="action-icon-container">
             <div className="action-icon">
               <div>
@@ -129,6 +172,12 @@ const Home = ({ email, users }) => {
           </div>
         </div>
       </div>
+      <UserWithdrawForm
+        showWithdraw={showWithdraw}
+        handleCloseWithdraw={handleCloseWithdraw}
+        handleWithdrawAmount={handleWithdrawAmount}
+        handleWithdraw={handleWithdraw}
+      />
     </main>
   );
 };
