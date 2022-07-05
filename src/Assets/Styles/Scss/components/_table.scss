@@ -39,11 +39,10 @@
     align-items: center;
   }
 
-  span {
+  h2 {
+    font-size: 2.625rem;
     width: 13rem;
     height: 2.2rem;
-    font-size: 1.8rem;
-    color: #4a4e5a;
   }
 }
 
@@ -95,14 +94,31 @@ td {
   text-align: center;
 }
 
+.budget-table {
+  button {
+    text-align: center;
+    margin: 0.5rem;
+    border: 0.1rem solid #f2f2f2;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    background-color: var(--white);
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f9fafe;
+    }
+  }
+}
+
 .budget-table-header {
   th {
     &:nth-child(1) {
-      width: 60%;
+      width: 50%;
     }
 
     &:nth-child(2) {
-      width: 40%;
+      width: 20%;
     }
   }
 }

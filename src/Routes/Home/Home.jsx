@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import * as BoxIcons from 'react-icons/bi';
 import UserWithdrawForm from '../../Components/Form/UserWithdrawForm';
 import UserDepositForm from '../../Components/Form/UserDepositForm';
+import ActionsEditButton from '../../Components/Button/ActionsEditButton';
+import ActionsDeleteButton from '../../Components/Button/ActionsDeleteButton';
 
 const Home = ({ email, users }) => {
   // eslint-disable-next-line
@@ -180,41 +182,126 @@ const Home = ({ email, users }) => {
             <h2>Expenses</h2>
           </div>
           <div>
-            <table className="budget-margin">
+            <table className="budget-table budget-margin">
               <thead className="budget-table-header">
                 <tr>
                   <th>Item</th>
                   <th>Amount</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Tuition Fee</td>
                   <td>80,000.00</td>
+                  <td>
+                    <ActionsEditButton
+                    // onClick={() => {
+                    //   handleShowEdit(accountNumber);
+                    // }}
+                    />
+                    <ActionsDeleteButton
+                    // onClick={() => {
+                    //   handleDelete(accountNumber);
+                    // }}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td>Tuition Fee</td>
                   <td>80,000.00</td>
+                  <td>
+                    <ActionsEditButton
+                    // onClick={() => {
+                    //   handleShowEdit(accountNumber);
+                    // }}
+                    />
+                    <ActionsDeleteButton
+                    // onClick={() => {
+                    //   handleDelete(accountNumber);
+                    // }}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td>Tuition Fee</td>
                   <td>80,000.00</td>
+                  <td>
+                    <ActionsEditButton
+                    // onClick={() => {
+                    //   handleShowEdit(accountNumber);
+                    // }}
+                    />
+                    <ActionsDeleteButton
+                    // onClick={() => {
+                    //   handleDelete(accountNumber);
+                    // }}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td>Tuition Fee</td>
                   <td>80,000.00</td>
+                  <td>
+                    <ActionsEditButton
+                    // onClick={() => {
+                    //   handleShowEdit(accountNumber);
+                    // }}
+                    />
+                    <ActionsDeleteButton
+                    // onClick={() => {
+                    //   handleDelete(accountNumber);
+                    // }}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td>Tuition Fee</td>
                   <td>80,000.00</td>
+                  <td>
+                    <ActionsEditButton
+                    // onClick={() => {
+                    //   handleShowEdit(accountNumber);
+                    // }}
+                    />
+                    <ActionsDeleteButton
+                    // onClick={() => {
+                    //   handleDelete(accountNumber);
+                    // }}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td>Tuition Fee</td>
                   <td>80,000.00</td>
+                  <td>
+                    <ActionsEditButton
+                    // onClick={() => {
+                    //   handleShowEdit(accountNumber);
+                    // }}
+                    />
+                    <ActionsDeleteButton
+                    // onClick={() => {
+                    //   handleDelete(accountNumber);
+                    // }}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td>Tuition Fee</td>
                   <td>80,000.00</td>
+                  <td>
+                    <ActionsEditButton
+                    // onClick={() => {
+                    //   handleShowEdit(accountNumber);
+                    // }}
+                    />
+                    <ActionsDeleteButton
+                    // onClick={() => {
+                    //   handleDelete(accountNumber);
+                    // }}
+                    />
+                  </td>
                 </tr>
               </tbody>
             </table>

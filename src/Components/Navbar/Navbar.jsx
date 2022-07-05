@@ -41,11 +41,7 @@ const Navbar = ({ handleLogOut }) => {
               {(role === 'admin' ? AdminSidebarData : UserSidebarData).map(
                 (item, index) => {
                   return (
-                    <Link
-                      to={item.path}
-                      key={index}
-                      className="nav-link active"
-                    >
+                    <Link to={item.path} key={index} className="nav-link">
                       <i className="nav-icon">{item.icon}</i>
                       <span className={item.cName}>{item.title}</span>
                     </Link>
@@ -54,7 +50,7 @@ const Navbar = ({ handleLogOut }) => {
               )}
             </ul>
           </div>
-          <Link to="/" className="nav-link active" onClick={handleLogOut}>
+          <Link to="/" className="nav-link" onClick={handleLogOut}>
             <i className="nav-icon">
               <BoxIcons.BiLogOut />
             </i>

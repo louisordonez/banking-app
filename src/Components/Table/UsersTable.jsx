@@ -19,7 +19,7 @@ const UsersTable = ({
     <div className="table">
       <div className="table-header">
         <div>
-          <span>{`Users`}</span>
+          <h2>{`Users`}</h2>
           <div>
             <SearchInput
               placeholder={`Enter account number`}

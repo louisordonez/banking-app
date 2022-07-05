@@ -111,9 +111,9 @@ const App = () => {
 
         handleIsLoggedIn(true);
         setIsLoggedIn(true);
-      } else {
-        handleAlert(`danger`, `Failed!`, `Check your email and password`);
       }
+    } else {
+      handleAlert(`danger`, `Failed!`, `Check your email and password`);
     }
   };
 
@@ -187,40 +187,36 @@ const App = () => {
           <Route
             path="/"
             element={
-              <div className="center">
-                <LogIn
-                  handleLogin={handleLogin}
-                  emailRef={emailRef}
-                  passwordRef={passwordRef}
-                  handleAlert={handleAlert}
-                  showAlert={showAlert}
-                  alertType={alertType}
-                  alertHeader={alertHeader}
-                  alertMessage={alertMessage}
-                  handleCloseAlert={handleCloseAlert}
-                />
-              </div>
+              <LogIn
+                handleLogin={handleLogin}
+                emailRef={emailRef}
+                passwordRef={passwordRef}
+                handleAlert={handleAlert}
+                showAlert={showAlert}
+                alertType={alertType}
+                alertHeader={alertHeader}
+                alertMessage={alertMessage}
+                handleCloseAlert={handleCloseAlert}
+              />
             }
           />
           <Route
             path="/signup"
             element={
-              <div className="center">
-                <SignUp
-                  showAlert={showAlert}
-                  alertType={alertType}
-                  alertHeader={alertHeader}
-                  alertMessage={alertMessage}
-                  handleSignUp={handleSignUp}
-                  firstNameSignUpRef={firstNameSignUpRef}
-                  lastNameSignUpRef={lastNameSignUpRef}
-                  birthdateSignUpRef={birthdateSignUpRef}
-                  genderSignUpRef={genderSignUpRef}
-                  emailSignUpRef={emailSignUpRef}
-                  passwordSignUpRef={passwordSignUpRef}
-                  handleCloseAlert={handleCloseAlert}
-                />
-              </div>
+              <SignUp
+                showAlert={showAlert}
+                alertType={alertType}
+                alertHeader={alertHeader}
+                alertMessage={alertMessage}
+                handleSignUp={handleSignUp}
+                firstNameSignUpRef={firstNameSignUpRef}
+                lastNameSignUpRef={lastNameSignUpRef}
+                birthdateSignUpRef={birthdateSignUpRef}
+                genderSignUpRef={genderSignUpRef}
+                emailSignUpRef={emailSignUpRef}
+                passwordSignUpRef={passwordSignUpRef}
+                handleCloseAlert={handleCloseAlert}
+              />
             }
           />
         </Routes>
