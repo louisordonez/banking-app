@@ -1,7 +1,14 @@
+.settings-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+  margin-right: -2.1rem;
+}
+
 .settings {
   width: 66rem;
   background: var(--white);
-  border: 0.1rem solid #f4f4f4;
   border-radius: 1.4rem;
   border: 0.1rem solid #e4e4e4;
 }

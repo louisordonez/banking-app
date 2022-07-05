@@ -1,12 +1,72 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Alert from '../../Components/Alert/Alert';
 import SettingsForm from '../../Components/Form/SettingsForm';
 
-const Settings = () => {
+const Settings = ({ userList }) => {
+  const [users, setUsers] = useState(userList);
+  const [email, setEmail] = useState(localStorage.getItem('email'));
   const [showAlert, setShowAlert] = useState('none');
   const [alertType, setAlertType] = useState('');
   const [alertHeader, setAlertHeader] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
+
+  const accountNumberSettingsRef = useRef(null);
+  const firstNameSettingsRef = useRef(null);
+  const lastNameSettingsRef = useRef(null);
+  const birthdateSettingsRef = useRef(null);
+  const genderSettingsRef = useRef(null);
+  const emailSettingsRef = useRef(null);
+  const passwordSettingsRef = useRef(null);
+
+  useEffect(() => {
+    setUsers(JSON.parse(localStorage.getItem('userList')));
+    displayUserInfo();
+  }, []);
+
+  const displayUserInfo = () => {
+    const user = users.find((u) => u.email === email);
+
+    if (user !== undefined) {
+      accountNumberSettingsRef.current.value = user.accountNumber;
+      firstNameSettingsRef.current.value = user.firstName;
+      lastNameSettingsRef.current.value = user.lastName;
+      birthdateSettingsRef.current.value = user.birthdate;
+      genderSettingsRef.current.value = user.gender;
+      emailSettingsRef.current.value = user.email;
+      passwordSettingsRef.current.value = user.password;
+    }
+  };
+
+  const handleSettingsEdit = (e) => {
+    e.preventDefault();
+
+    const userIndex = users.findIndex((u) => u.email === email);
+    const user = users.find((u) => u.email === email);
+
+    console.log(userIndex);
+
+    if (user !== undefined) {
+      if (
+        user.accountNumber !==
+          parseInt(accountNumberSettingsRef.current.value) &&
+        user.email === emailSettingsRef.current.value
+      ) {
+        handleAlert(`danger`, `Failed!`, `Email has already been taken`);
+      } else {
+        // users[userIndex].firstName = `${firstNameEditRef.current.value}`;
+        // users[userIndex].lastName = `${lastNameEditRef.current.value}`;
+        // users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
+        // users[userIndex].gender = `${genderEditRef.current.value}`;
+        // users[userIndex].email = `${emailEditRef.current.value}`;
+        // users[userIndex].password = `${passwordEditRef.current.value}`;
+
+        // localStorage.setItem('userList', JSON.stringify(users));
+        handleAlert(`success`, `Success!`, `User has been successfully edited`);
+      }
+    }
+
+    // resetEditCreateUserForm();
+  };
 
   const handleCloseAlert = () => {
     setShowAlert('none');
@@ -38,7 +98,16 @@ const Settings = () => {
     <main>
       <h2 className="page-header">Settings</h2>
       {displayAlert()}
-      <SettingsForm />
+      <SettingsForm
+        handleSettingsEdit={handleSettingsEdit}
+        accountNumberSettingsRef={accountNumberSettingsRef}
+        firstNameSettingsRef={firstNameSettingsRef}
+        lastNameSettingsRef={lastNameSettingsRef}
+        birthdateSettingsRef={birthdateSettingsRef}
+        genderSettingsRef={genderSettingsRef}
+        emailSettingsRef={emailSettingsRef}
+        passwordSettingsRef={passwordSettingsRef}
+      />
     </main>
   );
 };

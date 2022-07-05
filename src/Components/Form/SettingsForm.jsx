@@ -1,22 +1,32 @@
 import React from 'react';
 
-const SettingsForm = () => {
+const SettingsForm = ({
+  handleSettingsEdit,
+  accountNumberSettingsRef,
+  firstNameSettingsRef,
+  lastNameSettingsRef,
+  birthdateSettingsRef,
+  genderSettingsRef,
+  emailSettingsRef,
+  passwordSettingsRef,
+}) => {
   return (
-    <div className="center">
-      <div className="settings center">
+    <div className="settings-container">
+      <div className="settings">
         <div className="modal-header">
           <div>
             <span>Settings</span>
           </div>
         </div>
         <div className="modal-body">
-          <form>
+          <form onSubmit={handleSettingsEdit}>
             <div className="create-user-flex">
               <div>
                 <input
                   className="user-input-text"
                   placeholder="Account Number"
                   type="number"
+                  ref={accountNumberSettingsRef}
                   disabled
                 />
               </div>
@@ -27,6 +37,7 @@ const SettingsForm = () => {
                   className="user-input-text"
                   placeholder="First Name"
                   type="text"
+                  ref={firstNameSettingsRef}
                   required
                 />
               </div>
@@ -35,6 +46,7 @@ const SettingsForm = () => {
                   className="user-input-text"
                   placeholder="Last Name"
                   type="text"
+                  ref={lastNameSettingsRef}
                   required
                 />
               </div>
@@ -45,11 +57,16 @@ const SettingsForm = () => {
                   className="user-input-text"
                   placeholder="Birthdate"
                   type="date"
+                  ref={birthdateSettingsRef}
                   required
                 />
               </div>
               <div>
-                <select className="user-input-text" required>
+                <select
+                  className="user-input-text"
+                  required
+                  ref={genderSettingsRef}
+                >
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
@@ -61,6 +78,7 @@ const SettingsForm = () => {
                   className="user-input-text"
                   placeholder="Email"
                   type="email"
+                  ref={emailSettingsRef}
                   required
                 />
               </div>
@@ -69,6 +87,7 @@ const SettingsForm = () => {
                   className="user-input-text"
                   placeholder="Password"
                   type="password"
+                  ref={passwordSettingsRef}
                   required
                 />
               </div>

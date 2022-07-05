@@ -163,7 +163,7 @@ const App = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="users" element={<Users userList={users} />} />
           <Route path="transactions" element={<Transactions />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<Settings userList={users} />} />
         </Routes>
       </Router>
     );
