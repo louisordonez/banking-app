@@ -127,8 +127,6 @@ const Home = ({ email, users }) => {
 
     const transferUserIndex = setUserIndex(transferAccountNumber);
 
-    console.log(transferUserIndex);
-
     if (transferUserIndex === -1) {
       alert(`User account number does not exist`);
     } else {
