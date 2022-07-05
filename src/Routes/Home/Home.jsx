@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as BoxIcons from 'react-icons/bi';
-import UserWithdrawForm from '../../Components/Form/userWithdrawForm';
-import UserDepositForm from '../../Components/Form/userDepositForm';
+import UserWithdrawForm from '../../Components/Form/UserWithdrawForm';
+import UserDepositForm from '../../Components/Form/UserDepositForm';
 
 const Home = ({ email, users }) => {
   // eslint-disable-next-line
