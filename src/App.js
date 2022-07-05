@@ -11,7 +11,6 @@ import Home from './Routes/Home/Home';
 import { USER_LIST } from './UserList';
 
 const App = () => {
-  // eslint-disable-next-line
   const [users, setUsers] = useState(
     JSON.parse(localStorage.getItem('userList'))
   );
