@@ -17,6 +17,7 @@ const App = () => {
   );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState('');
+  const [email, setEmail] = useState('');
   const [showAlert, setShowAlert] = useState('none');
   const [alertType, setAlertType] = useState('');
   const [alertHeader, setAlertHeader] = useState('');
@@ -36,6 +37,7 @@ const App = () => {
     const userList = JSON.parse(localStorage.getItem('userList'));
     const isLoggedInLocalStorage = localStorage.getItem('isLoggedIn');
     const roleLocalStorage = localStorage.getItem('role');
+    const emailLocalStorage = localStorage.getItem('email');
 
     if (isLoggedInLocalStorage === null) {
       handleIsLoggedIn(false);
@@ -43,12 +45,14 @@ const App = () => {
       isLoggedInLocalStorage === 'true' &&
       roleLocalStorage === 'admin'
     ) {
+      setEmail(emailLocalStorage);
       setIsLoggedIn(true);
       setRole('admin');
     } else if (
       isLoggedInLocalStorage === 'true' &&
       roleLocalStorage === 'user'
     ) {
+      setEmail(emailLocalStorage);
       setIsLoggedIn(true);
       setRole('user');
     }
@@ -102,6 +106,9 @@ const App = () => {
           localStorage.setItem('role', 'user');
         }
 
+        setEmail(emailRef.current.value);
+        localStorage.setItem('email', emailRef.current.value);
+
         handleIsLoggedIn(true);
         setIsLoggedIn(true);
       } else {
@@ -145,6 +152,7 @@ const App = () => {
     setIsLoggedIn(false);
     setRole('');
     localStorage.setItem('role', '');
+    localStorage.setItem('email', '');
     window.location.assign('/');
   };
 
@@ -165,7 +173,7 @@ const App = () => {
       <Router>
         <Navbar handleLogOut={handleLogOut} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home email={email} users={users} />} />
           <Route path="users" element={<Users />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="settings" element={<Settings />} />
