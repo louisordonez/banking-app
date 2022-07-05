@@ -50,8 +50,12 @@ const UsersTable = ({
               });
 
               return (
-                <tr key={key} data-row="">
-                  <td data-account-number="">{accountNumber}</td>
+                <tr
+                  key={key}
+                  data-row=""
+                  data-row-account-number={accountNumber}
+                >
+                  <td data-account-number={accountNumber}>{accountNumber}</td>
                   <td>{fullName}</td>
                   <td>{localeStringBalance}</td>
                   <td>

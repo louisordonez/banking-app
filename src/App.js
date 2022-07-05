@@ -8,10 +8,9 @@ import Users from './Routes/Users/Users';
 import Transactions from './Routes/Transactions/Transactions';
 import Settings from './Routes/Settings/Settings';
 import Home from './Routes/Home/Home';
-import { USER_LIST } from './Assets/JS/UserList';
+import { USER_LIST } from './UserList';
 
 const App = () => {
-  // eslint-disable-next-line
   const [users, setUsers] = useState(
     JSON.parse(localStorage.getItem('userList'))
   );
@@ -164,7 +163,7 @@ const App = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="users" element={<Users userList={users} />} />
           <Route path="transactions" element={<Transactions />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<Settings userList={users} />} />
         </Routes>
       </Router>
     );

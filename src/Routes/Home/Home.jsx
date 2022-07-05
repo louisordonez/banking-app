@@ -7,7 +7,6 @@ import ActionsEditButton from '../../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../../Components/Button/ActionsDeleteButton';
 
 const Home = ({ email, users }) => {
-  // eslint-disable-next-line
   const [userList, setUserList] = useState(users);
   const [showWithdraw, setShowWithdraw] = useState('none');
   const [withdrawAmount, setWithdrawAmount] = useState(null);
@@ -17,7 +16,6 @@ const Home = ({ email, users }) => {
   const [accountNumber, setAccountNumber] = useState(null);
   const [transferAmount, setTransferAmount] = useState(null);
   const [transferAccountNumber, setTransferAccountNumber] = useState(null);
-  // eslint-disable-next-line
   const [displayBalance, setDisplayBalance] = useState('');
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
@@ -31,7 +29,7 @@ const Home = ({ email, users }) => {
         currency: 'PHP',
       })
     );
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleShowWithdraw = () => {
     setShowWithdraw('block');

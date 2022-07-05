@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Alert from '../../Components/Alert/Alert';
 
