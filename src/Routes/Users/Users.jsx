@@ -347,10 +347,9 @@ const Users = ({ userList }) => {
     }
   };
 
-  return (
-    <main>
-      <h2 className="page-header">Users</h2>
-      <div className="user-container">
+  const displayAlert = () => {
+    if (showAlert === 'block') {
+      return (
         <Alert
           alertType={alertType}
           alertHeader={alertHeader}
@@ -358,6 +357,108 @@ const Users = ({ userList }) => {
           showAlert={showAlert}
           onClick={handleCloseAlert}
         />
+      );
+    }
+  };
+
+  const displayCreateUserForm = () => {
+    if (showCreate === 'block') {
+      return (
+        <CreateUserForm
+          showCreate={showCreate}
+          handleCreateUser={handleCreateUser}
+          firstNameRef={firstNameRef}
+          lastNameRef={lastNameRef}
+          birthdateRef={birthdateRef}
+          genderRef={genderRef}
+          emailRef={emailRef}
+          passwordRef={passwordRef}
+          balanceRef={balanceRef}
+          handleCloseCreate={handleCloseCreate}
+        />
+      );
+    }
+  };
+
+  const displayEditUserForm = () => {
+    if (showEdit === 'block') {
+      return (
+        <EditUserForm
+          showEdit={showEdit}
+          handleEditUser={handleEditUser}
+          accountNumberEditRef={accountNumberEditRef}
+          firstNameEditRef={firstNameEditRef}
+          lastNameEditRef={lastNameEditRef}
+          birthdateEditRef={birthdateEditRef}
+          genderEditRef={genderEditRef}
+          emailEditRef={emailEditRef}
+          passwordEditRef={passwordEditRef}
+          balanceEditRef={balanceEditRef}
+          handleCloseEdit={handleCloseEdit}
+        />
+      );
+    }
+  };
+
+  const displayWithdrawForm = () => {
+    if (showWithdraw === 'block') {
+      return (
+        <WithdrawForm
+          showWithdraw={showWithdraw}
+          handleWithdraw={handleWithdraw}
+          accountNumber={accountNumber}
+          firstName={firstName}
+          lastName={lastName}
+          balance={balance}
+          withdrawAmountRef={withdrawAmountRef}
+          handleWithdrawAmount={handleWithdrawAmount}
+          handleCloseWithdraw={handleCloseWithdraw}
+        />
+      );
+    }
+  };
+
+  const displayDepositForm = () => {
+    if (showDeposit === 'block') {
+      return (
+        <DepositForm
+          showDeposit={showDeposit}
+          handleDeposit={handleDeposit}
+          accountNumber={accountNumber}
+          firstName={firstName}
+          lastName={lastName}
+          balance={balance}
+          depositAmountRef={depositAmountRef}
+          handleDepositAmount={handleDepositAmount}
+          handleCloseDeposit={handleCloseDeposit}
+        />
+      );
+    }
+  };
+
+  const displayTransferForm = () => {
+    if (showTransfer === 'block') {
+      return (
+        <TransferForm
+          showTransfer={showTransfer}
+          handleTransfer={handleTransfer}
+          fullName={fullName}
+          balance={balance}
+          handleTransferAccountNumber={handleTransferAccountNumber}
+          transferAccountNumberRef={transferAccountNumberRef}
+          handleTransferAmount={handleTransferAmount}
+          transferAmountRef={transferAmountRef}
+          handleCloseTransfer={handleCloseTransfer}
+        />
+      );
+    }
+  };
+
+  return (
+    <main>
+      <h2 className="page-header">Users</h2>
+      {displayAlert()}
+      <div className="user-container">
         <CreateUserButton
           textValue={`Create User`}
           onClick={handleShowCreate}
@@ -373,64 +474,11 @@ const Users = ({ userList }) => {
             handleDelete={handleDelete}
           />
         </div>
-        <CreateUserForm
-          showCreate={showCreate}
-          handleCreateUser={handleCreateUser}
-          firstNameRef={firstNameRef}
-          lastNameRef={lastNameRef}
-          birthdateRef={birthdateRef}
-          genderRef={genderRef}
-          emailRef={emailRef}
-          passwordRef={passwordRef}
-          balanceRef={balanceRef}
-          handleCloseCreate={handleCloseCreate}
-        />
-        <EditUserForm
-          showEdit={showEdit}
-          handleEditUser={handleEditUser}
-          accountNumberEditRef={accountNumberEditRef}
-          firstNameEditRef={firstNameEditRef}
-          lastNameEditRef={lastNameEditRef}
-          birthdateEditRef={birthdateEditRef}
-          genderEditRef={genderEditRef}
-          emailEditRef={emailEditRef}
-          passwordEditRef={passwordEditRef}
-          balanceEditRef={balanceEditRef}
-          handleCloseEdit={handleCloseEdit}
-        />
-        <WithdrawForm
-          showWithdraw={showWithdraw}
-          handleWithdraw={handleWithdraw}
-          accountNumber={accountNumber}
-          firstName={firstName}
-          lastName={lastName}
-          balance={balance}
-          withdrawAmountRef={withdrawAmountRef}
-          handleWithdrawAmount={handleWithdrawAmount}
-          handleCloseWithdraw={handleCloseWithdraw}
-        />
-        <DepositForm
-          showDeposit={showDeposit}
-          handleDeposit={handleDeposit}
-          accountNumber={accountNumber}
-          firstName={firstName}
-          lastName={lastName}
-          balance={balance}
-          depositAmountRef={depositAmountRef}
-          handleDepositAmount={handleDepositAmount}
-          handleCloseDeposit={handleCloseDeposit}
-        />
-        <TransferForm
-          showTransfer={showTransfer}
-          handleTransfer={handleTransfer}
-          fullName={fullName}
-          balance={balance}
-          handleTransferAccountNumber={handleTransferAccountNumber}
-          transferAccountNumberRef={transferAccountNumberRef}
-          handleTransferAmount={handleTransferAmount}
-          transferAmountRef={transferAmountRef}
-          handleCloseTransfer={handleCloseTransfer}
-        />
+        {displayCreateUserForm()}
+        {displayEditUserForm()}
+        {displayWithdrawForm()}
+        {displayDepositForm()}
+        {displayTransferForm()}
       </div>
     </main>
   );
