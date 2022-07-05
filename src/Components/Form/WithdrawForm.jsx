@@ -7,7 +7,7 @@ const WithdrawForm = ({
   firstName,
   lastName,
   balance,
-  withdrawAmount,
+  withdrawAmountRef,
   handleWithdrawAmount,
   handleCloseWithdraw,
 }) => {
@@ -71,7 +71,7 @@ const WithdrawForm = ({
                     type="number"
                     step=".01"
                     min=".01"
-                    defaultValue={withdrawAmount}
+                    ref={withdrawAmountRef}
                     onChange={handleWithdrawAmount}
                     required
                   />

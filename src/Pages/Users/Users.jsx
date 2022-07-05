@@ -36,6 +36,10 @@ const Users = ({ userList }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const balanceRef = useRef(null);
+  const depositAmountRef = useRef(null);
+  const withdrawAmountRef = useRef(null);
+  const transferAccountNumberRef = useRef(null);
+  const transferAmountRef = useRef(null);
 
   const accountNumberEditRef = useRef(null);
   const firstNameEditRef = useRef(null);
@@ -156,7 +160,7 @@ const Users = ({ userList }) => {
   };
 
   const resetWithdrawForm = () => {
-    setWithdrawAmount(null);
+    withdrawAmountRef.current.value = '';
   };
 
   const handleWithdraw = (e) => {
@@ -198,7 +202,7 @@ const Users = ({ userList }) => {
   };
 
   const resetDepositForm = () => {
-    setDepositAmount(null);
+    depositAmountRef.current.value = '';
   };
 
   const handleDeposit = (e) => {
@@ -239,8 +243,8 @@ const Users = ({ userList }) => {
   };
 
   const resetTransferForm = () => {
-    setTransferAccountNumber(null);
-    setTransferAmount(null);
+    transferAccountNumberRef.current.value = '';
+    transferAmountRef.current.value = '';
   };
 
   const handleTransfer = (e) => {
@@ -417,7 +421,7 @@ const Users = ({ userList }) => {
           firstName={firstName}
           lastName={lastName}
           balance={balance}
-          withdrawAmount={withdrawAmount}
+          withdrawAmountRef={withdrawAmountRef}
           handleWithdrawAmount={handleWithdrawAmount}
           handleCloseWithdraw={handleCloseWithdraw}
         />
@@ -428,7 +432,7 @@ const Users = ({ userList }) => {
           firstName={firstName}
           lastName={lastName}
           balance={balance}
-          depositAmount={depositAmount}
+          depositAmountRef={depositAmountRef}
           handleDepositAmount={handleDepositAmount}
           handleCloseDeposit={handleCloseDeposit}
         />
@@ -438,9 +442,9 @@ const Users = ({ userList }) => {
           fullName={fullName}
           balance={balance}
           handleTransferAccountNumber={handleTransferAccountNumber}
-          transferAccountNumber={transferAccountNumber}
+          transferAccountNumberRef={transferAccountNumberRef}
           handleTransferAmount={handleTransferAmount}
-          transferAmount={transferAmount}
+          transferAmountRef={transferAmountRef}
           handleCloseTransfer={handleCloseTransfer}
         />
       </div>
