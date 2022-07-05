@@ -7,9 +7,9 @@ const WithdrawForm = ({
   firstName,
   lastName,
   balance,
-  withdrawAmountRef,
   handleWithdrawAmount,
   handleCloseWithdraw,
+  withdrawAmount,
 }) => {
   return (
     <div style={{ display: `${showWithdraw}` }}>
@@ -71,8 +71,8 @@ const WithdrawForm = ({
                     type="number"
                     step=".01"
                     min=".01"
+                    defaultValue={withdrawAmount}
                     onChange={handleWithdrawAmount}
-                    ref={withdrawAmountRef}
                     required
                   />
                 </div>

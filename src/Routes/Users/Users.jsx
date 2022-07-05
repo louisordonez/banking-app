@@ -151,7 +151,7 @@ const Users = ({ userList }) => {
   };
 
   const resetWithdrawForm = () => {
-    withdrawAmountRef.current.value = '';
+    setWithdrawAmount(null);
   };
 
   const handleWithdraw = (e) => {
@@ -410,7 +410,7 @@ const Users = ({ userList }) => {
           firstName={firstName}
           lastName={lastName}
           balance={balance}
-          withdrawAmountRef={withdrawAmountRef}
+          withdrawAmount={withdrawAmount}
           handleWithdrawAmount={handleWithdrawAmount}
           handleCloseWithdraw={handleCloseWithdraw}
         />
