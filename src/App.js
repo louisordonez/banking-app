@@ -111,9 +111,9 @@ const App = () => {
 
         handleIsLoggedIn(true);
         setIsLoggedIn(true);
-      } else {
-        handleAlert(`danger`, `Failed!`, `Check your email and password`);
       }
+    } else {
+      handleAlert(`danger`, `Failed!`, `Check your email and password`);
     }
   };
 
