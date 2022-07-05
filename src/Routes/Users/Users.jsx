@@ -348,7 +348,7 @@ const Users = ({ userList }) => {
   };
 
   return (
-    <>
+    <main>
       <h2 className="page-header">Users</h2>
       <div className="user-container">
         <Alert
@@ -432,7 +432,7 @@ const Users = ({ userList }) => {
           handleCloseTransfer={handleCloseTransfer}
         />
       </div>
-    </>
+    </main>
   );
 };
 

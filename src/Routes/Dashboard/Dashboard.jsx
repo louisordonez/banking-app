@@ -26,7 +26,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <>
+    <main>
       <h2 className="page-header">Dashboard</h2>
       <div className="align-items-center page-header">
         <Link to="/users" className="dashboard-box primary-box">
@@ -56,7 +56,7 @@ const Dashboard = () => {
           </div>
         </Link>
       </div>
-    </>
+    </main>
   );
 };
 
