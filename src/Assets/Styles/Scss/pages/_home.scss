@@ -30,6 +30,7 @@
 }
 
 .balance-text {
+  position: absolute;
   top: 24%;
   left: 36%;
   width: 12rem;
@@ -42,4 +43,57 @@
   margin-top: 1.6rem;
   font-size: 3.2rem;
   color: var(--white);
+}
+
+.action-card {
+  margin-top: 4rem;
+  margin-left: 3rem;
+  margin-right: -1.6rem;
+  width: 15%;
+  height: 20rem;
+  background: var(--fourth-color);
+  border-radius: 1.2rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.action-icon-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8rem;
+  height: 8rem;
+  background: var(--white);
+  border-radius: 0.8rem;
+}
+
+.action-icon {
+  position: relative;
+
+  > div {
+    position: absolute;
+    margin-top: 2rem;
+    left: 25%;
+  }
+}
+
+.budget-container {
+  width: 82.6%;
+  background: var(--white);
+  border: 0.1rem solid #e4e4e4;
+  margin-left: 3rem;
+  margin-right: -1.6rem;
+  border-radius: 1.4rem;
+  overflow-y: scroll;
+}
+
+.add-expense-container {
+  margin: 4rem;
+}
+
+.budget-header {
+  font-size: 4.2rem;
+  margin: 4rem;
+  margin-bottom: 1rem;
 }

@@ -40,17 +40,71 @@ const Home = ({ email, users }) => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* <div className="budget-app-content">
-        <div className="budget-app-container">
-          <h2 className="budget-header">Budget App</h2>
-          <p className="description">Track your Expenses</p>
-          <button className="budget-btn">Add Budget</button>
-          <p className="balance-text">My Balance</p>
-          <p className="amount-text"></p>
+        <div className="action-card" title="Withdraw">
+          <div className="action-icon-container">
+            <div className="action-icon">
+              <div>
+                <BoxIcons.BiArrowToBottom
+                  style={{ color: 'var(--fourth-color)' }}
+                  size={42}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div> */}
+        <div className="action-card" title="Deposit">
+          <div className="action-icon-container">
+            <div className="action-icon">
+              <div>
+                <BoxIcons.BiArrowToTop
+                  style={{ color: 'var(--fourth-color)' }}
+                  size={42}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="action-card" title="Transfer">
+          <div className="action-icon-container">
+            <div className="action-icon">
+              <div>
+                <BoxIcons.BiTransferAlt
+                  style={{ color: 'var(--fourth-color)' }}
+                  size={42}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="add-expense-container">
+        <div className="flex-center">
+          <button className="btn-create-user btn-primary">Add Expense</button>
+        </div>
+      </div>
+      <div className="flex-center">
+        <div className="budget-container">
+          <div className="budget-header">
+            <h2>Expenses</h2>
+          </div>
+          <div>
+            <table className="budget-margin">
+              <thead className="budget-table-header">
+                <tr>
+                  <th>Item</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tuition Fee</td>
+                  <td>80,000.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </main>
   );
 };
