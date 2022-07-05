@@ -38,8 +38,6 @@ const Users = ({ userList }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const balanceRef = useRef(null);
-  const withdrawAmountRef = useRef(null);
-  const depositAmountRef = useRef(null);
   const transferAccountNumberRef = useRef(null);
   const transferAmountRef = useRef(null);
 
@@ -193,7 +191,7 @@ const Users = ({ userList }) => {
   };
 
   const resetDepositForm = () => {
-    depositAmountRef.current.value = '';
+    setDepositAmount(null);
   };
 
   const handleDeposit = (e) => {
@@ -428,7 +426,7 @@ const Users = ({ userList }) => {
           firstName={firstName}
           lastName={lastName}
           balance={balance}
-          depositAmountRef={depositAmountRef}
+          depositAmount={depositAmount}
           handleDepositAmount={handleDepositAmount}
           handleCloseDeposit={handleCloseDeposit}
         />

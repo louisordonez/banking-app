@@ -7,7 +7,7 @@ const DepositForm = ({
   firstName,
   lastName,
   balance,
-  depositAmountRef,
+  depositAmount,
   handleDepositAmount,
   handleCloseDeposit,
 }) => {
@@ -71,8 +71,8 @@ const DepositForm = ({
                     type="number"
                     step=".01"
                     min=".01"
+                    defaultValue={depositAmount}
                     onChange={handleDepositAmount}
-                    ref={depositAmountRef}
                     required
                   />
                 </div>

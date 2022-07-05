@@ -7,9 +7,9 @@ const WithdrawForm = ({
   firstName,
   lastName,
   balance,
+  withdrawAmount,
   handleWithdrawAmount,
   handleCloseWithdraw,
-  withdrawAmount,
 }) => {
   return (
     <div style={{ display: `${showWithdraw}` }}>
