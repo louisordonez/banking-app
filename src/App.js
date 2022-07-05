@@ -8,7 +8,7 @@ import Users from './Routes/Users/Users';
 import Transactions from './Routes/Transactions/Transactions';
 import Settings from './Routes/Settings/Settings';
 import Home from './Routes/Home/Home';
-import { USER_LIST } from './Assets/JS/UserList';
+import { USER_LIST } from './UserList';
 
 const App = () => {
   // eslint-disable-next-line
