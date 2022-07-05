@@ -6,9 +6,9 @@ const TransferForm = ({
   fullName,
   balance,
   handleTransferAccountNumber,
-  transferAccountNumberRef,
+  transferAccountNumber,
   handleTransferAmount,
-  transferAmountRef,
+  transferAmount,
   handleCloseTransfer,
 }) => {
   return (
@@ -50,8 +50,8 @@ const TransferForm = ({
                     placeholder="Account Number"
                     type="number"
                     pattern="[0-9]*"
+                    defaultValue={transferAccountNumber}
                     onChange={handleTransferAccountNumber}
-                    ref={transferAccountNumberRef}
                     required
                   />
                 </div>
@@ -63,8 +63,8 @@ const TransferForm = ({
                     type="number"
                     step=".01"
                     min=".01"
+                    defaultValue={transferAmount}
                     onChange={handleTransferAmount}
-                    ref={transferAmountRef}
                     required
                   />
                 </div>
