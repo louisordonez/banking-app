@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import * as BoxIcons from 'react-icons/bi';
 import UserWithdrawForm from '../../Components/Form/userWithdrawForm';
 
@@ -9,8 +9,7 @@ const Home = ({ email, users }) => {
   const [withdrawAmount, setWithdrawAmount] = useState(null);
   // eslint-disable-next-line
   const [displayBalance, setDisplayBalance] = useState('');
-
-  const withdrawAmountRef = null;
+  const withdrawAmountRef = useRef(null);
 
   useEffect(() => {
     const currentUser = userList.find((obj) => obj.email === email);
@@ -53,10 +52,15 @@ const Home = ({ email, users }) => {
 
     localStorage.setItem('userList', JSON.stringify(userList));
     handleCloseWithdraw();
+    handleResetWithdrawForm();
   };
 
   const handleWithdrawAmount = (e) => {
     setWithdrawAmount(parseFloat(e.target.value));
+  };
+
+  const handleResetWithdrawForm = () => {
+    withdrawAmountRef.current.value = '';
   };
 
   return (
@@ -177,6 +181,7 @@ const Home = ({ email, users }) => {
         handleCloseWithdraw={handleCloseWithdraw}
         handleWithdrawAmount={handleWithdrawAmount}
         handleWithdraw={handleWithdraw}
+        withdrawAmountRef={withdrawAmountRef}
       />
     </main>
   );
