@@ -42,7 +42,7 @@ const Dashboard = () => {
             </div>
           </div>
         </Link>
-        <Link to="/transactions" className="dashboard-box secondary-box">
+        <Link to="/transactions" className="dashboard-box primary-box">
           <div className="box-header">
             <div className="align-items-center">
               <BoxIcons.BiMoney size={32} />
