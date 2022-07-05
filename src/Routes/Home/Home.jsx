@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Home = () => {
+const Home = ({ email, users }) => {
+  const [userList, setUserList] = useState(users);
+
+  const currentUser = userList.find((obj) => obj.email === email);
+
   return (
     <main>
       <h2 className="page-header">Home</h2>
@@ -10,7 +14,7 @@ const Home = () => {
           <p className="description">Track your Expenses</p>
           <button className="budget-btn">Add Budget</button>
           <p className="balance-text">My Balance</p>
-          <p className="amount-text">1000</p>
+          <p className="amount-text">{currentUser.balance}</p>
         </div>
       </div>
     </main>
