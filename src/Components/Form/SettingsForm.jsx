@@ -6,7 +6,7 @@ const SettingsForm = () => {
       <div className="settings center">
         <div className="modal-header">
           <div>
-            <span>Edit User</span>
+            <span>Settings</span>
           </div>
         </div>
         <div className="modal-body">
