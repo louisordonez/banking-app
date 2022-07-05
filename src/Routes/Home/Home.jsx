@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as BoxIcons from 'react-icons/bi';
-import UserWithdrawForm from '../../Components/Form/userWithdrawForm';
+import UserWithdrawForm from '../../Components/Form/UserWithdrawForm';
+import UserDepositForm from '../../Components/Form/UserDepositForm';
 import ActionsEditButton from '../../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../../Components/Button/ActionsDeleteButton';
 
@@ -9,9 +10,12 @@ const Home = ({ email, users }) => {
   const [userList, setUserList] = useState(users);
   const [showWithdraw, setShowWithdraw] = useState('none');
   const [withdrawAmount, setWithdrawAmount] = useState(null);
+  const [showDeposit, setShowDeposit] = useState('none');
+  const [depositAmount, setDepositAmount] = useState(null);
   // eslint-disable-next-line
   const [displayBalance, setDisplayBalance] = useState('');
   const withdrawAmountRef = useRef(null);
+  const depositAmountRef = useRef(null);
 
   useEffect(() => {
     const currentUser = userList.find((obj) => obj.email === email);
@@ -57,12 +61,49 @@ const Home = ({ email, users }) => {
     handleResetWithdrawForm();
   };
 
+  const handleShowDeposit = () => {
+    setShowDeposit('block');
+  };
+
+  const handleCloseDeposit = () => {
+    setShowDeposit('none');
+  };
+
+  const handleDeposit = (e) => {
+    e.preventDefault();
+
+    const userIndex = userList.findIndex((obj) => obj.email === email);
+    const prevBalance = userList[userIndex].balance;
+    const totalBalance = prevBalance + depositAmount;
+
+    userList[userIndex].balance = totalBalance;
+
+    setDisplayBalance(
+      totalBalance.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'PHP',
+      })
+    );
+
+    localStorage.setItem('userList', JSON.stringify(userList));
+    handleCloseDeposit();
+    handleResetDepositForm();
+  };
+
   const handleWithdrawAmount = (e) => {
     setWithdrawAmount(parseFloat(e.target.value));
   };
 
   const handleResetWithdrawForm = () => {
     withdrawAmountRef.current.value = '';
+  };
+
+  const handleDepositAmount = (e) => {
+    setDepositAmount(parseFloat(e.target.value));
+  };
+
+  const handleResetDepositForm = () => {
+    depositAmountRef.current.value = '';
   };
 
   return (
@@ -101,7 +142,11 @@ const Home = ({ email, users }) => {
             </div>
           </div>
         </div>
-        <div className="action-card" title="Deposit">
+        <div
+          className="action-card"
+          title="Deposit"
+          onClick={handleShowDeposit}
+        >
           <div className="action-icon-container">
             <div className="action-icon">
               <div>
@@ -269,6 +314,13 @@ const Home = ({ email, users }) => {
         handleWithdrawAmount={handleWithdrawAmount}
         handleWithdraw={handleWithdraw}
         withdrawAmountRef={withdrawAmountRef}
+      />
+      <UserDepositForm
+        showDeposit={showDeposit}
+        handleCloseDeposit={handleCloseDeposit}
+        handleDepositAmount={handleDepositAmount}
+        handleDeposit={handleDeposit}
+        depositAmountRef={depositAmountRef}
       />
     </main>
   );
