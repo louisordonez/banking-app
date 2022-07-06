@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as BoxIcons from 'react-icons/bi';
 
-const Dashboard = () => {
+const Dashboard = ({ userList, transactionList }) => {
   const [totalUsers, setTotalUsers] = useState(null);
+  const [users, SetUsers] = useState(userList);
+  const [transactions, setTransactions] = useState(transactionList);
   const [totalBalance, setTotalBalance] = useState('');
 
   useEffect(() => {
@@ -62,7 +64,7 @@ const Dashboard = () => {
       </div>
       <div className="recent-table">
         <div className="recent-table-container">
-          <Link to="#" className="see-all-link">
+          <Link to="/transactions" className="see-all-link">
             See All
           </Link>
           <div className="budget-header">
@@ -78,28 +80,23 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>9876</td>
-                  <td>01-01-2020</td>
-                </tr>
-                <tr>
-                  <td>9876</td>
-                  <td>01-01-2020</td>
-                </tr>
-                <tr>
-                  <td>9876</td>
-                  <td>01-01-2020</td>
-                </tr>
-                <tr>
-                  <td>9876</td>
-                  <td>01-01-2020</td>
-                </tr>
+                {transactions.map((val, key) => {
+                  const { referenceNumber, date, description } = val;
+
+                  return (
+                    <tr key={key}>
+                      <td>{referenceNumber}</td>
+                      <td>{date}</td>
+                      <td>{description}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         </div>
         <div className="recent-table-container">
-          <Link to="#" className="see-all-link">
+          <Link to="/users" className="see-all-link">
             See All
           </Link>
           <div className="budget-header">
@@ -115,26 +112,26 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1756480543042</td>
-                  <td>John Doe</td>
-                  <td>₱20,000.00</td>
-                </tr>
-                <tr>
-                  <td>1756480543042</td>
-                  <td>John Doe</td>
-                  <td>₱20,000.00</td>
-                </tr>
-                <tr>
-                  <td>1756480543042</td>
-                  <td>John Doe</td>
-                  <td>₱20,000.00</td>
-                </tr>
-                <tr>
-                  <td>1756480543042</td>
-                  <td>John Doe</td>
-                  <td>₱20,000.00</td>
-                </tr>
+                {users.map((val, key) => {
+                  const { accountNumber, firstName, lastName, balance } = val;
+                  const fullName = `${firstName} ${lastName}`;
+                  const parseBalance = parseFloat(balance);
+
+                  const localeStringBalance = parseBalance.toLocaleString(
+                    'en-US',
+                    {
+                      style: 'currency',
+                      currency: 'PHP',
+                    }
+                  );
+                  return (
+                    <tr key={key}>
+                      <td>{accountNumber}</td>
+                      <td>{fullName}</td>
+                      <td>{localeStringBalance}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
