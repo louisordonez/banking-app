@@ -11,10 +11,10 @@
 
 .wallet-icon-container {
   position: absolute;
-  top: 28%;
-  left: 12%;
-  width: 8rem;
-  height: 8rem;
+  top: 20%;
+  left: 10%;
+  width: 12rem;
+  height: 12rem;
   background: var(--white);
   border-radius: 0.8rem;
 }
@@ -24,24 +24,34 @@
 
   > div {
     position: absolute;
-    margin-top: 2rem;
+    margin-top: 2.6rem;
     left: 25%;
   }
 }
 
+.account-number-header-text {
+  position: absolute;
+  top: 17%;
+  left: 40%;
+  font-size: 1.8rem;
+  color: var(--white);
+}
+
+.account-number-text {
+  font-size: 2.2rem;
+  color: var(--white);
+}
+
 .balance-text {
   position: absolute;
-  top: 24%;
-  left: 36%;
-  width: 12rem;
-  height: 2.4rem;
-  font-size: 2.4rem;
+  top: 52%;
+  left: 40%;
+  font-size: 1.8rem;
   color: var(--white);
 }
 
 .balance-amount {
-  margin-top: 1.6rem;
-  font-size: 3.2rem;
+  font-size: 2.2rem;
   color: var(--white);
 }
 

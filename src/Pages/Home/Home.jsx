@@ -32,6 +32,8 @@ const Home = ({ email, users }) => {
         currency: 'PHP',
       })
     );
+
+    setAccountNumber(currentUser.accountNumber);
   }, []);
 
   const handleShowWithdraw = () => {
@@ -96,10 +98,7 @@ const Home = ({ email, users }) => {
     handleResetDepositForm();
   };
 
-  const handleShowTransfer = (accountNumber) => {
-    setShowTransfer('block');
-    setAccountNumber(accountNumber);
-  };
+  const handleShowTransfer = () => setShowTransfer('block');
 
   const handleCloseTransfer = () => {
     setShowTransfer('none');
@@ -181,6 +180,10 @@ const Home = ({ email, users }) => {
       <h2 className="page-header">Home</h2>
       <div className="flex-center">
         <div className="balance-card">
+          <div className="account-number-header-text">
+            Account Number
+            <div className="account-number-text">{accountNumber}</div>
+          </div>
           <div className="balance-text">
             Balance
             <div className="balance-amount">{displayBalance}</div>
@@ -190,7 +193,7 @@ const Home = ({ email, users }) => {
               <div>
                 <BoxIcons.BiWallet
                   style={{ color: 'var(--fourth-color)' }}
-                  size={42}
+                  size={64}
                 />
               </div>
             </div>
