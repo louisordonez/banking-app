@@ -60,6 +60,86 @@ const Dashboard = () => {
           </div>
         </Link>
       </div>
+      <div className="recent-table">
+        <div className="recent-table-container">
+          <Link to="#" className="see-all-link">
+            See All
+          </Link>
+          <div className="budget-header">
+            <h2>Recent Transactions</h2>
+          </div>
+          <div>
+            <table className="budget-table budget-margin">
+              <thead className="budget-table-header">
+                <tr>
+                  <th>Reference Number</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>9876</td>
+                  <td>01-01-2020</td>
+                </tr>
+                <tr>
+                  <td>9876</td>
+                  <td>01-01-2020</td>
+                </tr>
+                <tr>
+                  <td>9876</td>
+                  <td>01-01-2020</td>
+                </tr>
+                <tr>
+                  <td>9876</td>
+                  <td>01-01-2020</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="recent-table-container">
+          <Link to="#" className="see-all-link">
+            See All
+          </Link>
+          <div className="budget-header">
+            <h2>Recent Users</h2>
+          </div>
+          <div>
+            <table className="budget-table budget-margin">
+              <thead className="budget-table-header">
+                <tr>
+                  <th>Account Number</th>
+                  <th>Name</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1756480543042</td>
+                  <td>John Doe</td>
+                  <td>₱20,000.00</td>
+                </tr>
+                <tr>
+                  <td>1756480543042</td>
+                  <td>John Doe</td>
+                  <td>₱20,000.00</td>
+                </tr>
+                <tr>
+                  <td>1756480543042</td>
+                  <td>John Doe</td>
+                  <td>₱20,000.00</td>
+                </tr>
+                <tr>
+                  <td>1756480543042</td>
+                  <td>John Doe</td>
+                  <td>₱20,000.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </main>
   );
 };
