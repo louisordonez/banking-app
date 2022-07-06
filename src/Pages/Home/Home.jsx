@@ -91,7 +91,7 @@ const Home = ({ email, users }) => {
         currency: 'PHP',
       })
     );
-  }, []);
+  }, [expenses, expectedBalance]);
 
   const handleAlert = (alertType, alertHeader, alertMessage) => {
     setAlertType(alertType);
