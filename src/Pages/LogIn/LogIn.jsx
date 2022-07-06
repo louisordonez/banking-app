@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Alert from '../../Components/Alert/Alert';
+import * as SimpleIcons from 'react-icons/si';
 
 const LogIn = ({
   handleLogin,
@@ -26,8 +27,12 @@ const LogIn = ({
           <div className="modal center landing-modal-bg">
             <div className="modal-content center">
               <div className="modal-header">
-                <div>
+                <div className="login-header-container">
                   <span>Log In</span>
+                  <div className="logo">
+                    <SimpleIcons.SiWebmoney className="login-title-logo" />
+                    <span className="login-title">Banking</span>
+                  </div>
                 </div>
               </div>
               <div className="modal-body">
