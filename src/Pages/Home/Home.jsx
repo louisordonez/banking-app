@@ -19,6 +19,7 @@ const Home = ({ email, users }) => {
   const [transferAccountNumber, setTransferAccountNumber] = useState(null);
   const [displayBalance, setDisplayBalance] = useState('');
   const [showExpense, setShowExpense] = useState('none');
+  const [transaction, setTransaction] = useState([]);
 
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
@@ -36,7 +37,13 @@ const Home = ({ email, users }) => {
     );
 
     setAccountNumber(currentUser.accountNumber);
+
+    setTransaction(JSON.parse(localStorage.getItem('transactionList')));
   }, []);
+
+  const updateTransactionListLocalStorage = (item) => {
+    localStorage.setItem('transactionList', JSON.stringify(item));
+  };
 
   const handleShowWithdraw = () => {
     setShowWithdraw('block');
@@ -57,16 +64,42 @@ const Home = ({ email, users }) => {
       alert('Insufficient balance.');
     } else {
       userList[userIndex].balance = totalBalance;
+
+      setDisplayBalance(
+        totalBalance.toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'PHP',
+        })
+      );
+
+      localStorage.setItem('userList', JSON.stringify(userList));
+
+      const referenceNumber = parseInt(new Date().getTime());
+      const date = new Date().toLocaleString('en-US', {
+        hour12: false,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+      const newTransaction = {
+        referenceNumber: referenceNumber,
+        accountNumber: accountNumber,
+        email: userList[userIndex].email,
+        firstName: userList[userIndex].firstName,
+        lastName: userList[userIndex].lastName,
+        date: date,
+        description: 'Withdraw',
+        amount: withdrawAmount,
+        prevBalance: prevBalance,
+        currentBalance: totalBalance,
+      };
+
+      setTransaction((state) => [newTransaction, ...state]);
+      updateTransactionListLocalStorage([newTransaction, ...transaction]);
     }
-
-    setDisplayBalance(
-      totalBalance.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'PHP',
-      })
-    );
-
-    localStorage.setItem('userList', JSON.stringify(userList));
     handleCloseWithdraw();
     handleResetWithdrawForm();
   };
