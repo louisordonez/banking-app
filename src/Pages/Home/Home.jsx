@@ -410,7 +410,7 @@ const Home = ({ email, users }) => {
     const newExpenseId = new Date().getTime();
     const expenseData = {
       id: parseInt(newExpenseId),
-      item: expenseAmountAddRef.current.value,
+      item: expenseItemAddRef.current.value,
       amount: parseFloat(expenseAmountAddRef.current.value),
     };
 
