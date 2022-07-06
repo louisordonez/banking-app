@@ -6,6 +6,10 @@
   margin-right: 3rem;
   margin-top: 4rem;
   cursor: pointer;
+
+  &:hover {
+    background: var(--third-color);
+  }
 }
 
 .box-header {

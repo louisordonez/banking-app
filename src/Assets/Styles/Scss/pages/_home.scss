@@ -55,6 +55,10 @@
   border-radius: 1.2rem;
   position: relative;
   cursor: pointer;
+
+  &:hover {
+    background: var(--third-color);
+  }
 }
 
 .action-icon-container {
