@@ -4,6 +4,7 @@ import UserWithdrawForm from '../../Components/Form/UserWithdrawForm';
 import UserDepositForm from '../../Components/Form/UserDepositForm';
 import UserTransferForm from '../../Components/Form/UserTransferForm';
 import UserAddExpenseForm from '../../Components/Form/UserAddExpenseForm';
+import UserEditExpenseForm from '../../Components/Form/UserEditExpenseForm';
 import ActionsEditButton from '../../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../../Components/Button/ActionsDeleteButton';
 import Alert from '../../Components/Alert/Alert';
@@ -32,13 +33,14 @@ const Home = ({ email, users }) => {
   const [transferAmount, setTransferAmount] = useState(null);
   const [transferAccountNumber, setTransferAccountNumber] = useState(null);
   const [displayBalance, setDisplayBalance] = useState('');
-  const [showExpense, setShowExpense] = useState('none');
+  const [showAddExpense, setShowAddExpense] = useState('none');
   const [transaction, setTransaction] = useState([]);
   const [showAlert, setShowAlert] = useState('none');
   const [alertType, setAlertType] = useState('');
   const [alertHeader, setAlertHeader] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
   const [expenses, setExpense] = useState(EXPENSE_LIST);
+  const [showEditExpense, setShowEditExpense] = useState('none');
 
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
@@ -288,12 +290,12 @@ const Home = ({ email, users }) => {
     handleCloseTransfer();
   };
 
-  const handleShowExpense = () => {
-    setShowExpense('block');
+  const handleShowAddExpense = () => {
+    setShowAddExpense('block');
   };
 
-  const handleCloseExpense = () => {
-    setShowExpense('none');
+  const handleCloseAddExpense = () => {
+    setShowAddExpense('none');
   };
 
   const handleWithdrawAmount = (e) => {
@@ -334,7 +336,8 @@ const Home = ({ email, users }) => {
     handleAlert(`success`, `Success!`, `Expense has been successfully deleted`);
   };
 
-  const handleShowEdit = () => {};
+  const handleShowEditExpense = () => setShowEditExpense('block');
+  const handleCloseEditExpense = () => setShowEditExpense('none');
 
   return (
     <main>
@@ -414,7 +417,7 @@ const Home = ({ email, users }) => {
         <div className="flex-center">
           <button
             className="btn-create-user btn-primary"
-            onClick={handleShowExpense}
+            onClick={handleShowAddExpense}
           >
             Add Expense
           </button>
@@ -422,8 +425,14 @@ const Home = ({ email, users }) => {
       </div>
       <div className="flex-center">
         <div className="budget-container">
-          <div className="budget-header">
-            <h2>Expenses</h2>
+          <div className="budget-header-container">
+            <div className="budget-header">
+              <h2>Expenses</h2>
+            </div>
+            <div className="budget-header"></div>
+            <div className="budget-header">
+              <h2>100.00</h2>
+            </div>
           </div>
           <div>
             <table className="budget-table budget-margin">
@@ -452,7 +461,7 @@ const Home = ({ email, users }) => {
                       <td>
                         <ActionsEditButton
                           onClick={() => {
-                            handleShowEdit(id);
+                            handleShowEditExpense(id);
                           }}
                         />
                         <ActionsDeleteButton
@@ -493,8 +502,12 @@ const Home = ({ email, users }) => {
         transferAccountNumberRef={transferAccountNumberRef}
       />
       <UserAddExpenseForm
-        showExpense={showExpense}
-        handleCloseExpense={handleCloseExpense}
+        showAddExpense={showAddExpense}
+        handleCloseAddExpense={handleCloseAddExpense}
+      />
+      <UserEditExpenseForm
+        showEditExpense={showEditExpense}
+        handleCloseEditExpense={handleCloseEditExpense}
       />
     </main>
   );

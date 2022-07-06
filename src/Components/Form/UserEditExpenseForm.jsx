@@ -1,21 +1,21 @@
 import React from 'react';
 
-const UserAddExpenseForm = ({
-  showAddExpense,
-  handleAddExpense,
-  handleCloseAddExpense,
+const UserEditExpenseForm = ({
+  showEditExpense,
+  handleEditExpense,
+  handleCloseEditExpense,
 }) => {
   return (
-    <div style={{ display: `${showAddExpense}` }}>
+    <div style={{ display: `${showEditExpense}` }}>
       <div className="modal center">
         <div className="modal-content center">
           <div className="modal-header">
             <div>
-              <span>Add Expense</span>
+              <span>Edit Expense</span>
             </div>
           </div>
           <div className="modal-body">
-            <form onSubmit={handleAddExpense}>
+            <form onSubmit={handleEditExpense}>
               <div className="create-user-flex">
                 <div style={{ width: `100%` }}>
                   <p className="user-modal-label">Item</p>
@@ -46,13 +46,13 @@ const UserAddExpenseForm = ({
                   <input
                     className="btn-small btn-primary btn-modal"
                     type="submit"
-                    value="Add"
+                    value="Edit"
                   />
                 </div>
                 <div className="create-user-flex flex-center">
                   <input
                     className="btn-small btn-cancel btn-modal-cancel"
-                    onClick={handleCloseAddExpense}
+                    onClick={handleCloseEditExpense}
                     type="button"
                     value="Cancel"
                   />
@@ -66,4 +66,4 @@ const UserAddExpenseForm = ({
   );
 };
 
-export default UserAddExpenseForm;
+export default UserEditExpenseForm;
