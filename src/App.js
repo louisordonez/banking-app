@@ -175,7 +175,7 @@ const App = () => {
           <Route path="/" element={<Home email={email} users={users} />} />
           <Route path="users" element={<Users />} />
           <Route path="transactions" element={<Transactions />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<Settings userList={users} />} />
         </Routes>
       </Router>
     );
