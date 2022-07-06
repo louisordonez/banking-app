@@ -14,6 +14,9 @@ const App = () => {
   const [users, setUsers] = useState(
     JSON.parse(localStorage.getItem('userList'))
   );
+  const [transactions, setTransactions] = useState(
+    JSON.parse(localStorage.getItem('transactionList'))
+  );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState('');
   const [email, setEmail] = useState('');
@@ -167,7 +170,12 @@ const App = () => {
       <Router>
         <Navbar handleLogOut={handleLogOut} />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route
+            path="/"
+            element={
+              <Dashboard userList={users} transactionList={transactions} />
+            }
+          />
           <Route path="users" element={<Users userList={users} />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="settings" element={<Settings userList={users} />} />
