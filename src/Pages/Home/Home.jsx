@@ -138,8 +138,8 @@ const Home = ({ email, users }) => {
       firstName: userList[userIndex].firstName,
       lastName: userList[userIndex].lastName,
       date: date,
-      description: 'Withdraw',
-      amount: withdrawAmount,
+      description: 'Deposit',
+      amount: depositAmount,
       prevBalance: prevBalance,
       currentBalance: totalBalance,
     };
@@ -203,6 +203,32 @@ const Home = ({ email, users }) => {
       } else {
         user.balance = totalBalance;
         transferUser.balance = transferUserTotalBalance;
+
+        const referenceNumber = parseInt(new Date().getTime());
+        const date = new Date().toLocaleString('en-US', {
+          hour12: false,
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        });
+        const newTransaction = {
+          referenceNumber: referenceNumber,
+          accountNumber: accountNumber,
+          email: userList[userIndex].email,
+          firstName: userList[userIndex].firstName,
+          lastName: userList[userIndex].lastName,
+          date: date,
+          description: `${accountNumber} Transfer to ${userList[transferUserIndex].accountNumber}`,
+          amount: transferAmount,
+          prevBalance: userPrevBalance,
+          currentBalance: totalBalance,
+        };
+
+        setTransaction((state) => [newTransaction, ...state]);
+        updateTransactionListLocalStorage([newTransaction, ...transaction]);
 
         setDisplayBalance(
           totalBalance.toLocaleString('en-US', {
