@@ -27,3 +27,23 @@
   justify-items: center;
   align-items: center;
 }
+
+.login-header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-title {
+  text-transform: uppercase;
+}
+
+.login-title-logo {
+  color: var(--black-light);
+  font-size: 2rem;
+}
+
+.logo {
+  display: inline-flex;
+  column-gap: 0.5rem;
+  align-items: center;
+}
