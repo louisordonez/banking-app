@@ -25,10 +25,11 @@ const EditUserForm = ({
           <div className="modal-body">
             <form onSubmit={handleEditUser}>
               <div className="create-user-flex">
-                <div>
+                <div style={{ width: '100%' }}>
+                  <p className="user-modal-label">Account Number</p>
                   <input
                     className="user-input-text"
-                    placeholder="Account Number"
+                    style={{ width: '100%' }}
                     type="number"
                     ref={accountNumberEditRef}
                     disabled
@@ -37,18 +38,18 @@ const EditUserForm = ({
               </div>
               <div className="create-user-flex">
                 <div>
+                  <p className="user-modal-label">First Name</p>
                   <input
                     className="user-input-text"
-                    placeholder="First Name"
                     type="text"
                     ref={firstNameEditRef}
                     required
                   />
                 </div>
                 <div>
+                  <p className="user-modal-label">Last Name</p>
                   <input
                     className="user-input-text"
-                    placeholder="Last Name"
                     type="text"
                     ref={lastNameEditRef}
                     required
@@ -57,15 +58,16 @@ const EditUserForm = ({
               </div>
               <div className="create-user-flex">
                 <div>
+                  <p className="user-modal-label">Birthdate</p>
                   <input
                     className="user-input-text"
-                    placeholder="Birthdate"
                     type="date"
                     ref={birthdateEditRef}
                     required
                   />
                 </div>
                 <div>
+                  <p className="user-modal-label">Gender</p>
                   <select
                     className="user-input-text"
                     ref={genderEditRef}
@@ -78,18 +80,19 @@ const EditUserForm = ({
               </div>
               <div className="create-user-flex">
                 <div>
+                  <p className="user-modal-label">Email</p>
                   <input
                     className="user-input-text"
-                    placeholder="Email"
                     type="email"
                     ref={emailEditRef}
                     required
                   />
                 </div>
                 <div>
+                  <p className="user-modal-label">Password</p>
+
                   <input
                     className="user-input-text"
-                    placeholder="Password"
                     type="password"
                     ref={passwordEditRef}
                     required
@@ -97,10 +100,11 @@ const EditUserForm = ({
                 </div>
               </div>
               <div className="create-user-flex">
-                <div>
+                <div style={{ width: '100%' }}>
+                  <p className="user-modal-label">Balance</p>
                   <input
                     className="user-input-text"
-                    placeholder="Balance"
+                    style={{ width: '100%' }}
                     type="number"
                     step=".01"
                     ref={balanceEditRef}
@@ -109,17 +113,21 @@ const EditUserForm = ({
                 </div>
               </div>
               <div className="modal-footer">
-                <input
-                  className="btn-small btn-cancel"
-                  onClick={handleCloseEdit}
-                  type="button"
-                  value="Cancel"
-                />
-                <input
-                  className="btn-small btn-primary"
-                  type="submit"
-                  value="Submit"
-                />
+                <div className="create-user-flex">
+                  <input
+                    className="btn-small btn-primary btn-modal"
+                    type="submit"
+                    value="Submit"
+                  />
+                </div>
+                <div className="create-user-flex flex-center">
+                  <input
+                    className="btn-small btn-cancel btn-modal-cancel"
+                    onClick={handleCloseEdit}
+                    type="button"
+                    value="Cancel"
+                  />
+                </div>
               </div>
             </form>
           </div>
