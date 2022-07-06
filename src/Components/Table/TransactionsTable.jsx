@@ -2,32 +2,7 @@ import React from 'react';
 import SearchInput from '../Input/SearchInput';
 import ActionsViewButton from '../Button/ActionsViewButton';
 
-const TransactionsTable = ({}) => {
-  const TRANSACTION_LIST = [
-    {
-      referenceNumber: 9876,
-      accountNumber: 1234,
-      firstName: 'Juan',
-      lastName: 'Dela Cruz',
-      date: '01-01-2020',
-      amount: 1000.0,
-      description: 'Withdraw',
-      prevBalance: 5000.0,
-      currentBalance: 4000.0,
-    },
-    {
-      referenceNumber: 5678,
-      accountNumber: 4567,
-      firstName: 'Maria',
-      lastName: 'Dela Cruz',
-      date: '02-02-2022',
-      amount: 2000.0,
-      description: 'Deposit',
-      prevBalance: 1000.0,
-      currentBalance: 3000.0,
-    },
-  ];
-
+const TransactionsTable = ({ transaction }) => {
   return (
     <div className="table">
       <div className="table-header">
@@ -44,7 +19,7 @@ const TransactionsTable = ({}) => {
       </div>
       <div className="table-container">
         <table>
-          <thead className="users-table-header">
+          <thead className="transactions-table-header">
             <tr>
               <th>Reference Number</th>
               <th>Date</th>
@@ -53,7 +28,7 @@ const TransactionsTable = ({}) => {
             </tr>
           </thead>
           <tbody>
-            {TRANSACTION_LIST.map((val, key) => {
+            {transaction.map((val, key) => {
               const {
                 referenceNumber,
                 accountNumber,

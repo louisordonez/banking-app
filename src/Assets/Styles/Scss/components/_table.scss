@@ -126,3 +126,23 @@ td {
   padding-top: 2rem;
   padding-bottom: 3rem;
 }
+
+.transactions-table-header {
+  th {
+    &:nth-child(1) {
+      width: 25%;
+    }
+
+    &:nth-child(2) {
+      width: 15%;
+    }
+
+    &:nth-child(3) {
+      width: 35%;
+    }
+
+    &:nth-child(4) {
+      width: 15%;
+    }
+  }
+}
