@@ -19,9 +19,10 @@ const UserDepositForm = ({
           <div className="modal-body">
             <form onSubmit={handleDeposit}>
               <div className="create-user-flex">
-                <div>
+                <div style={{ width: `100%` }}>
                   <input
                     className="user-input-text"
+                    style={{ width: `100%` }}
                     data-amount=""
                     placeholder="Amount"
                     type="number"
@@ -34,17 +35,21 @@ const UserDepositForm = ({
                 </div>
               </div>
               <div className="modal-footer">
-                <input
-                  className="btn-small btn-cancel"
-                  onClick={handleCloseDeposit}
-                  type="button"
-                  value="Cancel"
-                />
-                <input
-                  className="btn-small btn-primary"
-                  type="submit"
-                  value="Submit"
-                />
+                <div className="create-user-flex">
+                  <input
+                    className="btn-small btn-primary btn-modal"
+                    type="submit"
+                    value="Deposit"
+                  />
+                </div>
+                <div className="create-user-flex flex-center">
+                  <input
+                    className="btn-small btn-cancel btn-modal-cancel"
+                    onClick={handleCloseDeposit}
+                    type="button"
+                    value="Cancel"
+                  />
+                </div>
               </div>
             </form>
           </div>
