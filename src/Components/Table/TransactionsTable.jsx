@@ -33,63 +33,58 @@ const TransactionsTable = ({
             </tr>
           </thead>
           <tbody>
-            {transactionList
-              .filter((u) => u.email !== currentEmail)
-              .map((val, key) => {
-                const {
-                  referenceNumber,
-                  accountNumber,
-                  email,
-                  firstName,
-                  lastName,
-                  date,
-                  amount,
-                  description,
-                  prevBalance,
-                  currentBalance,
-                } = val;
-                const fullName = `${firstName} ${lastName}`;
-                const parseBalance = parseFloat(amount);
-                const localeStringBalance = parseBalance.toLocaleString(
-                  'en-US',
-                  {
-                    style: 'currency',
-                    currency: 'PHP',
-                  }
-                );
+            {transactionList.map((val, key) => {
+              const {
+                referenceNumber,
+                accountNumber,
+                email,
+                firstName,
+                lastName,
+                date,
+                amount,
+                description,
+                prevBalance,
+                currentBalance,
+              } = val;
+              const fullName = `${firstName} ${lastName}`;
+              const parseBalance = parseFloat(amount);
+              const localeStringBalance = parseBalance.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'PHP',
+              });
 
-                return (
-                  <tr
-                    key={key}
-                    data-row=""
-                    data-row-account-number={accountNumber}
-                  >
-                    <td data-reference-number={referenceNumber}>
-                      {referenceNumber}
-                    </td>
-                    <td data-account-number={date}>{date}</td>
-                    <td>{description}</td>
-                    <td>
-                      <ActionsViewButton
-                        onClick={() => {
-                          handleShowTransaction(
-                            referenceNumber,
-                            accountNumber,
-                            email,
-                            firstName,
-                            lastName,
-                            date,
-                            description,
-                            amount,
-                            prevBalance,
-                            currentBalance
-                          );
-                        }}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
+              return (
+                <tr
+                  key={key}
+                  data-row=""
+                  data-row-account-number={accountNumber}
+                >
+                  <td data-reference-number={referenceNumber}>
+                    {referenceNumber}
+                  </td>
+                  <td data-account-number={date}>{date}</td>
+                  <td>{description}</td>
+                  <td>
+                    <ActionsViewButton
+                      onClick={() => {
+                        handleShowTransaction(
+                          referenceNumber,
+                          accountNumber,
+                          email,
+                          firstName,
+                          lastName,
+                          date,
+                          description,
+                          amount,
+                          prevBalance,
+                          currentBalance
+                        );
+                      }}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
