@@ -50,8 +50,11 @@ const Home = ({ email, users }) => {
   const transferAccountNumberRef = useRef(null);
   const transferAmountRef = useRef(null);
 
-  const expenseItemRef = useRef(null);
-  const expenseAmountRef = useRef(null);
+  const expenseItemAddRef = useRef(null);
+  const expenseAmountAddRef = useRef(null);
+
+  const expenseItemEditRef = useRef(null);
+  const expenseAmountEditRef = useRef(null);
 
   useEffect(() => {
     const currentUser = userList.find((obj) => obj.email === email);
@@ -360,15 +363,6 @@ const Home = ({ email, users }) => {
     const newExpenses = expenses.filter((u) => u.id !== id);
 
     setExpense(newExpenses);
-    // updateTransactionListLocalStorage(newUsers);
-    handleAlert(`success`, `Success!`, `Expense has been successfully deleted`);
-  };
-
-  const handleAddExpense = (id) => {
-    const newExpenses = expenses.filter((u) => u.id !== id);
-
-    setExpense(newExpenses);
-    // updateTransactionListLocalStorage(newUsers);
     handleAlert(`success`, `Success!`, `Expense has been successfully deleted`);
   };
 
@@ -377,15 +371,15 @@ const Home = ({ email, users }) => {
 
     const expense = expenses.find((u) => u.id === id);
 
-    expenseItemRef.current.value = expense.item;
-    expenseAmountRef.current.value = expense.amount;
+    expenseItemEditRef.current.value = expense.item;
+    expenseAmountEditRef.current.value = expense.amount;
 
     setExpenseId(id);
   };
 
   const resetEditExenseForm = () => {
-    expenseItemRef.current.value = '';
-    expenseAmountRef.current.value = '';
+    expenseItemEditRef.current.value = '';
+    expenseAmountEditRef.current.value = '';
   };
 
   const handleEditExpense = (e) => {
@@ -395,12 +389,37 @@ const Home = ({ email, users }) => {
       (u) => u.id === parseInt(expenseId)
     );
 
-    expenses[expenseIndex].item = `${expenseItemRef.current.value}`;
-    expenses[expenseIndex].amount = parseFloat(expenseAmountRef.current.value);
+    expenses[expenseIndex].item = `${expenseItemEditRef.current.value}`;
+    expenses[expenseIndex].amount = parseFloat(
+      expenseAmountEditRef.current.value
+    );
 
-    handleAlert(`success`, `Success!`, `User has been successfully edited`);
+    handleAlert(`success`, `Success!`, `Expense has been successfully edited`);
     handleCloseEditExpense();
     resetEditExenseForm();
+  };
+
+  const resetAddExenseForm = () => {
+    expenseItemAddRef.current.value = '';
+    expenseAmountAddRef.current.value = '';
+  };
+
+  const handleAddExpense = (e) => {
+    e.preventDefault();
+
+    const newExpenseId = new Date().getTime();
+    const expenseData = {
+      id: parseInt(newExpenseId),
+      item: expenseAmountAddRef.current.value,
+      amount: parseFloat(expenseAmountAddRef.current.value),
+    };
+
+    setExpense((state) => [expenseData, ...state]);
+
+    handleAlert(`success`, `Success!`, `Expense has been successfully created`);
+
+    handleCloseAddExpense();
+    resetAddExenseForm();
   };
 
   const handleCloseEditExpense = () => setShowEditExpense('none');
@@ -568,15 +587,18 @@ const Home = ({ email, users }) => {
         transferAccountNumberRef={transferAccountNumberRef}
       />
       <UserAddExpenseForm
+        handleAddExpense={handleAddExpense}
         showAddExpense={showAddExpense}
         handleCloseAddExpense={handleCloseAddExpense}
+        expenseItemAddRef={expenseItemAddRef}
+        expenseAmountAddRef={expenseAmountAddRef}
       />
       <UserEditExpenseForm
         handleEditExpense={handleEditExpense}
         showEditExpense={showEditExpense}
         handleCloseEditExpense={handleCloseEditExpense}
-        expenseItemRef={expenseItemRef}
-        expenseAmountRef={expenseAmountRef}
+        expenseItemEditRef={expenseItemEditRef}
+        expenseAmountEditRef={expenseAmountEditRef}
       />
     </main>
   );
