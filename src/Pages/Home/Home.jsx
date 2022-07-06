@@ -6,6 +6,7 @@ import UserTransferForm from '../../Components/Form/UserTransferForm';
 import UserAddExpenseForm from '../../Components/Form/UserAddExpenseForm';
 import ActionsEditButton from '../../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../../Components/Button/ActionsDeleteButton';
+import Alert from '../../Components/Alert/Alert';
 
 const Home = ({ email, users }) => {
   const [userList, setUserList] = useState(users);
@@ -20,6 +21,10 @@ const Home = ({ email, users }) => {
   const [displayBalance, setDisplayBalance] = useState('');
   const [showExpense, setShowExpense] = useState('none');
   const [transaction, setTransaction] = useState([]);
+  const [showAlert, setShowAlert] = useState('none');
+  const [alertType, setAlertType] = useState('');
+  const [alertHeader, setAlertHeader] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
 
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
@@ -41,6 +46,18 @@ const Home = ({ email, users }) => {
     setTransaction(JSON.parse(localStorage.getItem('transactionList')));
   }, []);
 
+  const handleAlert = (alertType, alertHeader, alertMessage) => {
+    setAlertType(alertType);
+    setAlertHeader(alertHeader);
+    setAlertMessage(alertMessage);
+    setShowAlert('block');
+    setTimeout(handleCloseAlert, 5000);
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert('none');
+  };
+
   const updateTransactionListLocalStorage = (item) => {
     localStorage.setItem('transactionList', JSON.stringify(item));
   };
@@ -61,7 +78,7 @@ const Home = ({ email, users }) => {
     const totalBalance = prevBalance - withdrawAmount;
 
     if (withdrawAmount > prevBalance) {
-      alert('Insufficient balance.');
+      handleAlert(`danger`, `Failed!`, `User has insufficient balance`);
     } else {
       userList[userIndex].balance = totalBalance;
 
@@ -99,7 +116,13 @@ const Home = ({ email, users }) => {
 
       setTransaction((state) => [newTransaction, ...state]);
       updateTransactionListLocalStorage([newTransaction, ...transaction]);
+      handleAlert(
+        `success`,
+        `Success!`,
+        `Money has been successfully withdrew`
+      );
     }
+
     handleCloseWithdraw();
     handleResetWithdrawForm();
   };
@@ -155,6 +178,7 @@ const Home = ({ email, users }) => {
     );
 
     localStorage.setItem('userList', JSON.stringify(userList));
+    handleAlert(`success`, `Success!`, `Money has been successfully deposited`);
     handleCloseDeposit();
     handleResetDepositForm();
   };
@@ -188,7 +212,7 @@ const Home = ({ email, users }) => {
     const transferUserIndex = setUserIndex(transferAccountNumber);
 
     if (transferUserIndex === -1) {
-      alert(`User account number does not exist`);
+      handleAlert(`danger`, `Failed!`, `User account number does not exist`);
     } else {
       const userIndex = userList.findIndex((obj) => obj.email === email);
       const user = userList[userIndex];
@@ -199,7 +223,7 @@ const Home = ({ email, users }) => {
       const transferUserTotalBalance = transferUserPrevBalance + transferAmount;
 
       if (transferAmount > userPrevBalance) {
-        alert(`User has insufficient balance`);
+        handleAlert(`danger`, `Failed!`, `User has insufficient balance`);
       } else {
         user.balance = totalBalance;
         transferUser.balance = transferUserTotalBalance;
@@ -238,7 +262,11 @@ const Home = ({ email, users }) => {
         );
 
         localStorage.setItem('userList', JSON.stringify(userList));
-        alert(`success`, `Success!`, `Money has been successfully transferred`);
+        handleAlert(
+          `success`,
+          `Success!`,
+          `Money has been successfully transferred`
+        );
       }
     }
 
@@ -270,9 +298,24 @@ const Home = ({ email, users }) => {
     depositAmountRef.current.value = '';
   };
 
+  const displayAlert = () => {
+    if (showAlert === 'block') {
+      return (
+        <Alert
+          alertType={alertType}
+          alertHeader={alertHeader}
+          alertText={alertMessage}
+          showAlert={showAlert}
+          onClick={handleCloseAlert}
+        />
+      );
+    }
+  };
+
   return (
     <main>
       <h2 className="page-header">Home</h2>
+      {displayAlert()}
       <div className="flex-center">
         <div className="balance-card">
           <div className="account-number-header-text">
