@@ -18,10 +18,12 @@ const UserTransactions = ({ users, email }) => {
   const [amount, setAmount] = useState(null);
   const [prevBalance, setPrevBalance] = useState(null);
   const [currentBalance, setCurrentBalance] = useState(null);
+  const [currentEmail, setCurrentEmail] = useState('');
 
   useEffect(() => {
     setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
     setUserList(JSON.parse(localStorage.getItem('userList')));
+    setCurrentEmail(localStorage.getItem('email'));
   }, []);
 
   const handleShowTransaction = (
@@ -73,6 +75,7 @@ const UserTransactions = ({ users, email }) => {
           <TransactionsTable
             transactionList={transactionList}
             handleShowTransaction={handleShowTransaction}
+            currentEmail={currentEmail}
           />
         </div>
       </div>
