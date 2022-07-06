@@ -3,6 +3,7 @@ import * as BoxIcons from 'react-icons/bi';
 import UserWithdrawForm from '../../Components/Form/UserWithdrawForm';
 import UserDepositForm from '../../Components/Form/UserDepositForm';
 import UserTransferForm from '../../Components/Form/UserTransferForm';
+import UserAddExpenseForm from '../../Components/Form/UserAddExpenseForm';
 import ActionsEditButton from '../../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../../Components/Button/ActionsDeleteButton';
 
@@ -17,6 +18,7 @@ const Home = ({ email, users }) => {
   const [transferAmount, setTransferAmount] = useState(null);
   const [transferAccountNumber, setTransferAccountNumber] = useState(null);
   const [displayBalance, setDisplayBalance] = useState('');
+  const [showExpense, setShowExpense] = useState('none');
 
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
@@ -159,6 +161,14 @@ const Home = ({ email, users }) => {
     handleCloseTransfer();
   };
 
+  const handleShowExpense = () => {
+    setShowExpense('block');
+  };
+
+  const handleCloseExpense = () => {
+    setShowExpense('none');
+  };
+
   const handleWithdrawAmount = (e) => {
     setWithdrawAmount(parseFloat(e.target.value));
   };
@@ -250,7 +260,12 @@ const Home = ({ email, users }) => {
       </div>
       <div className="add-expense-container">
         <div className="flex-center">
-          <button className="btn-create-user btn-primary">Add Expense</button>
+          <button
+            className="btn-create-user btn-primary"
+            onClick={handleShowExpense}
+          >
+            Add Expense
+          </button>
         </div>
       </div>
       <div className="flex-center">
@@ -407,6 +422,10 @@ const Home = ({ email, users }) => {
         handleTransferAccountNumber={handleTransferAccountNumber}
         transferAmountRef={transferAmountRef}
         transferAccountNumberRef={transferAccountNumberRef}
+      />
+      <UserAddExpenseForm
+        showExpense={showExpense}
+        handleCloseExpense={handleCloseExpense}
       />
     </main>
   );
