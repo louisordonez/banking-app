@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar/Navbar';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Users from './Pages/Users/Users';
 import Transactions from './Pages/Transactions/Transactions';
+import UserTransactions from './Pages/Transactions/UserTransactions';
 import Settings from './Pages/Settings/Settings';
 import Home from './Pages/Home/Home';
 import { USER_LIST } from './UserList';
@@ -177,7 +178,10 @@ const App = () => {
             }
           />
           <Route path="users" element={<Users userList={users} />} />
-          <Route path="transactions" element={<Transactions />} />
+          <Route
+            path="transactions"
+            element={<Transactions email={email} users={users} />}
+          />
           <Route path="settings" element={<Settings userList={users} />} />
         </Routes>
       </Router>
@@ -191,7 +195,7 @@ const App = () => {
           <Route path="users" element={<Users />} />
           <Route
             path="transactions"
-            element={<Transactions email={email} users={users} />}
+            element={<UserTransactions email={email} users={users} />}
           />
           <Route path="settings" element={<Settings userList={users} />} />
         </Routes>
