@@ -9,7 +9,7 @@ const Dashboard = () => {
   useEffect(() => {
     const userList = JSON.parse(localStorage.getItem('userList'));
 
-    setTotalUsers(userList.length - 1);
+    setTotalUsers(userList.length);
 
     let total = 0;
 
