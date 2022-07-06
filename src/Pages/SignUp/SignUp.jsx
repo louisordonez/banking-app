@@ -38,18 +38,18 @@ const SignUp = ({
                 <form onSubmit={handleSignUp}>
                   <div className="create-user-flex">
                     <div>
+                      <p className="user-modal-label">First Name</p>
                       <input
                         className="user-input-text"
-                        placeholder="First Name"
                         type="text"
                         ref={firstNameSignUpRef}
                         required
                       />
                     </div>
                     <div>
+                      <p className="user-modal-label">Last Name</p>
                       <input
                         className="user-input-text"
-                        placeholder="Last Name"
                         type="text"
                         ref={lastNameSignUpRef}
                         required
@@ -58,6 +58,7 @@ const SignUp = ({
                   </div>
                   <div className="create-user-flex">
                     <div>
+                      <p className="user-modal-label">Birthdate</p>
                       <input
                         className="user-input-text"
                         placeholder="Birthdate"
@@ -67,6 +68,7 @@ const SignUp = ({
                       />
                     </div>
                     <div>
+                      <p className="user-modal-label">Gender</p>
                       <select
                         className="user-input-text"
                         defaultValue={''}
@@ -83,18 +85,18 @@ const SignUp = ({
                   </div>
                   <div className="create-user-flex">
                     <div>
+                      <p className="user-modal-label">Email</p>
                       <input
                         className="user-input-text"
-                        placeholder="Email"
                         type="email"
                         ref={emailSignUpRef}
                         required
                       />
                     </div>
                     <div>
+                      <p className="user-modal-label">Password</p>
                       <input
                         className="user-input-text"
-                        placeholder="Password"
                         type="password"
                         ref={passwordSignUpRef}
                         required
@@ -102,18 +104,24 @@ const SignUp = ({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link to="/">
+                    <div className="create-user-flex" style={{ width: `100%` }}>
                       <input
-                        className="btn-small btn-cancel"
-                        type="button"
-                        value="Log In"
+                        className="btn-small btn-primary"
+                        style={{ width: `100%` }}
+                        type="submit"
+                        value="Sign Up"
                       />
-                    </Link>
-                    <input
-                      className="btn-small btn-primary"
-                      type="submit"
-                      value="Submit"
-                    />
+                    </div>
+                    <div className="create-user-flex flex-center">
+                      <Link to="/">
+                        <input
+                          style={{ width: `100%`, marginTop: `1rem` }}
+                          className="btn-small btn-cancel btn-modal-cancel"
+                          type="button"
+                          value="Log In"
+                        />
+                      </Link>
+                    </div>
                   </div>
                 </form>
               </div>

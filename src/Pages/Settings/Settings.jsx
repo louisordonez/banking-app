@@ -10,7 +10,6 @@ const Settings = ({ userList }) => {
   const [alertHeader, setAlertHeader] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
 
-  const accountNumberSettingsRef = useRef(null);
   const firstNameSettingsRef = useRef(null);
   const lastNameSettingsRef = useRef(null);
   const birthdateSettingsRef = useRef(null);
@@ -27,7 +26,6 @@ const Settings = ({ userList }) => {
     const user = users.find((u) => u.email === email);
 
     if (user !== undefined) {
-      accountNumberSettingsRef.current.value = user.accountNumber;
       firstNameSettingsRef.current.value = user.firstName;
       lastNameSettingsRef.current.value = user.lastName;
       birthdateSettingsRef.current.value = user.birthdate;
@@ -98,7 +96,6 @@ const Settings = ({ userList }) => {
       {displayAlert()}
       <SettingsForm
         handleSettingsEdit={handleSettingsEdit}
-        accountNumberSettingsRef={accountNumberSettingsRef}
         firstNameSettingsRef={firstNameSettingsRef}
         lastNameSettingsRef={lastNameSettingsRef}
         birthdateSettingsRef={birthdateSettingsRef}

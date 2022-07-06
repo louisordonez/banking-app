@@ -2,7 +2,6 @@ import React from 'react';
 
 const SettingsForm = ({
   handleSettingsEdit,
-  accountNumberSettingsRef,
   firstNameSettingsRef,
   lastNameSettingsRef,
   birthdateSettingsRef,
@@ -22,29 +21,18 @@ const SettingsForm = ({
           <form onSubmit={handleSettingsEdit}>
             <div className="create-user-flex">
               <div>
+                <p className="user-modal-label">First Name</p>
                 <input
                   className="user-input-text"
-                  placeholder="Account Number"
-                  type="number"
-                  ref={accountNumberSettingsRef}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="create-user-flex">
-              <div>
-                <input
-                  className="user-input-text"
-                  placeholder="First Name"
                   type="text"
                   ref={firstNameSettingsRef}
                   required
                 />
               </div>
               <div>
+                <p className="user-modal-label">Last Name</p>
                 <input
                   className="user-input-text"
-                  placeholder="Last Name"
                   type="text"
                   ref={lastNameSettingsRef}
                   required
@@ -53,15 +41,16 @@ const SettingsForm = ({
             </div>
             <div className="create-user-flex">
               <div>
+                <p className="user-modal-label">Birthdate</p>
                 <input
                   className="user-input-text"
-                  placeholder="Birthdate"
                   type="date"
                   ref={birthdateSettingsRef}
                   required
                 />
               </div>
               <div>
+                <p className="user-modal-label">Gender</p>
                 <select
                   className="user-input-text"
                   required
@@ -74,6 +63,7 @@ const SettingsForm = ({
             </div>
             <div className="create-user-flex">
               <div>
+                <p className="user-modal-label">Email</p>
                 <input
                   className="user-input-text"
                   placeholder="Email"
@@ -83,6 +73,7 @@ const SettingsForm = ({
                 />
               </div>
               <div>
+                <p className="user-modal-label">Password</p>
                 <input
                   className="user-input-text"
                   placeholder="Password"
@@ -93,11 +84,13 @@ const SettingsForm = ({
               </div>
             </div>
             <div className="modal-footer">
-              <input
-                className="btn-small btn-primary"
-                type="submit"
-                value="Submit"
-              />
+              <div className="create-user-flex">
+                <input
+                  className="btn-small btn-primary btn-modal"
+                  type="submit"
+                  value="Submit"
+                />
+              </div>
             </div>
           </form>
         </div>

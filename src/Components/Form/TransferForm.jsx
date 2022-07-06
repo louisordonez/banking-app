@@ -23,21 +23,16 @@ const TransferForm = ({
           <div className="modal-body">
             <form onSubmit={handleTransfer}>
               <div className="create-user-flex">
-                <p className="user-modal-text user-modal-text-margin user-modal-text-info">
+                <span className="user-modal-text user-modal-text-margin user-modal-text-info">
                   Name
                   <p className="user-modal-text">{fullName}</p>
-                </p>
+                </span>
               </div>
               <div className="create-user-flex">
-                <p className="user-modal-text user-modal-text-margin user-modal-text-info">
+                <span className="user-modal-text user-modal-text-margin user-modal-text-info">
                   Balance
-                  <p className="user-modal-text">
-                    {balance.toLocaleString('en-US', {
-                      style: 'currency',
-                      currency: 'PHP',
-                    })}
-                  </p>
-                </p>
+                  <p className="user-modal-text">{balance}</p>
+                </span>
               </div>
               <div className="create-user-flex">
                 <div style={{ width: '100%' }}>

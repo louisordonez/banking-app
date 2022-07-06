@@ -145,12 +145,19 @@ const Users = ({ userList }) => {
     resetCreateUserForm();
   };
 
+  const displayBalanceLocaleString = (prevBalance) => {
+    return prevBalance.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'PHP',
+    });
+  };
+
   const handleShowWithdraw = (accountNumber, firstName, lastName, balance) => {
     setShowWithdraw('block');
     setAccountNumber(accountNumber);
     setFirstName(firstName);
     setLastName(lastName);
-    setBalance(balance);
+    setBalance(displayBalanceLocaleString(balance));
   };
 
   const handleCloseWithdraw = () => setShowWithdraw('none');
@@ -192,7 +199,7 @@ const Users = ({ userList }) => {
     setAccountNumber(accountNumber);
     setFirstName(firstName);
     setLastName(lastName);
-    setBalance(balance);
+    setBalance(displayBalanceLocaleString(balance));
   };
 
   const handleCloseDeposit = () => setShowDeposit('none');
@@ -227,7 +234,7 @@ const Users = ({ userList }) => {
     setFirstName(firstName);
     setLastName(lastName);
     setFullName(`${firstName} ${lastName}`);
-    setBalance(balance);
+    setBalance(displayBalanceLocaleString(balance));
   };
 
   const handleCloseTransfer = () => {

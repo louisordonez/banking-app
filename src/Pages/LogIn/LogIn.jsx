@@ -34,18 +34,18 @@ const LogIn = ({
                 <form onSubmit={handleLogin}>
                   <div className="create-user-flex">
                     <div>
+                      <p className="user-modal-label">Email</p>
                       <input
                         className="user-input-text"
-                        placeholder="Email"
                         type="email"
                         ref={emailRef}
                         required
                       />
                     </div>
                     <div>
+                      <p className="user-modal-label">Password</p>
                       <input
                         className="user-input-text"
-                        placeholder="Password"
                         type="password"
                         ref={passwordRef}
                         required
@@ -53,18 +53,24 @@ const LogIn = ({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link to="/signup">
+                    <div className="create-user-flex" style={{ width: `100%` }}>
                       <input
-                        className="btn-small btn-cancel"
-                        type="button"
-                        value="Sign Up"
+                        className="btn-small btn-primary"
+                        style={{ width: `100%` }}
+                        type="submit"
+                        value="Log In"
                       />
-                    </Link>
-                    <input
-                      className="btn-small btn-primary"
-                      type="submit"
-                      value="Log In"
-                    />
+                    </div>
+                    <div className="create-user-flex flex-center">
+                      <Link to="/signup">
+                        <input
+                          style={{ width: `100%`, marginTop: `1rem` }}
+                          className="btn-small btn-cancel btn-modal-cancel"
+                          type="button"
+                          value="Sign Up"
+                        />
+                      </Link>
+                    </div>
                   </div>
                 </form>
               </div>
