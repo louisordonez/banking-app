@@ -21,7 +21,11 @@ const UserTransactions = ({ users, email }) => {
   const [currentEmail, setCurrentEmail] = useState('');
 
   useEffect(() => {
-    setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
+    setTransactionList(
+      JSON.parse(localStorage.getItem('transactionList')).filter(
+        (u) => u.email !== currentEmail
+      )
+    );
     setUserList(JSON.parse(localStorage.getItem('userList')));
     setCurrentEmail(localStorage.getItem('email'));
   }, []);
