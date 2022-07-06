@@ -27,7 +27,7 @@ const SignUp = ({
       />
       <main>
         <div className="center">
-          <div className="modal center">
+          <div className="modal center landing-modal-bg">
             <div className="modal-content center">
               <div className="modal-header">
                 <div>
