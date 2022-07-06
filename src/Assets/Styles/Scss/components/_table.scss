@@ -9,7 +9,7 @@
   button {
     text-align: center;
     margin: 0.5rem;
-    border: 0.1rem solid #f2f2f2;
+    border: 0.1rem solid #e4e4e4;
     width: 3rem;
     height: 3rem;
     border-radius: 1rem;
@@ -54,7 +54,6 @@ table {
   width: 100%;
   border-spacing: 0rem;
 }
-
 tr {
   &:hover {
     background: #f9fafe;
@@ -64,8 +63,8 @@ tr {
 th {
   height: 3.4rem;
   font-size: 1.6rem;
-  color: var(--black);
-  background-color: #f9fafe;
+  color: var(--white);
+  background-color: var(--fourth-color);
   font-weight: 400;
   text-align: center;
 }
@@ -89,7 +88,6 @@ th {
 td {
   height: 1.7rem;
   font-size: 1.4rem;
-  color: #798ba3;
   padding: 1.2rem;
   text-align: center;
 }
