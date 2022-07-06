@@ -28,6 +28,7 @@ const Users = ({ userList }) => {
   const [alertType, setAlertType] = useState('');
   const [alertHeader, setAlertHeader] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
+  const [transaction, setTransaction] = useState([]);
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -67,6 +68,10 @@ const Users = ({ userList }) => {
 
   const updateUserListLocalStorage = (item) => {
     localStorage.setItem('userList', JSON.stringify(item));
+  };
+
+  const updateTransactionListLocalStorage = (item) => {
+    localStorage.setItem('transactionList', JSON.stringify(item));
   };
 
   const handleCloseAlert = () => {
@@ -182,7 +187,33 @@ const Users = ({ userList }) => {
       handleAlert(`danger`, `Failed!`, `User has insufficient balance`);
     } else {
       user.balance = totalBalance;
+
       updateUserListLocalStorage(users);
+
+      const referenceNumber = parseInt(new Date().getTime());
+      const date = new Date().toLocaleString('en-US', {
+        hour12: false,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+      const newTransaction = {
+        referenceNumber: referenceNumber,
+        accountNumber: accountNumber,
+        firstName: firstName,
+        lastName: lastName,
+        date: date,
+        description: 'Withdraw',
+        amount: withdrawAmount,
+        prevBalance: userPrevBalance,
+        currentBalance: totalBalance,
+      };
+
+      setTransaction((state) => [newTransaction, ...state]);
+      updateTransactionListLocalStorage([newTransaction, ...transaction]);
       handleAlert(
         `success`,
         `Success!`,
@@ -223,6 +254,32 @@ const Users = ({ userList }) => {
     user.balance = totalBalance;
 
     updateUserListLocalStorage(users);
+
+    const referenceNumber = parseInt(new Date().getTime());
+    const date = new Date().toLocaleString('en-US', {
+      hour12: false,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+    const newTransaction = {
+      referenceNumber: referenceNumber,
+      accountNumber: accountNumber,
+      firstName: firstName,
+      lastName: lastName,
+      date: date,
+      description: 'Deposit',
+      amount: depositAmount,
+      prevBalance: userPrevBalance,
+      currentBalance: totalBalance,
+    };
+
+    setTransaction((state) => [newTransaction, ...state]);
+    updateTransactionListLocalStorage([newTransaction, ...transaction]);
+
     handleAlert(`success`, `Success!`, `Money has been successfully deposited`);
     handleCloseDeposit();
     resetDepositForm();
@@ -277,6 +334,32 @@ const Users = ({ userList }) => {
         transferUser.balance = transferUserTotalBalance;
 
         updateUserListLocalStorage(users);
+
+        const referenceNumber = parseInt(new Date().getTime());
+        const date = new Date().toLocaleString('en-US', {
+          hour12: false,
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        });
+        const newTransaction = {
+          referenceNumber: referenceNumber,
+          accountNumber: accountNumber,
+          firstName: firstName,
+          lastName: lastName,
+          date: date,
+          description: `${accountNumber} Transfer to ${transferUser.accountNumber}`,
+          amount: transferAmount,
+          prevBalance: userPrevBalance,
+          currentBalance: totalBalance,
+        };
+
+        setTransaction((state) => [newTransaction, ...state]);
+        updateTransactionListLocalStorage([newTransaction, ...transaction]);
+
         handleAlert(
           `success`,
           `Success!`,
