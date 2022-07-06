@@ -119,6 +119,7 @@ const App = () => {
 
         handleIsLoggedIn(true);
         setIsLoggedIn(true);
+        window.location.assign('/');
       } else {
         handleAlert(`danger`, `Failed!`, `Check your email and password`);
       }
