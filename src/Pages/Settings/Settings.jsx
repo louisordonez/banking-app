@@ -42,30 +42,28 @@ const Settings = ({ userList }) => {
 
     const userIndex = users.findIndex((u) => u.email === email);
     const user = users.find((u) => u.email === email);
-
-    console.log(userIndex);
+    const existingUser = users.find(
+      (u) => u.email === emailSettingsRef.current.value
+    );
 
     if (user !== undefined) {
       if (
-        user.accountNumber !==
-          parseInt(accountNumberSettingsRef.current.value) &&
-        user.email === emailSettingsRef.current.value
+        existingUser !== undefined &&
+        parseInt(existingUser.accountNumber) !== user.accountNumber
       ) {
         handleAlert(`danger`, `Failed!`, `Email has already been taken`);
       } else {
-        // users[userIndex].firstName = `${firstNameEditRef.current.value}`;
-        // users[userIndex].lastName = `${lastNameEditRef.current.value}`;
-        // users[userIndex].birthdate = `${birthdateEditRef.current.value}`;
-        // users[userIndex].gender = `${genderEditRef.current.value}`;
-        // users[userIndex].email = `${emailEditRef.current.value}`;
-        // users[userIndex].password = `${passwordEditRef.current.value}`;
-
-        // localStorage.setItem('userList', JSON.stringify(users));
+        users[userIndex].firstName = `${firstNameSettingsRef.current.value}`;
+        users[userIndex].lastName = `${lastNameSettingsRef.current.value}`;
+        users[userIndex].birthdate = `${birthdateSettingsRef.current.value}`;
+        users[userIndex].gender = `${genderSettingsRef.current.value}`;
+        users[userIndex].email = `${emailSettingsRef.current.value}`;
+        users[userIndex].password = `${passwordSettingsRef.current.value}`;
+        localStorage.setItem('email', emailSettingsRef.current.value);
+        localStorage.setItem('userList', JSON.stringify(users));
         handleAlert(`success`, `Success!`, `User has been successfully edited`);
       }
     }
-
-    // resetEditCreateUserForm();
   };
 
   const handleCloseAlert = () => {

@@ -316,13 +316,17 @@ const Users = ({ userList }) => {
     const userIndex = users.findIndex(
       (u) => u.accountNumber === parseInt(accountNumberEditRef.current.value)
     );
-
-    const user = users.find((u) => u.email === emailEditRef.current.value);
+    const user = users.find(
+      (u) => u.accountNumber === parseInt(accountNumberEditRef.current.value)
+    );
+    const existingUser = users.find(
+      (u) => u.email === emailEditRef.current.value
+    );
 
     if (user !== undefined) {
       if (
-        user.accountNumber !== parseInt(accountNumberEditRef.current.value) &&
-        user.email === emailEditRef.current.value
+        existingUser !== undefined &&
+        parseInt(existingUser.accountNumber) !== users[userIndex].accountNumber
       ) {
         handleAlert(`danger`, `Failed!`, `Email has already been taken`);
       } else {
