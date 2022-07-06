@@ -53,6 +53,7 @@ const Users = ({ userList }) => {
 
   useEffect(() => {
     setUsers(JSON.parse(localStorage.getItem('userList')));
+    setTransaction(JSON.parse(localStorage.getItem('transactionList')));
     removeAdmin();
   }, []);
 
