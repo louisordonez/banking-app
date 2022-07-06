@@ -34,6 +34,7 @@ const App = () => {
 
   useEffect(() => {
     const userList = JSON.parse(localStorage.getItem('userList'));
+    const transactionList = JSON.parse(localStorage.getItem('transactionList'));
     const isLoggedInLocalStorage = localStorage.getItem('isLoggedIn');
     const roleLocalStorage = localStorage.getItem('role');
     const emailLocalStorage = localStorage.getItem('email');
@@ -60,6 +61,10 @@ const App = () => {
       setUsers(userList);
     } else {
       loadUserListLocalStorage();
+    }
+
+    if (transactionList === null) {
+      localStorage.setItem('transactionList', JSON.stringify([]));
     }
   }, []);
 

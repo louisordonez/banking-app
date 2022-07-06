@@ -2,7 +2,7 @@ import React from 'react';
 import SearchInput from '../Input/SearchInput';
 import ActionsViewButton from '../Button/ActionsViewButton';
 
-const TransactionsTable = ({ transaction }) => {
+const TransactionsTable = ({ transactionList }) => {
   return (
     <div className="table">
       <div className="table-header">
@@ -28,7 +28,7 @@ const TransactionsTable = ({ transaction }) => {
             </tr>
           </thead>
           <tbody>
-            {transaction.map((val, key) => {
+            {transactionList.map((val, key) => {
               const {
                 referenceNumber,
                 accountNumber,
