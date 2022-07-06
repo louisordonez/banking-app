@@ -8,6 +8,19 @@ import ActionsEditButton from '../../Components/Button/ActionsEditButton';
 import ActionsDeleteButton from '../../Components/Button/ActionsDeleteButton';
 import Alert from '../../Components/Alert/Alert';
 
+const EXPENSE_LIST = [
+  {
+    id: 1,
+    item: `Tution Fee`,
+    amount: 80000.0,
+  },
+  {
+    id: 2,
+    item: `Electricity`,
+    amount: 1000.0,
+  },
+];
+
 const Home = ({ email, users }) => {
   const [userList, setUserList] = useState(users);
   const [showWithdraw, setShowWithdraw] = useState('none');
@@ -25,6 +38,7 @@ const Home = ({ email, users }) => {
   const [alertType, setAlertType] = useState('');
   const [alertHeader, setAlertHeader] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
+  const [expenses, setExpense] = useState(EXPENSE_LIST);
 
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
@@ -312,6 +326,16 @@ const Home = ({ email, users }) => {
     }
   };
 
+  const handleDelete = (id) => {
+    const newExpenses = expenses.filter((u) => u.id !== id);
+
+    setExpense(newExpenses);
+    // updateTransactionListLocalStorage(newUsers);
+    handleAlert(`success`, `Success!`, `Expense has been successfully deleted`);
+  };
+
+  const handleShowEdit = () => {};
+
   return (
     <main>
       <h2 className="page-header">Home</h2>
@@ -411,118 +435,35 @@ const Home = ({ email, users }) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Tuition Fee</td>
-                  <td>80,000.00</td>
-                  <td>
-                    <ActionsEditButton
-                    // onClick={() => {
-                    //   handleShowEdit(accountNumber);
-                    // }}
-                    />
-                    <ActionsDeleteButton
-                    // onClick={() => {
-                    //   handleDelete(accountNumber);
-                    // }}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Tuition Fee</td>
-                  <td>80,000.00</td>
-                  <td>
-                    <ActionsEditButton
-                    // onClick={() => {
-                    //   handleShowEdit(accountNumber);
-                    // }}
-                    />
-                    <ActionsDeleteButton
-                    // onClick={() => {
-                    //   handleDelete(accountNumber);
-                    // }}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Tuition Fee</td>
-                  <td>80,000.00</td>
-                  <td>
-                    <ActionsEditButton
-                    // onClick={() => {
-                    //   handleShowEdit(accountNumber);
-                    // }}
-                    />
-                    <ActionsDeleteButton
-                    // onClick={() => {
-                    //   handleDelete(accountNumber);
-                    // }}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Tuition Fee</td>
-                  <td>80,000.00</td>
-                  <td>
-                    <ActionsEditButton
-                    // onClick={() => {
-                    //   handleShowEdit(accountNumber);
-                    // }}
-                    />
-                    <ActionsDeleteButton
-                    // onClick={() => {
-                    //   handleDelete(accountNumber);
-                    // }}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Tuition Fee</td>
-                  <td>80,000.00</td>
-                  <td>
-                    <ActionsEditButton
-                    // onClick={() => {
-                    //   handleShowEdit(accountNumber);
-                    // }}
-                    />
-                    <ActionsDeleteButton
-                    // onClick={() => {
-                    //   handleDelete(accountNumber);
-                    // }}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Tuition Fee</td>
-                  <td>80,000.00</td>
-                  <td>
-                    <ActionsEditButton
-                    // onClick={() => {
-                    //   handleShowEdit(accountNumber);
-                    // }}
-                    />
-                    <ActionsDeleteButton
-                    // onClick={() => {
-                    //   handleDelete(accountNumber);
-                    // }}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Tuition Fee</td>
-                  <td>80,000.00</td>
-                  <td>
-                    <ActionsEditButton
-                    // onClick={() => {
-                    //   handleShowEdit(accountNumber);
-                    // }}
-                    />
-                    <ActionsDeleteButton
-                    // onClick={() => {
-                    //   handleDelete(accountNumber);
-                    // }}
-                    />
-                  </td>
-                </tr>
+                {expenses.map((val, key) => {
+                  const { id, item, amount } = val;
+                  const parseAmount = parseFloat(amount);
+                  const localeStringAmount = parseAmount.toLocaleString(
+                    'en-US',
+                    {
+                      style: 'currency',
+                      currency: 'PHP',
+                    }
+                  );
+                  return (
+                    <tr>
+                      <td>{item}</td>
+                      <td>{localeStringAmount}</td>
+                      <td>
+                        <ActionsEditButton
+                          onClick={() => {
+                            handleShowEdit(id);
+                          }}
+                        />
+                        <ActionsDeleteButton
+                          onClick={() => {
+                            handleDelete(id);
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
