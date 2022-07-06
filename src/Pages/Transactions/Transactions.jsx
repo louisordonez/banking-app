@@ -65,12 +65,30 @@ const Transactions = ({ users, email }) => {
   };
   const handleCloseTransaction = () => setShowTransactionDetails('none');
 
+  const handleTransactionSearch = (e) => {
+    const referenceNumber = e.target.value;
+
+    const tr = document.querySelectorAll('[data-row]');
+    const td = document.querySelectorAll('[data-reference-number]');
+
+    for (let i = 0; i < tr.length; i++) {
+      let trValue = td[i].textContent;
+
+      if (trValue.indexOf(referenceNumber) > -1) {
+        tr[i].style.display = '';
+      } else {
+        tr[i].style.display = 'none';
+      }
+    }
+  };
+
   return (
     <main>
       <h2 className="page-header">Transactions</h2>
       <div className="user-container">
         <div className="flex-center table-whole transactions-container">
           <TransactionsTable
+            handleTransactionSearch={handleTransactionSearch}
             transactionList={transactionList}
             handleShowTransaction={handleShowTransaction}
           />

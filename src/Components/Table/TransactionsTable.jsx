@@ -6,6 +6,7 @@ const TransactionsTable = ({
   handleShowTransaction,
   transactionList,
   currentEmail,
+  handleTransactionSearch,
 }) => {
   return (
     <div className="table">
@@ -15,7 +16,7 @@ const TransactionsTable = ({
           <div>
             <SearchInput
               placeholder={`Enter reference number`}
-              // handleSearch={handleSearch}
+              handleSearch={handleTransactionSearch}
               type={`number`}
             />
           </div>
