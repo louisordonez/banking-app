@@ -1,35 +1,35 @@
 import React from 'react';
 
-const ViewTransaction = ({ showTransaction }) => {
+const ViewTransactionModal = ({ showTransactionDetails, transactionList }) => {
   return (
-    <div style={{ display: `${showTransaction}` }}>
+    <div style={{ display: 'block' }}>
       <div className="modal center">
         <div className="modal-content center">
           <div className="modal-header">
             <div>
-              <span>Withdraw</span>
+              <span>Transaction</span>
             </div>
           </div>
           <div className="modal-body">
-            <form onSubmit={handleWithdraw}>
+            <form onSubmit>
               <div className="create-user-flex">
                 <span className="user-modal-text user-modal-text-margin user-modal-text-info">
                   Name
                   <p className="user-modal-text">
-                    {firstName} {lastName}
+                    {} {}
                   </p>
                 </span>
               </div>
               <div className="create-user-flex">
                 <span className="user-modal-text user-modal-text-margin user-modal-text-info">
                   Account Number
-                  <p className="user-modal-text">{accountNumber}</p>
+                  <p className="user-modal-text">{}</p>
                 </span>
               </div>
               <div className="create-user-flex">
                 <span className="user-modal-text user-modal-text-margin user-modal-text-info">
                   Balance
-                  <p className="user-modal-text">{balance}</p>
+                  <p className="user-modal-text">{}</p>
                 </span>
               </div>
               <div className="create-user-flex">
@@ -42,8 +42,6 @@ const ViewTransaction = ({ showTransaction }) => {
                     type="number"
                     step=".01"
                     min=".01"
-                    ref={withdrawAmountRef}
-                    onChange={handleWithdrawAmount}
                     required
                   />
                 </div>
@@ -59,7 +57,6 @@ const ViewTransaction = ({ showTransaction }) => {
                 <div className="create-user-flex flex-center">
                   <input
                     className="btn-small btn-cancel btn-modal-cancel"
-                    onClick={handleCloseWithdraw}
                     type="button"
                     value="Cancel"
                   />
@@ -73,4 +70,4 @@ const ViewTransaction = ({ showTransaction }) => {
   );
 };
 
-export default ViewTransaction;
+export default ViewTransactionModal;

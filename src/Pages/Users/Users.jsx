@@ -54,18 +54,7 @@ const Users = ({ userList }) => {
   useEffect(() => {
     setUsers(JSON.parse(localStorage.getItem('userList')));
     setTransaction(JSON.parse(localStorage.getItem('transactionList')));
-    // removeAdmin();
   }, []);
-
-  // const removeAdmin = () => {
-  //   const adminTr = document.querySelector(
-  //     `[data-row-account-number="1656904372"]`
-  //   );
-
-  //   if (adminTr !== null) {
-  //     adminTr.remove();
-  //   }
-  // };
 
   const updateUserListLocalStorage = (item) => {
     localStorage.setItem('userList', JSON.stringify(item));
