@@ -540,7 +540,7 @@ const Home = ({ email, users }) => {
                     }
                   );
                   return (
-                    <tr>
+                    <tr key={key}>
                       <td>{item}</td>
                       <td>{localeStringAmount}</td>
                       <td>
