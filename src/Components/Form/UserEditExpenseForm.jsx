@@ -4,8 +4,8 @@ const UserEditExpenseForm = ({
   showEditExpense,
   handleEditExpense,
   handleCloseEditExpense,
-  expenseItemRef,
-  expenseAmountRef,
+  expenseItemEditRef,
+  expenseAmountEditRef,
 }) => {
   return (
     <div style={{ display: `${showEditExpense}` }}>
@@ -25,7 +25,7 @@ const UserEditExpenseForm = ({
                     className="user-input-text"
                     style={{ width: `100%` }}
                     type="text"
-                    ref={expenseItemRef}
+                    ref={expenseItemEditRef}
                     required
                   />
                 </div>
@@ -40,7 +40,7 @@ const UserEditExpenseForm = ({
                     type="number"
                     step=".01"
                     min=".01"
-                    ref={expenseAmountRef}
+                    ref={expenseAmountEditRef}
                     required
                   />
                 </div>
