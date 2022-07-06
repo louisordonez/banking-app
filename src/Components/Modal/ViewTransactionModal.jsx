@@ -1,8 +1,21 @@
 import React from 'react';
 
-const ViewTransactionModal = ({ showTransactionDetails, transactionList }) => {
+const ViewTransactionModal = ({
+  showTransactionDetails,
+  handleCloseTransaction,
+  referenceNumber,
+  accountNumber,
+  email,
+  firstName,
+  lastName,
+  date,
+  description,
+  amount,
+  prevBalance,
+  currentBalance,
+}) => {
   return (
-    <div style={{ display: 'block' }}>
+    <div style={{ display: `${showTransactionDetails}` }}>
       <div className="modal center">
         <div className="modal-content center">
           <div className="modal-header">
@@ -11,58 +24,66 @@ const ViewTransactionModal = ({ showTransactionDetails, transactionList }) => {
             </div>
           </div>
           <div className="modal-body">
-            <form onSubmit>
-              <div className="create-user-flex">
-                <span className="user-modal-text user-modal-text-margin user-modal-text-info">
-                  Name
-                  <p className="user-modal-text">
-                    {} {}
-                  </p>
-                </span>
+            <div className="create-user-flex">
+              <span className="user-modal-text user-modal-text-margin user-modal-text-info">
+                Reference Number
+                <p className="user-modal-text">{referenceNumber}</p>
+              </span>
+            </div>
+            <div className="create-user-flex">
+              <span className="user-modal-text user-modal-text-margin user-modal-text-info">
+                Date
+                <p className="user-modal-text">{date}</p>
+              </span>
+            </div>
+            <div className="create-user-flex">
+              <span className="user-modal-text user-modal-text-margin user-modal-text-info">
+                Account Number
+                <p className="user-modal-text">{accountNumber}</p>
+              </span>
+            </div>
+            <div className="create-user-flex">
+              <span className="user-modal-text user-modal-text-margin user-modal-text-info">
+                Name
+                <p className="user-modal-text">
+                  {firstName} {lastName}
+                </p>
+              </span>
+            </div>
+            <div className="create-user-flex">
+              <span className="user-modal-text user-modal-text-margin user-modal-text-info">
+                Description
+                <p className="user-modal-text">{description}</p>
+              </span>
+            </div>
+            <div className="create-user-flex">
+              <span className="user-modal-text user-modal-text-margin user-modal-text-info">
+                Amount
+                <p className="user-modal-text">{amount}</p>
+              </span>
+            </div>
+            <div className="create-user-flex">
+              <span className="user-modal-text user-modal-text-margin user-modal-text-info">
+                Previous Balance
+                <p className="user-modal-text">{prevBalance}</p>
+              </span>
+            </div>
+            <div className="create-user-flex">
+              <span className="user-modal-text user-modal-text-margin user-modal-text-info">
+                Current Balance
+                <p className="user-modal-text">{currentBalance}</p>
+              </span>
+            </div>
+            <div className="modal-footer">
+              <div className="create-user-flex flex-center">
+                <input
+                  className="btn-small btn-cancel btn-modal-cancel"
+                  type="button"
+                  value="Close"
+                  onClick={handleCloseTransaction}
+                />
               </div>
-              <div className="create-user-flex">
-                <span className="user-modal-text user-modal-text-margin user-modal-text-info">
-                  Account Number
-                  <p className="user-modal-text">{}</p>
-                </span>
-              </div>
-              <div className="create-user-flex">
-                <span className="user-modal-text user-modal-text-margin user-modal-text-info">
-                  Balance
-                  <p className="user-modal-text">{}</p>
-                </span>
-              </div>
-              <div className="create-user-flex">
-                <div style={{ width: '100%' }}>
-                  <p className="user-modal-label">Amount</p>
-                  <input
-                    className="user-input-text"
-                    style={{ width: '100%' }}
-                    data-amount=""
-                    type="number"
-                    step=".01"
-                    min=".01"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="modal-footer">
-                <div className="create-user-flex">
-                  <input
-                    className="btn-small btn-primary btn-modal"
-                    type="submit"
-                    value="Withdraw"
-                  />
-                </div>
-                <div className="create-user-flex flex-center">
-                  <input
-                    className="btn-small btn-cancel btn-modal-cancel"
-                    type="button"
-                    value="Cancel"
-                  />
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

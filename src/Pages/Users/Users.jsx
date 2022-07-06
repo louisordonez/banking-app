@@ -193,6 +193,7 @@ const Users = ({ userList }) => {
       const newTransaction = {
         referenceNumber: referenceNumber,
         accountNumber: accountNumber,
+        email: user.email,
         firstName: firstName,
         lastName: lastName,
         date: date,
@@ -258,6 +259,7 @@ const Users = ({ userList }) => {
     const newTransaction = {
       referenceNumber: referenceNumber,
       accountNumber: accountNumber,
+      email: user.email,
       firstName: firstName,
       lastName: lastName,
       date: date,
@@ -338,6 +340,7 @@ const Users = ({ userList }) => {
         const newTransaction = {
           referenceNumber: referenceNumber,
           accountNumber: accountNumber,
+          email: user.email,
           firstName: firstName,
           lastName: lastName,
           date: date,

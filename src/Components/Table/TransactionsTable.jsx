@@ -2,7 +2,7 @@ import React from 'react';
 import SearchInput from '../Input/SearchInput';
 import ActionsViewButton from '../Button/ActionsViewButton';
 
-const TransactionsTable = ({ transactionList }) => {
+const TransactionsTable = ({ handleShowTransaction, transactionList }) => {
   return (
     <div className="table">
       <div className="table-header">
@@ -32,6 +32,7 @@ const TransactionsTable = ({ transactionList }) => {
               const {
                 referenceNumber,
                 accountNumber,
+                email,
                 firstName,
                 lastName,
                 date,
@@ -59,7 +60,22 @@ const TransactionsTable = ({ transactionList }) => {
                   <td data-account-number={date}>{date}</td>
                   <td>{description}</td>
                   <td>
-                    <ActionsViewButton />
+                    <ActionsViewButton
+                      onClick={() => {
+                        handleShowTransaction(
+                          referenceNumber,
+                          accountNumber,
+                          email,
+                          firstName,
+                          lastName,
+                          date,
+                          description,
+                          amount,
+                          prevBalance,
+                          currentBalance
+                        );
+                      }}
+                    />
                   </td>
                 </tr>
               );
