@@ -20,11 +20,11 @@ const UserDepositForm = ({
             <form onSubmit={handleDeposit}>
               <div className="create-user-flex">
                 <div style={{ width: `100%` }}>
+                  <p className="user-modal-label">Amount</p>
                   <input
                     className="user-input-text"
                     style={{ width: `100%` }}
                     data-amount=""
-                    placeholder="Amount"
                     type="number"
                     step=".01"
                     min=".01"

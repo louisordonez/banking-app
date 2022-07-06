@@ -22,10 +22,10 @@ const UserTransferForm = ({
             <form onSubmit={handleTransfer}>
               <div className="create-user-flex">
                 <div style={{ width: `100%` }}>
+                  <p className="user-modal-label">Account Number</p>
                   <input
                     className="user-input-text"
                     style={{ width: `100%` }}
-                    placeholder="Account Number"
                     type="number"
                     pattern="[0-9]*"
                     ref={transferAccountNumberRef}
@@ -36,11 +36,11 @@ const UserTransferForm = ({
               </div>
               <div className="create-user-flex">
                 <div style={{ width: `100%` }}>
+                  <p className="user-modal-label">Amount</p>
                   <input
                     className="user-input-text"
                     style={{ width: `100%` }}
                     data-amount=""
-                    placeholder="Amount"
                     type="number"
                     step=".01"
                     min=".01"
