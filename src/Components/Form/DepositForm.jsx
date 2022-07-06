@@ -23,51 +23,37 @@ const DepositForm = ({
           <div className="modal-body">
             <form onSubmit={handleDeposit}>
               <div className="create-user-flex">
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Balance"
-                    type="number"
-                    defaultValue={accountNumber}
-                    disabled
-                  />
-                </div>
+                <p className="user-modal-text user-modal-text-margin user-modal-text-info">
+                  Name
+                  <p className="user-modal-text">
+                    {firstName} {lastName}
+                  </p>
+                </p>
               </div>
               <div className="create-user-flex">
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="First Name"
-                    type="text"
-                    defaultValue={firstName}
-                    disabled
-                  />
-                </div>
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Last Name"
-                    type="text"
-                    defaultValue={lastName}
-                    disabled
-                  />
-                </div>
+                <p className="user-modal-text user-modal-text-margin user-modal-text-info">
+                  Account Number
+                  <p className="user-modal-text">{accountNumber}</p>
+                </p>
               </div>
               <div className="create-user-flex">
-                <div>
+                <p className="user-modal-text user-modal-text-margin user-modal-text-info">
+                  Balance
+                  <p className="user-modal-text">
+                    {balance.toLocaleString('en-US', {
+                      style: 'currency',
+                      currency: 'PHP',
+                    })}
+                  </p>
+                </p>
+              </div>
+              <div className="create-user-flex">
+                <div style={{ width: '100%' }}>
+                  <p className="user-modal-label">Amount</p>
                   <input
                     className="user-input-text"
-                    placeholder="Balance"
-                    type="number"
-                    defaultValue={balance}
-                    disabled
-                  />
-                </div>
-                <div>
-                  <input
-                    className="user-input-text"
+                    style={{ width: '100%' }}
                     data-amount=""
-                    placeholder="Amount"
                     type="number"
                     step=".01"
                     min=".01"
@@ -78,17 +64,21 @@ const DepositForm = ({
                 </div>
               </div>
               <div className="modal-footer">
-                <input
-                  className="btn-small btn-cancel"
-                  onClick={handleCloseDeposit}
-                  type="button"
-                  value="Cancel"
-                />
-                <input
-                  className="btn-small btn-primary"
-                  type="submit"
-                  value="Submit"
-                />
+                <div className="create-user-flex">
+                  <input
+                    className="btn-small btn-primary btn-modal"
+                    type="submit"
+                    value="Deposit"
+                  />
+                </div>
+                <div className="create-user-flex flex-center">
+                  <input
+                    className="btn-small btn-cancel btn-modal-cancel"
+                    onClick={handleCloseDeposit}
+                    type="button"
+                    value="Cancel"
+                  />
+                </div>
               </div>
             </form>
           </div>

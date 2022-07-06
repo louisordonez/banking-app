@@ -23,31 +23,28 @@ const TransferForm = ({
           <div className="modal-body">
             <form onSubmit={handleTransfer}>
               <div className="create-user-flex">
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Name"
-                    type="text"
-                    defaultValue={fullName}
-                    disabled
-                  />
-                </div>
-                <div>
-                  <input
-                    className="user-input-text"
-                    placeholder="Balance"
-                    type="number"
-                    step=".01"
-                    defaultValue={balance}
-                    disabled
-                  />
-                </div>
+                <p className="user-modal-text user-modal-text-margin user-modal-text-info">
+                  Name
+                  <p className="user-modal-text">{fullName}</p>
+                </p>
               </div>
               <div className="create-user-flex">
-                <div>
+                <p className="user-modal-text user-modal-text-margin user-modal-text-info">
+                  Balance
+                  <p className="user-modal-text">
+                    {balance.toLocaleString('en-US', {
+                      style: 'currency',
+                      currency: 'PHP',
+                    })}
+                  </p>
+                </p>
+              </div>
+              <div className="create-user-flex">
+                <div style={{ width: '100%' }}>
+                  <p className="user-modal-label">Account Number</p>
                   <input
                     className="user-input-text"
-                    placeholder="Account Number"
+                    style={{ width: '100%' }}
                     type="number"
                     pattern="[0-9]*"
                     ref={transferAccountNumberRef}
@@ -55,11 +52,14 @@ const TransferForm = ({
                     required
                   />
                 </div>
-                <div>
+              </div>
+              <div className="create-user-flex">
+                <div style={{ width: '100%' }}>
+                  <p className="user-modal-label">Amount</p>
                   <input
                     className="user-input-text"
+                    style={{ width: '100%' }}
                     data-amount=""
-                    placeholder="Amount"
                     type="number"
                     step=".01"
                     min=".01"
@@ -70,17 +70,21 @@ const TransferForm = ({
                 </div>
               </div>
               <div className="modal-footer">
-                <input
-                  className="btn-small btn-cancel"
-                  onClick={handleCloseTransfer}
-                  type="button"
-                  value="Cancel"
-                />
-                <input
-                  className="btn-small btn-primary"
-                  type="submit"
-                  value="Submit"
-                />
+                <div className="create-user-flex">
+                  <input
+                    className="btn-small btn-primary btn-modal"
+                    type="submit"
+                    value="Transfer"
+                  />
+                </div>
+                <div className="create-user-flex flex-center">
+                  <input
+                    className="btn-small btn-cancel btn-modal-cancel"
+                    onClick={handleCloseTransfer}
+                    type="button"
+                    value="Cancel"
+                  />
+                </div>
               </div>
             </form>
           </div>

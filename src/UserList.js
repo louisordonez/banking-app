@@ -7,7 +7,7 @@ export const USER_LIST = [
     gender: 'Male',
     email: 'admin@email.com',
     password: 'admin',
-    balance: 20000000.0,
+    balance: 15000.0,
     role: 'admin',
   },
   {
@@ -18,7 +18,7 @@ export const USER_LIST = [
     gender: 'Male',
     email: 'jd@email.com',
     password: 'jd',
-    balance: 15000000.0,
+    balance: 20000.0,
     role: 'user',
   },
   {
@@ -29,7 +29,7 @@ export const USER_LIST = [
     gender: 'Female',
     email: 'mdc@email.com',
     password: 'mdc',
-    balance: 20000000.0,
+    balance: 30000.0,
     role: 'user',
   },
   {
