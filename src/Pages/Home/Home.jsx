@@ -12,7 +12,7 @@ import Alert from '../../Components/Alert/Alert';
 const EXPENSE_LIST = [
   {
     id: 1,
-    item: `Tution Fee`,
+    item: `Tuition Fee`,
     amount: 80000.0,
   },
   {
@@ -33,6 +33,7 @@ const Home = ({ email, users }) => {
   const [transferAmount, setTransferAmount] = useState(null);
   const [transferAccountNumber, setTransferAccountNumber] = useState(null);
   const [displayBalance, setDisplayBalance] = useState('');
+  const [expectedBalance, setExpectedBalance] = useState(null);
   const [showAddExpense, setShowAddExpense] = useState('none');
   const [transaction, setTransaction] = useState([]);
   const [showAlert, setShowAlert] = useState('none');
@@ -41,11 +42,16 @@ const Home = ({ email, users }) => {
   const [alertMessage, setAlertMessage] = useState('');
   const [expenses, setExpense] = useState(EXPENSE_LIST);
   const [showEditExpense, setShowEditExpense] = useState('none');
+  const [expenseId, setExpenseId] = useState('none');
+  const [expenseTotal, setExpenseTotal] = useState('none');
 
   const withdrawAmountRef = useRef(null);
   const depositAmountRef = useRef(null);
   const transferAccountNumberRef = useRef(null);
   const transferAmountRef = useRef(null);
+
+  const expenseItemRef = useRef(null);
+  const expenseAmountRef = useRef(null);
 
   useEffect(() => {
     const currentUser = userList.find((obj) => obj.email === email);
@@ -60,6 +66,28 @@ const Home = ({ email, users }) => {
     setAccountNumber(currentUser.accountNumber);
 
     setTransaction(JSON.parse(localStorage.getItem('transactionList')));
+
+    let total = 0;
+
+    expenses.forEach((element) => {
+      total += element.amount;
+    });
+
+    setExpenseTotal(
+      total.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'PHP',
+      })
+    );
+
+    let expected = currentUser.balance - total;
+
+    setExpectedBalance(
+      expected.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'PHP',
+      })
+    );
   }, []);
 
   const handleAlert = (alertType, alertHeader, alertMessage) => {
@@ -328,7 +356,7 @@ const Home = ({ email, users }) => {
     }
   };
 
-  const handleDelete = (id) => {
+  const handleDeleteExpense = (id) => {
     const newExpenses = expenses.filter((u) => u.id !== id);
 
     setExpense(newExpenses);
@@ -336,7 +364,45 @@ const Home = ({ email, users }) => {
     handleAlert(`success`, `Success!`, `Expense has been successfully deleted`);
   };
 
-  const handleShowEditExpense = () => setShowEditExpense('block');
+  const handleAddExpense = (id) => {
+    const newExpenses = expenses.filter((u) => u.id !== id);
+
+    setExpense(newExpenses);
+    // updateTransactionListLocalStorage(newUsers);
+    handleAlert(`success`, `Success!`, `Expense has been successfully deleted`);
+  };
+
+  const handleShowEditExpense = (id) => {
+    setShowEditExpense('block');
+
+    const expense = expenses.find((u) => u.id === id);
+
+    expenseItemRef.current.value = expense.item;
+    expenseAmountRef.current.value = expense.amount;
+
+    setExpenseId(id);
+  };
+
+  const resetEditExenseForm = () => {
+    expenseItemRef.current.value = '';
+    expenseAmountRef.current.value = '';
+  };
+
+  const handleEditExpense = (e) => {
+    e.preventDefault();
+
+    const expenseIndex = expenses.findIndex(
+      (u) => u.id === parseInt(expenseId)
+    );
+
+    expenses[expenseIndex].item = `${expenseItemRef.current.value}`;
+    expenses[expenseIndex].amount = parseFloat(expenseAmountRef.current.value);
+
+    handleAlert(`success`, `Success!`, `User has been successfully edited`);
+    handleCloseEditExpense();
+    resetEditExenseForm();
+  };
+
   const handleCloseEditExpense = () => setShowEditExpense('none');
 
   return (
@@ -427,11 +493,11 @@ const Home = ({ email, users }) => {
         <div className="budget-container">
           <div className="budget-header-container">
             <div className="budget-header">
-              <h2>Expenses</h2>
+              <h2>Expenses: {expenseTotal}</h2>
             </div>
             <div className="budget-header"></div>
             <div className="budget-header">
-              <h2>100.00</h2>
+              <h2>Expected Balance: {expectedBalance}</h2>
             </div>
           </div>
           <div>
@@ -466,7 +532,7 @@ const Home = ({ email, users }) => {
                         />
                         <ActionsDeleteButton
                           onClick={() => {
-                            handleDelete(id);
+                            handleDeleteExpense(id);
                           }}
                         />
                       </td>
@@ -506,8 +572,11 @@ const Home = ({ email, users }) => {
         handleCloseAddExpense={handleCloseAddExpense}
       />
       <UserEditExpenseForm
+        handleEditExpense={handleEditExpense}
         showEditExpense={showEditExpense}
         handleCloseEditExpense={handleCloseEditExpense}
+        expenseItemRef={expenseItemRef}
+        expenseAmountRef={expenseAmountRef}
       />
     </main>
   );
