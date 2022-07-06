@@ -10,7 +10,7 @@ const Alert = ({ showAlert, alertType, alertHeader, alertText, onClick }) => {
     >
       <div>
         <button className="close" onClick={onClick}>
-          <BoxIcons.BiX size={16} style={{ color: 'black' }} />
+          <BoxIcons.BiX size={18} />
         </button>
         <span className="alert-header">{alertHeader} </span>
         <span>{alertText}</span>
