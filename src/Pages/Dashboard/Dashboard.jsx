@@ -4,12 +4,15 @@ import * as BoxIcons from 'react-icons/bi';
 
 const Dashboard = ({ userList, transactionList }) => {
   const [totalUsers, setTotalUsers] = useState(null);
-  const [users, SetUsers] = useState(userList);
+  const [users, setUsers] = useState(userList);
   const [transactions, setTransactions] = useState(transactionList);
   const [totalBalance, setTotalBalance] = useState('');
 
   useEffect(() => {
     const userList = JSON.parse(localStorage.getItem('userList'));
+
+    setTransactions(JSON.parse(localStorage.getItem('transactionList')));
+    setUsers(userList);
 
     setTotalUsers(userList.length);
 
