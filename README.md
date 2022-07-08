@@ -5,6 +5,21 @@
 
 This project is a combination of Banking and Budget web application.
 
+## Features
+
+### Admin:
+
+- Create, edit, and remove a user
+- Withdraw, deposit, and transfer money from a user
+- View all user transactions
+
+## User:
+
+- Create an account
+- Withdraw, deposit, and transfer money
+- Add, edit, and remove expenses
+- View transactions
+
 ## Tech Stack
 
 - ReactJS
