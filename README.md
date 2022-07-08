@@ -28,12 +28,12 @@ This project is a combination of Banking and Budget web application.
 
 ## Test Accounts
 
-### Admin
+### Admin:
 
 - `email: admin@email.com`  
   `password: admin`
 
-### User
+### User:
 
 - `email: jd@email.com`  
   `password: jd`
