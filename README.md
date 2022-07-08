@@ -31,7 +31,7 @@ This project is a combination of Banking and Budget web application.
 ### Admin:
 
 - `email: admin@email.com`  
-  `password: admin`
+  `password: admin`  
   `balance: 15000.0`
 
 ### User:
