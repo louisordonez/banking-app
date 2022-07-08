@@ -5,6 +5,12 @@
 
 This project is a combination of Banking and Budget web application.
 
+## Tech Stack
+
+- HTML
+- SCSS
+- React
+
 ## Features
 
 ### Admin:
@@ -20,8 +26,22 @@ This project is a combination of Banking and Budget web application.
 - Add, edit, and remove expenses
 - View transactions
 
-## Tech Stack
+## Test Accounts
 
-- ReactJS
+### Admin
+
+- `email: admin@email.com`  
+  `password: admin`
+
+### User
+
+- `email: jd@email.com`  
+  `password: jd`
+
+- `email: mdc@email.com`  
+  `password: mdc`
+
+- `email: jdc@email.com`  
+  `password: jdc`
 
 ### Live Demo: https://banking-app-kappa.vercel.app/
