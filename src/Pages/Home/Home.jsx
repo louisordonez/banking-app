@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as BoxIcons from 'react-icons/bi';
-import UserWithdrawForm from '../../Components/Form/UserWithdrawForm';
-import UserDepositForm from '../../Components/Form/UserDepositForm';
-import UserTransferForm from '../../Components/Form/UserTransferForm';
-import UserAddExpenseForm from '../../Components/Form/UserAddExpenseForm';
-import UserEditExpenseForm from '../../Components/Form/UserEditExpenseForm';
-import ActionsEditButton from '../../Components/Button/ActionsEditButton';
-import ActionsDeleteButton from '../../Components/Button/ActionsDeleteButton';
-import Alert from '../../Components/Alert/Alert';
+import UserWithdrawForm from '../../components/Form/UserWithdrawForm';
+import UserDepositForm from '../../components/Form/UserDepositForm';
+import UserTransferForm from '../../components/Form/UserTransferForm';
+import UserAddExpenseForm from '../../components/Form/UserAddExpenseForm';
+import UserEditExpenseForm from '../../components/Form/UserEditExpenseForm';
+import ActionsEditButton from '../../components/Button/ActionsEditButton';
+import ActionsDeleteButton from '../../components/Button/ActionsDeleteButton';
+import Alert from '../../components/Alert/Alert';
 
 const EXPENSE_LIST = [
   {

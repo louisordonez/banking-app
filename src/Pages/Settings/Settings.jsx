@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Alert from '../../Components/Alert/Alert';
-import SettingsForm from '../../Components/Form/SettingsForm';
+import Alert from '../../components/Alert/Alert';
+import SettingsForm from '../../components/Form/SettingsForm';
 
 const Settings = ({ userList }) => {
   const [users, setUsers] = useState(userList);
