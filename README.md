@@ -1,6 +1,11 @@
 # banking-app
 
+## Admin
+
 ![Screenshot](./src/Assets/Screenshots/Screenshot_1.png)
+
+## User
+
 ![Screenshot](./src/Assets/Screenshots/Screenshot_2.png)
 
 This project is a combination of Banking and Budget web application.

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Alert from '../../Components/Alert/Alert';
+import Alert from '../../components/Alert/Alert';
 
 const SignUp = ({
   showAlert,

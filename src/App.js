@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LogIn from './Pages/LogIn/LogIn';
-import SignUp from './Pages/SignUp/SignUp';
-import Navbar from './Components/Navbar/Navbar';
-import Dashboard from './Pages/Dashboard/Dashboard';
-import Users from './Pages/Users/Users';
-import Transactions from './Pages/Transactions/Transactions';
-import UserTransactions from './Pages/Transactions/UserTransactions';
-import Settings from './Pages/Settings/Settings';
-import Home from './Pages/Home/Home';
+import LogIn from './pages/LogIn/LogIn';
+import SignUp from './pages/SignUp/SignUp';
+import Navbar from './components/Navbar/Navbar';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Users from './pages/Users/Users';
+import Transactions from './pages/Transactions/Transactions';
+import UserTransactions from './pages/Transactions/UserTransactions';
+import Settings from './pages/Settings/Settings';
+import Home from './pages/Home/Home';
 import { USER_LIST } from './UserList';
 
 const App = () => {

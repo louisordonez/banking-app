@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import TransactionsTable from '../../Components/Table/TransactionsTable';
-import ViewTransactionModal from '../../Components/Modal/ViewTransactionModal';
+import TransactionsTable from '../../components/Table/TransactionsTable';
+import ViewTransactionModal from '../../components/Modal/ViewTransactionModal';
 
 const Transactions = ({ users, email }) => {
   const [transactionList, setTransactionList] = useState(
